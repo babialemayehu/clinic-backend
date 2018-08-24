@@ -1,0 +1,16 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+// Variables
+@import 'variables';
+
+// // Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+// Materialize
+
+@import "node_modules/materialize-css/sass/materialize";
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
