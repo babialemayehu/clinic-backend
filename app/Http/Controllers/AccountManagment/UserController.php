@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\AccountManagment;
 
 use Illuminate\Http\Request;
-use App\Mail\Welcome; 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\Welcome; 
+use App\User; 
 
 class UserController extends \App\Http\Controllers\Controller
 {
@@ -21,23 +24,22 @@ class UserController extends \App\Http\Controllers\Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'worker_id'=> 'required',
-            'first_name'=> 'required',
-            'father_name'=> 'required',
-            'grand_father_name'=> 'required',
+            'workerId'=> 'required',
+            'firstName'=> 'required',
+            'fatherName'=> 'required',
+            'grandFratherName'=> 'required',
             'email'=> 'required',
             'phone'=> 'required',
-             'password'=> 'required',
             'gender'=> 'required',
-            'role_id'=> 'required',
+            'role'=> 'required',
         ]);
         
         $password = '222222'; 
         Mail::to($request['email'])->send(new Welcome($password)); 
         $user = User::create([
-            'first_name' => $request['first'],
+            'first_name' => $request['firstName'],
             'father_name' => $request['fatherName'], 
-            'grand_father_name' => $request['grandFatherName'], 
+            'grand_father_name' => $request['grandFratherName'], 
             'worker_id' => $request['workerId'],
             'email' => $request['email'],
             'phone' => $request['phone'],
@@ -62,5 +64,10 @@ class UserController extends \App\Http\Controllers\Controller
     public function destroy($id)
     {
         //
+    }
+
+    //GET
+    public function authUser(){
+        return User::find(1); 
     }
 }

@@ -23,7 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('password');
             $table->string('gender');
-            $table->integer('role_id'); 
+            $table->integer('role_id');
+            $table->boolean('isFirstTime')->default(1); 
+            $table->string('profile_pic')->nullable();  
             $table->rememberToken();
             $table->timestamps();
         });

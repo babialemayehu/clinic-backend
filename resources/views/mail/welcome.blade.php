@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>wellcome</h1>
+    <storng>Password: {{$password}}</strong>
 </body>
 </html>

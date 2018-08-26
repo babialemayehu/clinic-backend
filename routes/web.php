@@ -1,6 +1,9 @@
 <?php
 
-//Auth::routes();
+Route::get('/test', function(){
+    return view('index'); 
+}); 
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
@@ -9,7 +12,8 @@ Route::prefix('ajax')
     ->middleware(['cors'])
     ->group(function(){
         Route::prefix('get')->group(function(){
-            Route::get('rolesExceptAdmin', 'RoleController@getRolesExceptAdmin'); 
+            Route::get('roles except admin', 'RoleController@getRolesExceptAdmin');
+            Route::get('auth user', 'UserController@authUser'); 
         }); 
         Route::prefix('post')->group(function(){
             Route::post('create user', 'UserController@store'); 
