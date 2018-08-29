@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('gender');
             $table->integer('role_id');
-            $table->boolean('isFirstTime')->default(1); 
+            $table->boolean('isFirstTime')->default("http://clinic.com/img/avatar.png"); 
             $table->string('profile_pic')->nullable();  
             $table->rememberToken();
             $table->timestamps();

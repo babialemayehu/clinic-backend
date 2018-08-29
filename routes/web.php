@@ -1,7 +1,11 @@
 <?php
 
 Route::get('/test', function(){
-    return view('index'); 
+    return;  
+}); 
+
+Route::get('/icon', function(){
+    header("location: /css/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2"); 
 }); 
 
 Route::middleware(['auth'])->group(function () {
@@ -12,11 +16,18 @@ Route::prefix('ajax')
     ->middleware(['cors'])
     ->group(function(){
         Route::prefix('get')->group(function(){
+            // on admin previlage
             Route::get('roles except admin', 'RoleController@getRolesExceptAdmin');
+            Route::get('users', 'UserController@getUsers'); 
+            Route::get('total users', 'UserController@totalUsers'); 
             Route::get('auth user', 'UserController@authUser'); 
+            Route::get('user profile/{user}', 'UserController@userProfile'); 
         }); 
         Route::prefix('post')->group(function(){
             Route::post('create user', 'UserController@store'); 
+        }); 
+        Route::prefix('update')->group(function(){
+            Route::put('user', 'UserController@update'); 
         }); 
 }); 
 
