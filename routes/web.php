@@ -22,12 +22,18 @@ Route::prefix('ajax')
             Route::get('total users', 'UserController@totalUsers'); 
             Route::get('auth user', 'UserController@authUser'); 
             Route::get('user profile/{user}', 'UserController@userProfile'); 
+            
         }); 
         Route::prefix('post')->group(function(){
             Route::post('create user', 'UserController@store'); 
+            Route::post('isCurrentPassword', 'UserController@currentPassword'); 
         }); 
         Route::prefix('update')->group(function(){
             Route::put('user', 'UserController@update'); 
+            Route::put('password', 'UserController@changePassword'); 
+        }); 
+        Route::prefix('delete')->group(function(){
+            Route::delete('user/{id}', 'UserController@destroy'); 
         }); 
 }); 
 
