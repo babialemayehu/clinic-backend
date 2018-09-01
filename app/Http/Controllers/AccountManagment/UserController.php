@@ -126,7 +126,15 @@ class UserController extends \App\Http\Controllers\Controller
         }else{
             $user->password = Hash::make($request->newPassword); 
             $user->save(); 
-            return 'true'; 
+             return 'true'; 
         }
     }   
+    public function uploadProfilePic(Request $request){
+        // auth 
+        $user = User::find(19); 
+        $imageName =  $user->worker_id.'.'.$request->file('image')->extension(); 
+        $user->profile_pic = $request->file('image')
+        ->storeAs('profile_pic', $imageName); 
+        return $user->profile_pic; 
+    }
 }

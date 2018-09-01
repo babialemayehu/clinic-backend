@@ -35,6 +35,11 @@ Route::prefix('ajax')
         Route::prefix('delete')->group(function(){
             Route::delete('user/{id}', 'UserController@destroy'); 
         }); 
+        Route::prefix('file')->group(function(){
+            Route::prefix('upload')->group(function(){
+                Route::post('profile pic', 'UserController@uploadProfilePic'); 
+            }); 
+        }); 
 }); 
 
 
