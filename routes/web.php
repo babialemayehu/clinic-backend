@@ -27,6 +27,7 @@ Route::prefix('ajax')
         Route::prefix('post')->group(function(){
             Route::post('create user', 'UserController@store'); 
             Route::post('isCurrentPassword', 'UserController@currentPassword'); 
+            Route::post('logout', 'UserController@logout'); 
         }); 
         Route::prefix('update')->group(function(){
             Route::put('user', 'UserController@update'); 
@@ -58,4 +59,10 @@ Route::namespace('Auth')->group(function(){
     Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail');
     Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'ResetPasswordController@reset');
+});
+
+// FRONT END VIEWS 
+
+Route::middleware(['auth'])->group(function(){
+    Route::get("/admin", "FrontendController@admin"); 
 });

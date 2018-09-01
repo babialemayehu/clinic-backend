@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Storage;
 use App\Mail\Welcome; 
 use App\User; 
 use App\Role; 
@@ -87,8 +88,8 @@ class UserController extends \App\Http\Controllers\Controller
 
     //GET
     public function authUser(){
-        $user =  User::find(1);
-        $user->profile_pic = URL::asset('img/'.$user->profile_pic );
+        $user =  User::find(19);
+        $user->profile_pic = url(Storage::url($user->profile_pic ));
         return $user ; 
     }
 
@@ -121,20 +122,29 @@ class UserController extends \App\Http\Controllers\Controller
 
     public function changePassword(Request $request){
         $user = User::find(19); 
-        if (!Auth::once(['worker_id'=> $user->worker_id, 'password'=>$request->currentPassword])){
-            return responce(json_encode((object)['message'=>"You have given invalid password"]), 406); 
+        if (!Auth::once(['worker_id'=> $user->worker_id, 'password'=>$request->currentPassword])
+            && !$user->isFirstTime){
+            return response(json_encode((object)['message'=>"You have given invalid password"]), 406); 
         }else{
             $user->password = Hash::make($request->newPassword); 
             $user->save(); 
              return 'true'; 
         }
     }   
+
     public function uploadProfilePic(Request $request){
         // auth 
         $user = User::find(19); 
         $imageName =  $user->worker_id.'.'.$request->file('image')->extension(); 
         $user->profile_pic = $request->file('image')
-        ->storeAs('profile_pic', $imageName); 
-        return $user->profile_pic; 
+        ->storeAs('profile', $imageName, 'public'); 
+        $user->save(); 
+        return 'true'; 
+    }
+
+    public function logout(Request $request){
+        Auth::logout(); 
+        return redirect('/'); 
+        // return 'logout'; 
     }
 }
