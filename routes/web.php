@@ -12,35 +12,57 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 Route::prefix('ajax')
-    ->namespace('AccountManagment')
-    ->middleware(['cors'])
-    ->group(function(){
-        Route::prefix('get')->group(function(){
-            // on admin previlage
+->middleware(['cors'])
+->group(function(){
+    Route::prefix('get')->group(function(){
+        Route::namespace('AccountManagment')
+        ->group(function(){
             Route::get('roles except admin', 'RoleController@getRolesExceptAdmin');
             Route::get('users', 'UserController@getUsers'); 
             Route::get('total users', 'UserController@totalUsers'); 
             Route::get('auth user', 'UserController@authUser'); 
-            Route::get('user profile/{user}', 'UserController@userProfile'); 
-            
+            Route::get('user profile/{user}', 'UserController@userProfile');
         }); 
-        Route::prefix('post')->group(function(){
+        Route::namespace('PatientManagment')
+        ->group(function(){
+            Route::get('departments', 'DepartmentController@index'); 
+        }); 
+    }); 
+
+    Route::prefix('post')->group(function(){
+        Route::namespace('AccountManagment')
+        ->group(function(){
             Route::post('create user', 'UserController@store'); 
             Route::post('isCurrentPassword', 'UserController@currentPassword'); 
             Route::post('logout', 'UserController@logout'); 
         }); 
-        Route::prefix('update')->group(function(){
+         Route::namespace('PatientManagment')
+        ->group(function(){
+            Route::post('patient/new', 'PatientController@newPatient'); 
+        }); 
+    }); 
+
+    Route::prefix('update')->group(function(){
+        Route::namespace('AccountManagment')
+        ->group(function(){
             Route::put('user', 'UserController@update'); 
             Route::put('password', 'UserController@changePassword'); 
-        }); 
-        Route::prefix('delete')->group(function(){
-            Route::delete('user/{id}', 'UserController@destroy'); 
-        }); 
-        Route::prefix('file')->group(function(){
-            Route::prefix('upload')->group(function(){
-                Route::post('profile pic', 'UserController@uploadProfilePic'); 
-            }); 
-        }); 
+        });        
+    }); 
+
+    Route::prefix('delete')->group(function(){
+        Route::namespace('AccountManagment')
+        ->group(function(){
+            Route::delete('user/{id}', 'UserController@destroy');  
+        });     
+    }); 
+    
+    Route::prefix('file')->group(function(){
+        Route::namespace('AccountManagment')
+        ->group(function(){
+            Route::post('upload/profile pic', 'UserController@uploadProfilePic');  
+        });
+    }); 
 }); 
 
 

@@ -10,8 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
-    use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
-    
+    use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;  
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
