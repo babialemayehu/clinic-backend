@@ -26,6 +26,12 @@ Route::prefix('ajax')
         Route::namespace('PatientManagment')
         ->group(function(){
             Route::get('departments', 'DepartmentController@index'); 
+            Route::get('search/auto complete/{key}', 'PatientController@searchAutoComplete');
+            Route::get('search/{key}', 'PatientController@search');    
+            Route::prefix('queue')->group(function(){
+                Route::get('recent/{id}', 'QueueController@recentVisists'); 
+                Route::get('patients in queue', 'QueueController@queuedPatients');
+            }); 
         }); 
     }); 
 
@@ -39,6 +45,11 @@ Route::prefix('ajax')
          Route::namespace('PatientManagment')
         ->group(function(){
             Route::post('patient/new', 'PatientController@newPatient'); 
+            Route::prefix('queue')->group(function(){
+                Route::post('add/{patinetId}', 'QueueController@queue'); 
+                Route::post('remove/{patinetId}', 'QueueController@dequeue'); 
+                Route::get('recent/{id}', 'QueueController@recentVisists'); 
+            });
         }); 
     }); 
 
@@ -55,6 +66,10 @@ Route::prefix('ajax')
         ->group(function(){
             Route::delete('user/{id}', 'UserController@destroy');  
         });     
+        Route::namespace('PatientManagment')
+        ->group(function(){
+            Route::delete('patient/{id}', 'PatientController@destroy'); 
+        }); 
     }); 
     
     Route::prefix('file')->group(function(){

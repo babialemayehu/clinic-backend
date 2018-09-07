@@ -150,6 +150,9 @@ return [
         /*
          * Package Service Providers...
          */
+        Laravel\Scout\ScoutServiceProvider::class,
+        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
+        Yab\MySQLScout\Providers\MySQLScoutServiceProvider::class,
 
         /*
          * Application Service Providers...
