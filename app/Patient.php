@@ -47,4 +47,6 @@ class Patient extends Model
     public function queues(){
         return $this->hasMany('App\Patient_queue'); 
     }
+
+    
 }

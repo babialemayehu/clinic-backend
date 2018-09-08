@@ -148,4 +148,9 @@ class UserController extends \App\Http\Controllers\Controller
         return redirect('/'); 
         // return 'logout'; 
     }
+
+    public function total(){
+        return User::get()->count();  
+    }
+
 }

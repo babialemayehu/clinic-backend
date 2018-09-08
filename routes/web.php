@@ -22,6 +22,9 @@ Route::prefix('ajax')
             Route::get('total users', 'UserController@totalUsers'); 
             Route::get('auth user', 'UserController@authUser'); 
             Route::get('user profile/{user}', 'UserController@userProfile');
+            Route::prefix('user')->group(function(){
+                Route::get('total', 'UserController@total'); 
+            }); 
         }); 
         Route::namespace('PatientManagment')
         ->group(function(){
@@ -31,6 +34,11 @@ Route::prefix('ajax')
             Route::prefix('queue')->group(function(){
                 Route::get('recent/{id}', 'QueueController@recentVisists'); 
                 Route::get('patients in queue', 'QueueController@queuedPatients');
+                Route::get('total', 'QueueController@total'); 
+                Route::get('served total', 'QueueController@totalServed');
+            });
+            Route::prefix('patient')->group(function(){
+                Route::get('totalNumber', 'PatientController@totalNumber'); 
             }); 
         }); 
     }); 
@@ -69,6 +77,7 @@ Route::prefix('ajax')
         Route::namespace('PatientManagment')
         ->group(function(){
             Route::delete('patient/{id}', 'PatientController@destroy'); 
+            Route::delete('queue/{patientId}', 'QueueController@remove'); 
         }); 
     }); 
     

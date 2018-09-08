@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Patient_queue extends Model
 {
+    use SoftDeletes;
+
     protected $fillable =  
     [
         'id',

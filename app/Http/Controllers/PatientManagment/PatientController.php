@@ -25,10 +25,10 @@ class PatientController extends Controller
         ]);
         $department = Department::where('name', $request->department)->first();
         $patient = Patient::create([
-            'reg_id' => $request->reg_id, 
-            'first_name' => $request->first_name, 
-            'father_name' => $request->father_name, 
-            'grand_father_name' => $request->grand_father_name, 
+            'reg_id' => strtoupper($request->reg_id), 
+            'first_name' => ucfirst($request->first_name), 
+            'father_name' => ucfirst($request->father_name), 
+            'grand_father_name' => ucfirst($request->grand_father_name), 
             'birth_date' => $request->birth_date, 
             'dorm_room_number' => $request->dorm_room_number, 
             'dorm_block' => $request->dorm_block, 
@@ -62,6 +62,13 @@ class PatientController extends Controller
         if(!empty($key)){
             $patient = Patient::where('reg_id', '=', $key)->first(); 
             $patient->department = $patient->department()->first(); 
+            $queues = $patient->queues()->get(); 
+            $patient->is_queued = false; 
+            foreach($queues as $queue){
+                if(!$queue->is_served){
+                    $patient->is_queued = true; 
+                }
+            }
             return $patient; 
         }
         return false; 
@@ -72,5 +79,11 @@ class PatientController extends Controller
         $patient->queues()->delete();  
         $patient->delete(); 
         return $patient; 
+    }
+
+     // Dashboard
+
+     public function totalNumber(){
+        return Patient::get()->count(); 
     }
 }

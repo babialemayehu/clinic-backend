@@ -19,6 +19,8 @@ class CreatePatientQueuesTable extends Migration
             $table->integer('physician_id'); 
             $table->integer('patient_id');
             $table->boolean('is_served')->default(0); 
+            $table->integer('queue_number')->default(1); 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
