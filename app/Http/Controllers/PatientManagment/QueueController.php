@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PatientManagment;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; 
+use Illuminate\Support\Facades\Auth;
 use App\Patient_queue; 
 use App\User; 
 use App\Patient; 
@@ -14,7 +15,7 @@ class QueueController extends Controller
     private $auth; 
 
     function __construct(){
-        $this->auth = User::find(1); 
+        $this->auth = Auth::user(); 
     } 
 
     public function autoChoosePhysician(){

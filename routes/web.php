@@ -111,4 +111,5 @@ Route::namespace('Auth')->group(function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get("/admin", "FrontendController@admin"); 
+    Route::get("/clurk", "FrontendController@clurk"); 
 });

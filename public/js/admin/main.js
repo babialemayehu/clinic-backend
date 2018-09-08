@@ -805,7 +805,7 @@ var ContextComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div class=\"row center\">\n    <div class='tile-container center'>\n      <mat-card class=\" col m3 l3 s12\">\n        <strong><p>Number Of Patients</p></strong>\n        <h2>{{numberOfPatients}}</h2>\n      </mat-card>\n    </div>\n    \n    <div class='tile-container center'>\n      <mat-card class=\" col m3 l3 s12\">\n        <strong><p>Number of Workers</p></strong>\n        <h2>{{numberOfUsers}}</h2>\n      </mat-card>\n    </div>\n\n    <div class='tile-container center'>\n      <mat-card class=\" col m3 l3 s12\">\n        <strong><p>Patients in queue</p></strong>\n        <h2>{{patinetsInQueue}}</h2>\n      </mat-card>\n    </div>\n\n    <div class='tile-container center'>\n      <mat-card class=\" col m3 l3 s12\">\n        <strong><p>Served patients today</p></strong>\n        <h2>{{servedPatinets}}</h2>\n      </mat-card>\n    </div>\n  </div>\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n  <div class=\"row\">\n    <mat-card class=\" col m6 l4 s12\">\n      section 1\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 2\n    </mat-card>\n    <mat-card class=\" col m6 l4 s12\">\n      section 3\n    </mat-card>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -816,7 +816,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <mat-car
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".tile-container {\n  padding: 8px;\n  display: inline-block; }\n  .tile-container .mat-card {\n    padding: 16px;\n    width: 100%; }\n"
 
 /***/ }),
 
@@ -831,6 +831,8 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _service_patient_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/patient.service */ "./src/app/service/patient.service.ts");
+/* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/user.service */ "./src/app/service/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -841,10 +843,35 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent() {
+    function DashboardComponent(_patient, _user) {
+        this._patient = _patient;
+        this._user = _user;
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._patient.totalNumberOfPatients()
+            .subscribe(function (totalNumber) {
+            console.log(totalNumber);
+            _this.numberOfPatients = totalNumber;
+        });
+        this._user.totalNumberOfUsers()
+            .subscribe(function (totalNum) {
+            console.log(totalNum);
+            _this.numberOfUsers = totalNum;
+        });
+        this._patient.totalNumberOfQueue()
+            .subscribe(function (totalNum) {
+            console.log(totalNum);
+            _this.patinetsInQueue = totalNum;
+        });
+        this._patient.numServedToday()
+            .subscribe(function (totalNum) {
+            console.log(totalNum);
+            _this.servedPatinets = totalNum;
+        });
     };
     DashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -852,7 +879,7 @@ var DashboardComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./dashboard.component.html */ "./src/app/dashboard/dashboard.component.html"),
             styles: [__webpack_require__(/*! ./dashboard.component.scss */ "./src/app/dashboard/dashboard.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_service_patient_service__WEBPACK_IMPORTED_MODULE_1__["PatientService"], _service_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
     ], DashboardComponent);
     return DashboardComponent;
 }());
@@ -1144,7 +1171,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"progress\" [class.hide]=\"!loading\" >\n  <div class=\"indeterminate\"></div>\n</div>\n<div class=\"form-conatiner\" [class.form-loading]=\"loading\">\n  <header class=\"container\">\n      <h5>Create User </h5> \n  </header>\n  <div layout layout-fill ng-app=\"context-menu\">\n    \n  <form id=\"registartionForm\" class=\"container\" (ngSubmit)=\"onSubmit()\" [formGroup]='regForm' > \n    <div class=\"row\">\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"worker_id\" placeholder=\"worker_id\" class=\"browser-default\"> \n        <mat-error *ngIf=\"worker_id.invalid && worker_id.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field  class=\"col m6\">\n        <input matInput formControlName=\"first_name\" placeholder=\"First Name\">\n       \n      </mat-form-field>\n\n      <mat-form-field class=\"col m6\">\n        <input matInput formControlName='father_name' placeholder=\"Father Name\">\n        <mat-error *ngIf=\"father_name.invalid && father_name.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"grand_father_name\" placeholder=\"Grand Father Name\"> \n        <mat-error *ngIf=\"grand_father_name.invlaid && grand_father_name.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m6\">\n        <mat-select formControlName=\"gender\" placeholder=\"Gender\">\n          <mat-option value=\"Male\">Male</mat-option>\n          <mat-option value=\"Female\">Female</mat-option>\n        </mat-select>\n        <mat-error *ngIf=\"gender.invlaid && gender.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m6\">\n        <mat-select  formControlName=\"role_id\" placeholder=\"Role\">\n          <mat-option *ngFor=\"let _role of data.roles\" [value]=\"_role.id\">\n            {{_role.name}}\n          </mat-option>\n        </mat-select>\n       \n        <mat-error *ngIf=\"role_id.invlaid && role_id.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"email\" placeholder=\"email\"> \n        <mat-error *ngIf=\"email.errors?.required && email.touched\">\n          This field is required\n        </mat-error>\n        <mat-error *ngIf=\"email.errors?.email && email.touched\">\n          You have provided invaild email\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"phone\" placeholder=\"phone\" > \n        <mat-error *ngIf=\"phone.invalid && phone.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field> \n\n      <div class=\"col m12\">\n        <button type=\"submit\" [disabled]='regForm.invalid' class=\"weves-effect weves-light btn blue white-text right\">Submit</button>\n      </div>\n    </div>\n  </form>\n</div>\n"
+module.exports = "<div class=\"progress\" [class.hide]=\"!loading\" >\n  <div class=\"indeterminate\"></div>\n</div>\n<span mat-button (click)=\"thisDialog.close()\" class=\"right\" id=\"close\" ><mat-icon>clear</mat-icon></span> \n<div class=\"form-conatiner\" [class.form-loading]=\"loading\">\n  <header class=\"container\">\n      <h5>Create User </h5> \n  </header>\n  <div layout layout-fill ng-app=\"context-menu\">\n    \n  <form id=\"registartionForm\" class=\"container\" (ngSubmit)=\"onSubmit()\" [formGroup]='regForm' > \n    <div class=\"row\">\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"worker_id\" placeholder=\"worker_id\" class=\"browser-default uppercase\"> \n        <mat-error *ngIf=\"worker_id.invalid && worker_id.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field  class=\"col m6\">\n        <input matInput formControlName=\"first_name\" placeholder=\"First Name\" class=\"browser-default capitalize\">\n       \n      </mat-form-field>\n\n      <mat-form-field class=\"col m6\">\n        <input matInput formControlName='father_name' placeholder=\"Father Name\" class=\"browser-default capitalize\">\n        <mat-error *ngIf=\"father_name.invalid && father_name.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"grand_father_name\" placeholder=\"Grand Father Name\" class=\"browser-default capitalize\"> \n        <mat-error *ngIf=\"grand_father_name.invlaid && grand_father_name.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m6\">\n        <mat-select formControlName=\"gender\" placeholder=\"Gender\">\n          <mat-option value=\"Male\">Male</mat-option>\n          <mat-option value=\"Female\">Female</mat-option>\n        </mat-select>\n        <mat-error *ngIf=\"gender.invlaid && gender.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m6\">\n        <mat-select  formControlName=\"role_id\" placeholder=\"Role\">\n          <mat-option *ngFor=\"let _role of data.roles\" [value]=\"_role.id\">\n            {{_role.name}}\n          </mat-option>\n        </mat-select>\n       \n        <mat-error *ngIf=\"role_id.invlaid && role_id.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"email\" placeholder=\"email\"> \n        <mat-error *ngIf=\"email.errors?.required && email.touched\">\n          This field is required\n        </mat-error>\n        <mat-error *ngIf=\"email.errors?.email && email.touched\">\n          You have provided invaild email\n        </mat-error>\n      </mat-form-field>\n\n      <mat-form-field class=\"col m12\">\n        <input matInput formControlName=\"phone\" placeholder=\"phone\" > \n        <mat-error *ngIf=\"phone.invalid && phone.touched\">\n          This field is required\n        </mat-error>\n      </mat-form-field> \n\n      <div class=\"col m12\">\n        <button type=\"submit\" [disabled]='regForm.invalid' class=\"weves-effect weves-light btn blue white-text right\">Submit</button>\n      </div>\n    </div>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -1155,7 +1182,7 @@ module.exports = "<div class=\"progress\" [class.hide]=\"!loading\" >\n  <div cl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "#close {\n  margin-right: 34px;\n  opacity: .5;\n  width: 1.3em;\n  cursor: pointer; }\n  #close .mat-icon {\n    font-size: 1.3em; }\n  #close:hover {\n  opacity: .9; }\n"
 
 /***/ }),
 
@@ -1423,6 +1450,59 @@ var CommonMessageService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/service/patient.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/service/patient.service.ts ***!
+  \********************************************/
+/*! exports provided: PatientService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatientService", function() { return PatientService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PatientService = /** @class */ (function () {
+    function PatientService(_http) {
+        this._http = _http;
+        this.root = "http://clinic.com";
+    }
+    PatientService.prototype.totalNumberOfPatients = function () {
+        var URL = this.root + "/ajax/get/patient/totalNumber";
+        return this._http.get(URL);
+    };
+    PatientService.prototype.totalNumberOfQueue = function () {
+        var URL = this.root + "/ajax/get/queue/total";
+        return this._http.get(URL);
+    };
+    PatientService.prototype.numServedToday = function () {
+        var URL = this.root + "/ajax/get/queue/served total";
+        return this._http.get(URL);
+    };
+    PatientService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], PatientService);
+    return PatientService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/service/role.service.ts":
 /*!*****************************************!*\
   !*** ./src/app/service/role.service.ts ***!
@@ -1545,6 +1625,10 @@ var UserService = /** @class */ (function () {
     UserService.prototype.logout = function () {
         var $url = this.root + "/ajax/post/logout";
         return this.http.post($url, {});
+    };
+    UserService.prototype.totalNumberOfUsers = function () {
+        var $url = this.root + "/ajax/get/user/total";
+        return this.http.get($url);
     };
     UserService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -3234,7 +3318,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/clinicFrontEnd/testProject/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /var/www/clinicFrontEnd/Admin/src/main.ts */"./src/main.ts");
 
 
 /***/ })

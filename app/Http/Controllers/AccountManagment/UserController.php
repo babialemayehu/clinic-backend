@@ -17,7 +17,7 @@ class UserController extends \App\Http\Controllers\Controller
     private $AUTH; 
 
     function __construct(){
-        $this->AUTH = User::find(19); 
+        $auth = Auth::user(); 
     } 
     public function index()
     {
@@ -92,8 +92,9 @@ class UserController extends \App\Http\Controllers\Controller
 
     //GET
     public function authUser(){
-        $this->AUTH->profile_pic = url(Storage::url($this->AUTH->profile_pic ));
-        return $this->AUTH ; 
+        $auth = Auth::user(); 
+        $auth->profile_pic = url(Storage::url($auth->profile_pic ));
+        return $auth; 
     }
 
     public function getUsers($pagination = 25){
@@ -115,31 +116,31 @@ class UserController extends \App\Http\Controllers\Controller
     }
 
     public function currentPassword(Request $request){
-
-        if (!Auth::once(['worker_id'=> $this->AUTH->worker_id, 'password'=>$request->currentPassword])){
+        $auth = Auth::user(); 
+        if (!Auth::once(['worker_id'=> $auth->worker_id, 'password'=>$request->currentPassword])){
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406 ); 
         }
         return 'true';
     }
 
     public function changePassword(Request $request){
- 
-        if (!Auth::once(['worker_id'=> $this->AUTH->worker_id, 'password'=>$request->currentPassword])
-            && !$this->AUTH->isFirstTime){
+        $auth = Auth::user(); 
+        if (!Auth::once(['worker_id'=> $auth->worker_id, 'password'=>$request->currentPassword])
+            && !$auth->isFirstTime){
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406); 
         }else{
-            $this->AUTH->password = Hash::make($request->newPassword); 
-            $this->AUTH->save(); 
+            $auth->password = Hash::make($request->newPassword); 
+            $auth->save(); 
              return 'true'; 
         }
     }   
 
     public function uploadProfilePic(Request $request){
-        // auth 
-        $imageName =  $this->AUTH->worker_id.'.'.$request->file('image')->extension(); 
-        $this->AUTH->profile_pic = $request->file('image')
+        $auth = Auth::user(); 
+        $imageName =  $auth->worker_id.'.'.$request->file('image')->extension(); 
+        $auth->profile_pic = $request->file('image')
         ->storeAs('profile', $imageName, 'public'); 
-        $this->AUTH->save(); 
+        $auth->save(); 
         return 'true'; 
     }
 
