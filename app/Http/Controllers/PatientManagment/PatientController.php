@@ -45,6 +45,37 @@ class PatientController extends Controller
         return $patient; 
     }
 
+    public function update($id,Request $request){
+        $this->validate($request, [
+            'reg_id'=> 'required',
+            'first_name'=> 'required',
+            'father_name'=> 'required',
+            'grand_father_name'=> 'required',
+            'birth_date'=> 'required',
+            'dorm_room_number' => 'required', 
+            'dorm_block' => 'required', 
+            'phone'=> 'required',
+            'gender'=> 'required',
+            'accadamic_year' => 'required', 
+        ]);
+        $department = Department::where('name', $request->department)->first();
+        $patient = Patient::find($id);
+        $patient->update([
+            'reg_id' => strtoupper($request->reg_id), 
+            'first_name' => ucfirst($request->first_name), 
+            'father_name' => ucfirst($request->father_name), 
+            'grand_father_name' => ucfirst($request->grand_father_name), 
+            'birth_date' => $request->birth_date, 
+            'dorm_room_number' => $request->dorm_room_number, 
+            'dorm_block' => $request->dorm_block, 
+            'phone' => $request->phone,  
+            'gender' => $request->gender, 
+            'department_id' => $department->id,
+            'college_id' => $department->college_id,
+            'accadamic_year' => $request->accadamic_year,
+        ]); 
+        return $patient;
+    }
     public function searchAutoComplete($key){
         if(!empty($key)){
             $patients = Patient::search($key)->take(15)->get(); 

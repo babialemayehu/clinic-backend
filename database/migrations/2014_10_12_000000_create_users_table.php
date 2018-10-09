@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->integer('role_id');
             $table->boolean('isFirstTime')->default(1); 
-            $table->string('profile_pic')->default("avatar.png");  
+            $table->string('profile_pic')->default("avatar.jpg");  
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

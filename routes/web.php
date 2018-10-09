@@ -66,7 +66,11 @@ Route::prefix('ajax')
         ->group(function(){
             Route::put('user', 'UserController@update'); 
             Route::put('password', 'UserController@changePassword'); 
-        });        
+        });      
+        Route::namespace('PatientManagment')
+        ->group(function(){
+            Route::put('patient/{id}', 'PatientController@update');        
+        });     
     }); 
 
     Route::prefix('delete')->group(function(){
@@ -112,4 +116,5 @@ Route::namespace('Auth')->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get("/admin", "FrontendController@admin"); 
     Route::get("/clurk", "FrontendController@clurk"); 
-});
+});  Route::get("/admin", "FrontendController@admin"); 
+    Route::get("/clurk", "FrontendController@clurk"); 

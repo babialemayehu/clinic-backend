@@ -57,9 +57,10 @@ class LoginController extends Controller
             case 1:
                 return '/admin';
             break;
-            case 2:
+            case 7: 
+                return '/clurk'; 
             break;
         }
-        return '/home';
+        return '/notFound';
     }
 }

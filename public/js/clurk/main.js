@@ -484,6 +484,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./service/user.service */ "./src/app/service/user.service.ts");
+/* harmony import */ var _first_time_login_first_time_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./first-time-login/first-time-login.component */ "./src/app/first-time-login/first-time-login.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -496,6 +497,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
     function AppComponent(_modal, _user) {
         this._modal = _modal;
@@ -504,30 +506,27 @@ var AppComponent = /** @class */ (function () {
         this.laodAuthUser();
     }
     AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
         document.addEventListener('DOMContentLoaded', function () {
             M.AutoInit();
         });
-        // this._user.authUser().subscribe(
-        //   user => {
-        //     if(user.isFirstTime){
-        //       this.modal = this._modal.open(FirstTimeLoginComponent, {
-        //         width: '500px',
-        //         height: '280px', 
-        //         data: {
-        //           $auth: user,
-        //           $profilePic: this.profilePic
-        //         }
-        //       }); 
-        //       this.modal.afterClosed().subscribe(
-        //         finised => {
-        //           if(finised){
-        //             this.laodAuthUser(); 
-        //           } 
-        //         }
-        //       )
-        //     }
-        //   }
-        // )  
+        this._user.authUser().subscribe(function (user) {
+            if (user.isFirstTime) {
+                _this.modal = _this._modal.open(_first_time_login_first_time_login_component__WEBPACK_IMPORTED_MODULE_3__["FirstTimeLoginComponent"], {
+                    width: '500px',
+                    height: '280px',
+                    data: {
+                        $auth: user,
+                        $profilePic: _this.profilePic
+                    }
+                });
+                _this.modal.afterClosed().subscribe(function (finised) {
+                    if (finised) {
+                        _this.laodAuthUser();
+                    }
+                });
+            }
+        });
     };
     AppComponent.prototype.laodAuthUser = function () {
         var _this = this;
@@ -1802,7 +1801,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"progress\" *ngIf=\"loading\">\n  <div class=\"indeterminate\"></div>\n</div>\n<div class=\"container\" [class.form-loading]=\"loading\">\n  <div >\n    <h5 id=\"name\">\n      <span>{{(patient)?.first_name}} </span>\n      <span>{{(patient)?.father_name}} </span> \n      <span>{{(patient)?.grand_father_name}} </span>\n    </h5>\n    <button mat-icon-button [matMenuTriggerFor]=\"patientMenu\" class=\"right\">\n      <mat-icon style=\" cursor: pointer;\" >more_vert</mat-icon>\n    </button>\n    \n    <mat-menu #patientMenu=\"matMenu\">\n      <button mat-menu-item (click)=\"edit()\"><mat-icon>edit</mat-icon> Edit</button>\n      <button mat-menu-item (click)=\"delete()\"><mat-icon>delete</mat-icon> Delete</button>\n    </mat-menu>\n    <strong  id=\"reg_id\">\n      <p style=\"display: inline;margin-right: 1.5em;\"> {{(patient)?.reg_id}}</p>    \n    </strong>\n  </div> \n  <div class=\"row\">\n    <div class='col m6'> \n      <div>\n         <span class=\"secondery\" style=\"display:block\">\n          {{(patient)?.accadamic_year}} year {{(patient)?.department.name}} department\n        </span>\n        <span class=\"third\" style=\"display:block\">Gender {{(patient)?.gender}}</span>\n        <div class=\"box\" style=\"margin-top: 14%\">\n          <p>Borned at {{(patient)?.birth_date}}</p>\n          <p>Block {{(patient)?.dorm_block}} Dorm {{(patient)?.dorm_room_number}}</p>\n          <p><mat-icon style=\"font-size:1em;\">call</mat-icon>{{(patient)?.phone}}</p>\n        </div>\n      </div>\n    </div>\n    <div class='col m6' id=\"recent\">\n      <div class='box'>\n        <app-recent-patient-visit \n        [patientId]=\"(patient)?.id\"\n        [push]=\"$queue\"\n        [remove]=\"$dequeue\"\n        ></app-recent-patient-visit>        \n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\" id=\"bottons\">\n      <button mat-button [disabled]=\"(patient)?.is_queued\" (click)=\"queue((patient)?.id)\" class=\"primary white-text right\" >Queue <mat-icon>send</mat-icon></button>\n      <button mat-button [disabled]=\"!(patient)?.is_queued\" (click)=\"removeQueue((patient)?.id)\" class=\"danger-text danger-boarder right\"  >Dequeue <mat-icon>remove_circle_outline</mat-icon></button>\n  </div>\n</div>"
+module.exports = "<div class=\"progress\" *ngIf=\"loading\">\n  <div class=\"indeterminate\"></div>\n</div>\n<div class=\"container\" [class.form-loading]=\"loading\">\n  <div >\n    <h5 id=\"name\">\n      <span>{{(patient)?.first_name}} </span>\n      <span>{{(patient)?.father_name}} </span> \n      <span>{{(patient)?.grand_father_name}} </span>\n    </h5>\n    <button mat-icon-button [matMenuTriggerFor]=\"patientMenu\" class=\"right\">\n      <mat-icon style=\" cursor: pointer;\" >more_vert</mat-icon>\n    </button>\n    \n    <mat-menu #patientMenu=\"matMenu\">\n      <button mat-menu-item (click)=\"edit()\"><mat-icon>edit</mat-icon> Edit</button>\n      <button mat-menu-item (click)=\"delete()\"><mat-icon>delete</mat-icon> Delete</button>\n    </mat-menu>\n    <strong  id=\"reg_id\">\n      <p style=\"display: inline;margin-right: 1.5em;\"> {{(patient)?.reg_id}}</p>    \n    </strong>\n  </div> \n  <div class=\"row\">\n    <div class='col m6'> \n      <div>\n         <span class=\"secondery\" style=\"display:block\">\n          <!-- \n          {{(patient)?.accadamic_year}} year {{(patient)?.department.name}} department -->\n        </span>\n        <span class=\"third\" style=\"display:block\">Gender {{(patient)?.gender}}</span>\n        <div class=\"box\" style=\"margin-top: 14%\">\n          <p>Borned at {{(patient)?.birth_date}}</p>\n          <p>Block {{(patient)?.dorm_block}} Dorm {{(patient)?.dorm_room_number}}</p>\n          <p><mat-icon style=\"font-size:1em;\">call</mat-icon>{{(patient)?.phone}}</p>\n        </div>\n      </div>\n    </div>\n    <div class='col m6' id=\"recent\">\n      <div class='box'>\n        <app-recent-patient-visit \n        [patientId]=\"(patient)?.id\"\n        [push]=\"$queue\"\n        [remove]=\"$dequeue\"\n        ></app-recent-patient-visit>\n        <h3>{{(patient)?.is_queued}}</h3>\n      </div>\n    </div>\n  </div>\n  {{(patient)?.is_queued}}\n  <div class=\"row\" id=\"bottons\">\n      <button mat-button [disabled]=\"(patient)?.is_queued\" (click)=\"queue((patient)?.id)\" class=\"primary white-text right\" >Queue <mat-icon>send</mat-icon></button>\n      <button mat-button [disabled]=\"!(patient)?.is_queued\" (click)=\"removeQueue((patient)?.id)\" class=\"danger-text danger-boarder right\"  >Dequeue <mat-icon>remove_circle_outline</mat-icon></button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1871,6 +1870,7 @@ var PatientProfileComponent = /** @class */ (function () {
         });
     };
     PatientProfileComponent.prototype.edit = function () {
+        var _this = this;
         var dialog = this._editModal.open(_registeration_form_registeration_form_component__WEBPACK_IMPORTED_MODULE_3__["RegisterationFormComponent"], {
             width: '600px',
             disableClose: true,
@@ -1878,6 +1878,10 @@ var PatientProfileComponent = /** @class */ (function () {
                 departments: this.departments,
                 patient: this.patient,
             },
+        });
+        dialog.afterClosed()
+            .subscribe(function (patient) {
+            _this.patient = patient.data;
         });
     };
     PatientProfileComponent.prototype.delete = function () {
@@ -2451,6 +2455,7 @@ var RegisterationFormComponent = /** @class */ (function () {
         this._message = _message;
         this.loading = false;
         this.regOprationMode = 'new';
+        this.patient = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     Object.defineProperty(RegisterationFormComponent.prototype, "value", {
         set: function (user) {
@@ -2518,6 +2523,7 @@ var RegisterationFormComponent = /** @class */ (function () {
             _this._route.navigate(['/']);
             _this.thisDialog.close({ responce: true, opration: 'create', data: responce });
             _this._message.httpSuccess('created account for <b> ' + responce.first_name);
+            _this.patient.emit(responce);
         }, function (error) {
             _this.loading = false;
             _this._message.httpError({ responce: false, operation: 'create', data: error });
@@ -2529,6 +2535,7 @@ var RegisterationFormComponent = /** @class */ (function () {
             //window.location.href="/user"; 
             _this.thisDialog.close({ responce: true, opration: 'update', data: responce });
             _this._message.httpSuccess('created account for <b> ' + responce.first_name + "</b>");
+            _this.patient.emit(responce);
         }, function (error) {
             _this.loading = false;
             _this._message.httpError({ responce: false, operation: 'update', data: error });
@@ -2601,6 +2608,10 @@ var RegisterationFormComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], RegisterationFormComponent.prototype, "patient", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", _model_User__WEBPACK_IMPORTED_MODULE_7__["User"]),
@@ -2934,7 +2945,7 @@ var PatientService = /** @class */ (function () {
         return this._http.post(URL, patient);
     };
     PatientService.prototype.updatePatient = function (patient) {
-        var URL = this.root + "/ajax/update/patient";
+        var URL = this.root + "/ajax/update/patient/" + patient.id;
         return this._http.put(URL, patient);
     };
     PatientService.prototype.deletePatint = function (id) {
@@ -3268,8 +3279,8 @@ var SidenavComponent = /** @class */ (function () {
         M.Sidenav.getInstance(document.querySelector('.sidenav')).close();
     };
     SidenavComponent.prototype.logoutClick = function () {
-        this._user.logout().subscribe(function (r) {
-            console.log(r);
+        this._user.logout().subscribe(function (responce) {
+            window.location.href = '/';
         });
     };
     __decorate([

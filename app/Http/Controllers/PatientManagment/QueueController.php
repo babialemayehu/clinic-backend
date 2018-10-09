@@ -15,7 +15,7 @@ class QueueController extends Controller
     private $auth; 
 
     function __construct(){
-        $this->auth = Auth::user(); 
+        $this->auth = User::find(1); 
     } 
 
     public function autoChoosePhysician(){
@@ -23,6 +23,7 @@ class QueueController extends Controller
     }
 
     public function queue($patinetId){
+        $auth = User::find(1); 
         $previos_queue = Patient_queue::orderBy('created_at', 'DESC')->take(1);
         
         $previos_queue_number = 0;
@@ -32,7 +33,7 @@ class QueueController extends Controller
         } 
         // return $previos_queue->get(); 
         $patient = Patient_queue::create([
-            "clurk_id" => $this->auth->id, 
+            "clurk_id" => $auth->id, 
             "physician_id" => $this->autoChoosePhysician(), 
             "patient_id" =>$patinetId
         ]);
@@ -74,7 +75,7 @@ class QueueController extends Controller
         return 'false'; 
     }
     public function recentVisists($id){
-        $patient_queues = Patient_queue::where('patientweb.php_id', $id)->take(5)->get(); 
+        $patient_queues = Patient_queue::where('patient_id', $id)->take(5)->get(); 
         foreach($patient_queues as $patient_queue){
             $patient_queue->physician = $patient_queue->physician()->first();
             $patient_queue->humanWaitingTime = Carbon::parse($patient_queue->created_at)->diffForHumans(); 

@@ -17,7 +17,7 @@ class UserController extends \App\Http\Controllers\Controller
     private $AUTH; 
 
     function __construct(){
-        $auth = Auth::user(); 
+        $auth = User::find(1); 
     } 
     public function index()
     {
@@ -92,7 +92,7 @@ class UserController extends \App\Http\Controllers\Controller
 
     //GET
     public function authUser(){
-        $auth = Auth::user(); 
+        $auth = User::find(1); 
         $auth->profile_pic = url(Storage::url($auth->profile_pic ));
         return $auth; 
     }
@@ -116,7 +116,7 @@ class UserController extends \App\Http\Controllers\Controller
     }
 
     public function currentPassword(Request $request){
-        $auth = Auth::user(); 
+        $auth = User::find(1); 
         if (!Auth::once(['worker_id'=> $auth->worker_id, 'password'=>$request->currentPassword])){
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406 ); 
         }
@@ -124,7 +124,7 @@ class UserController extends \App\Http\Controllers\Controller
     }
 
     public function changePassword(Request $request){
-        $auth = Auth::user(); 
+        $auth = User::find(1); 
         if (!Auth::once(['worker_id'=> $auth->worker_id, 'password'=>$request->currentPassword])
             && !$auth->isFirstTime){
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406); 
@@ -136,18 +136,20 @@ class UserController extends \App\Http\Controllers\Controller
     }   
 
     public function uploadProfilePic(Request $request){
-        $auth = Auth::user(); 
+        $auth = User::find(1); 
         $imageName =  $auth->worker_id.'.'.$request->file('image')->extension(); 
         $auth->profile_pic = $request->file('image')
-        ->storeAs('profile', $imageName, 'public'); 
+        ->storeAs('profile', $imageName, 'public');
+         $auth->isFirstTime = false; 
         $auth->save(); 
         return 'true'; 
     }
 
     public function logout(Request $request){
+        $user = User::find(1); 
         Auth::logout(); 
-        return redirect('/'); 
-        // return 'logout'; 
+        $responce =  (object)["redirectTo" => '/', "user" => $user];  
+        return json_encode($responce); 
     }
 
     public function total(){
