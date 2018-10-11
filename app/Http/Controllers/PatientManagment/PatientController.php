@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Patient; 
 use App\Department; 
+use App\User; 
 
 class PatientController extends Controller
 {
     public function newPatient(Request $request){
        // return $request->all(); 
+        $auth = User::find(1); 
         $this->validate($request, [
             'reg_id'=> 'required',
             'first_name'=> 'required',
@@ -37,6 +39,7 @@ class PatientController extends Controller
             'department_id' => $department->id,
             'college_id' => $department->college_id,
             'accadamic_year' => $request->accadamic_year,
+            'clurk_id' => $auth->id,
         ]); 
 
         $patientQueue = new QueueController; 
@@ -61,7 +64,7 @@ class PatientController extends Controller
         $department = Department::where('name', $request->department)->first();
         $patient = Patient::find($id);
         $patient->update([
-            'reg_id' => strtoupper($request->reg_id), 
+            'reg_id' => strtoupper($request->reg_id),
             'first_name' => ucfirst($request->first_name), 
             'father_name' => ucfirst($request->father_name), 
             'grand_father_name' => ucfirst($request->grand_father_name), 

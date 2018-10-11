@@ -75,7 +75,7 @@ class QueueController extends Controller
         return 'false'; 
     }
     public function recentVisists($id){
-        $patient_queues = Patient_queue::where('patient_id', $id)->take(5)->get(); 
+        $patient_queues = Patient_queue::where('is_served', 1)->where('patient_id', $id)->take(5)->get(); 
         foreach($patient_queues as $patient_queue){
             $patient_queue->physician = $patient_queue->physician()->first();
             $patient_queue->humanWaitingTime = Carbon::parse($patient_queue->created_at)->diffForHumans(); 
@@ -83,8 +83,12 @@ class QueueController extends Controller
         return $patient_queues; 
     }
 
-    public function queuedPatients(){
-        $queued = Patient_queue::where('is_served', 0)->orderBy('created_at', 'DESC')->get(); 
+    public function queuedPatients($limit = -1){
+        $queued = Patient_queue::where('is_served', 0)->orderBy('created_at', 'DESC'); 
+        if($limit == -1){
+            $queued = $queued->take($limit); 
+        }
+        $queued = $queued->get(); 
         foreach($queued as $patient){
             $patient->patient = $patient->patient()->first(); 
             $patient->humanWaitingTime = Carbon::parse($patient->created_at)->diffForHumans(); 
@@ -99,5 +103,9 @@ class QueueController extends Controller
 
    public function totalServed(){
        return '5'; 
+   }
+
+   public function isQueued($patient_id){
+       return Patient_queue::where('is_served', 0)->where('patient_id', $patient_id)->get()->count(); 
    }
 }

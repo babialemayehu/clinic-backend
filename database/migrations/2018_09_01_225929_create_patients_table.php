@@ -27,6 +27,7 @@ class CreatePatientsTable extends Migration
             $table->integer('accadamic_year'); 
             $table->integer('department_id'); 
             $table->integer('college_id'); 
+            $table->integer('clurk_id'); 
             $table->softDeletes();
             $table->timestamps();
         });
