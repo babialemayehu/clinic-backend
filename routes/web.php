@@ -32,7 +32,7 @@ Route::prefix('ajax')
             Route::get('search/auto complete/{key}', 'PatientController@searchAutoComplete');
             Route::get('search/{key}', 'PatientController@search');    
             Route::prefix('queue')->group(function(){
-                Route::get('recent/{id}', 'QueueController@recentVisists'); 
+                Route::get('visits/{id}/{limit}', 'QueueController@visits'); 
                 Route::get('patients in queue/{limit}', 'QueueController@queuedPatients');
                 Route::get('total', 'QueueController@total'); 
                 Route::get('served total', 'QueueController@totalServed');

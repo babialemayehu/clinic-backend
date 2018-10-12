@@ -23,7 +23,7 @@ class Patient_queue extends Model
     }
 
     public function physician(){
-        return $this->belongsTo('App\User'); 
+        return $this->belongsTo('App\User', 'physician_id'); 
     }
     
     public function patient(){

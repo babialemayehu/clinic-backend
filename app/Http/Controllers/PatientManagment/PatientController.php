@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Patient; 
 use App\Department; 
 use App\User; 
+use Carbon\Carbon; 
 
 class PatientController extends Controller
 {
@@ -86,6 +87,9 @@ class PatientController extends Controller
                 $patient->department = $patient->department()->first();
                 $queue = $patient->queues()->where('is_served', 0)->get(); 
                 $patient->queue_status = ($queue->count())?true: false;  
+                $patient->birth_date= Carbon::parse($patient->birth_date)->toFormattedDateString(); 
+                $patient->age = Carbon::parse($patient->birth_date)->diffForHumans();
+                $patient->registerd_at = Carbon::parse($patient->created_at)->diffForHumans();
             }
             return $patients; 
         }
@@ -98,6 +102,9 @@ class PatientController extends Controller
             $patient->department = $patient->department()->first(); 
             $queues = $patient->queues()->get(); 
             $patient->is_queued = false; 
+            $patient->birth_date= Carbon::parse($patient->birth_date)->toFormattedDateString(); 
+            $patient->age = Carbon::parse($patient->birth_date)->diffForHumans();
+            $patient->registerd_at = Carbon::parse($patient->created_at)->diffForHumans();
             foreach($queues as $queue){
                 if(!$queue->is_served){
                     $patient->is_queued = true; 

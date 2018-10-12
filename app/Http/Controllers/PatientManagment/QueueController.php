@@ -74,11 +74,23 @@ class QueueController extends Controller
         }
         return 'false'; 
     }
-    public function recentVisists($id){
-        $patient_queues = Patient_queue::where('is_served', 1)->where('patient_id', $id)->take(5)->get(); 
+    public function visits($id, $limit = -1){
+        $patient_id = Patient::where('reg_id', $id)->first()->id; 
+        $patient_queues = Patient_queue::where('is_served', 1)
+                            ->where('patient_id', $patient_id)
+                            ->orderBy('updated_at'); 
+        if($limit > 0){
+            $patient_queues = $patient_queue->take($limit); 
+        }
+
+        $patient_queues = $patient_queues->get(); 
+
         foreach($patient_queues as $patient_queue){
-            $patient_queue->physician = $patient_queue->physician()->first();
-            $patient_queue->humanWaitingTime = Carbon::parse($patient_queue->created_at)->diffForHumans(); 
+            $patient_queue->physician = $patient_queue->first()->physician()->get();
+            $c = Carbon::parse($patient_queue->created_at); 
+            $patient_queue->humanWaitingTime = $c->diffForHumans(); 
+            $patient_queue->date = $c->toFormattedDateString(); 
+            //$patinet_queue->visitd_at = Carbon::parse($patient_queue->created_at)->diffForHumans(); 
         }
         return $patient_queues; 
     }
