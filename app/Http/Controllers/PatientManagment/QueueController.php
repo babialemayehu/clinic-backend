@@ -34,7 +34,7 @@ class QueueController extends Controller
         // return $previos_queue->get(); 
         $patient = Patient_queue::create([
             "clurk_id" => $auth->id, 
-            "physician_id" => $this->autoChoosePhysician(), 
+            // "physician_id" => $this->autoChoosePhysician(), 
             "patient_id" =>$patinetId
         ]);
         
@@ -80,13 +80,13 @@ class QueueController extends Controller
                             ->where('patient_id', $patient_id)
                             ->orderBy('updated_at'); 
         if($limit > 0){
-            $patient_queues = $patient_queue->take($limit); 
+            $patient_queues = $patient_queues->take($limit); 
         }
 
         $patient_queues = $patient_queues->get(); 
 
         foreach($patient_queues as $patient_queue){
-            $patient_queue->physician = $patient_queue->first()->physician()->get();
+            $patient_queue->physician = $patient_queue->physician()->first(); 
             $c = Carbon::parse($patient_queue->created_at); 
             $patient_queue->humanWaitingTime = $c->diffForHumans(); 
             $patient_queue->date = $c->toFormattedDateString(); 
@@ -120,4 +120,6 @@ class QueueController extends Controller
    public function isQueued($patient_id){
        return Patient_queue::where('is_served', 0)->where('patient_id', $patient_id)->get()->count(); 
    }
+
+   
 }

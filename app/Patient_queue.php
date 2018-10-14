@@ -19,7 +19,7 @@ class Patient_queue extends Model
     ]; 
 
     public function clurk(){
-        return $this->belongsTo('App\User'); 
+        return $this->belongsTo('App\User', 'clurk_id'); 
     }
 
     public function physician(){

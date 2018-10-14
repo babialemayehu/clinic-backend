@@ -130,6 +130,9 @@ class UserController extends \App\Http\Controllers\Controller
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406); 
         }else{
             $auth->password = Hash::make($request->newPassword); 
+            if($auth->setup_step == 0){
+                $auth->setup_step = 1; 
+            }
             $auth->save(); 
              return 'true'; 
         }
@@ -140,9 +143,12 @@ class UserController extends \App\Http\Controllers\Controller
         $imageName =  $auth->worker_id.'.'.$request->file('image')->extension(); 
         $auth->profile_pic = $request->file('image')
         ->storeAs('profile', $imageName, 'public');
-         $auth->isFirstTime = false; 
+        if($auth->setup_step == 1){
+            $auth->setup_step =-1; 
+        }
         $auth->save(); 
-        return 'true'; 
+        $auth->profile_pic = 'http://clinic/storage/'.$auth->profile_pic;
+        return $auth; 
     }
 
     public function logout(Request $request){

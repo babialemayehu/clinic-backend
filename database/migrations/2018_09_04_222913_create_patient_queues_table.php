@@ -16,7 +16,7 @@ class CreatePatientQueuesTable extends Migration
         Schema::create('patient_queues', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('clurk_id'); 
-            $table->integer('physician_id'); 
+            $table->integer('physician_id')->nullable; 
             $table->integer('patient_id');
             $table->boolean('is_served')->default(0); 
             $table->integer('queue_number')->default(1); 
