@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id');
             $table->integer('setup_step')->default(0); 
             $table->string('profile_pic')->default("avatar.jpg");  
+            $table->integer('room_number')->nullable(); 
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

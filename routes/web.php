@@ -26,6 +26,7 @@ Route::prefix('ajax')
                 Route::get('total', 'UserController@total'); 
             }); 
         }); 
+
         Route::namespace('PatientManagment')
         ->group(function(){
             Route::get('departments', 'DepartmentController@index'); 
@@ -37,10 +38,17 @@ Route::prefix('ajax')
                 Route::get('total', 'QueueController@total'); 
                 Route::get('served total', 'QueueController@totalServed');
                 Route::get('is in queue/{patient_id}', 'QueueController@isQueued'); 
+                Route::get('next', 'QueueController@next'); 
             });
             Route::prefix('patient')->group(function(){
                 Route::get('totalNumber', 'PatientController@totalNumber'); 
             }); 
+        }); 
+
+        Route::namespace('LaboratoryManagement')->prefix('lab')
+        ->group(function(){
+            Route::get('search/auto/{key}', 'Test@search_auto'); 
+            Route::get('search/{key}', 'Test@search'); 
         }); 
     }); 
 
@@ -50,6 +58,7 @@ Route::prefix('ajax')
             Route::post('create user', 'UserController@store'); 
             Route::post('isCurrentPassword', 'UserController@currentPassword'); 
             Route::post('logout', 'UserController@logout'); 
+            
         }); 
          Route::namespace('PatientManagment')
         ->group(function(){
@@ -60,6 +69,13 @@ Route::prefix('ajax')
                 Route::get('recent/{id}', 'QueueController@recentVisists'); 
             });
         }); 
+
+        Route::namespace('LaboratoryManagement')->prefix('lab')
+        ->group(function(){
+            Route::post('request', 'LaboratoryContorller@request'); 
+            Route::post('search/auto/{key}', 'Test@search_auto'); 
+            Route::post('search/{key}', 'Test@search'); 
+        }); 
     }); 
 
     Route::prefix('update')->group(function(){
@@ -67,11 +83,26 @@ Route::prefix('ajax')
         ->group(function(){
             Route::put('user', 'UserController@update'); 
             Route::put('password', 'UserController@changePassword'); 
-        });      
+            Route::put('password', 'UserController@changePassword'); 
+            Route::put('room number/{room_number}', 'UserController@room_number'); 
+        });
+
         Route::namespace('PatientManagment')
         ->group(function(){
             Route::put('patient/{id}', 'PatientController@update');        
-        });     
+        }); 
+
+        Route::namespace('PatientRecordManagement')->prefix('hisstory')
+        ->group(function(){
+            Route::put('chief_complient/{hisstory}', 'HisstoryController@chief_complient'); 
+            Route::put('metrics/{hisstory}', 'HisstoryController@metrics'); 
+            Route::put('status/waiting/{hisstory}', 'HissHisstoryControllertory@waiting_status'); 
+        }); 
+
+        Route::namespace('LaboratoryManagment')->prefix('lab')
+        ->group(function(){
+            Route::put('responce', 'LaboratoryContorller@responce'); 
+        }); 
     }); 
 
     Route::prefix('delete')->group(function(){

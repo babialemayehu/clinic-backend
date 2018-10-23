@@ -85,7 +85,7 @@ class PatientController extends Controller
             $patients = Patient::search($key)->take(15)->get(); 
             foreach($patients as $patient){
                 $patient->department = $patient->department()->first();
-                $queue = $patient->queues()->where('is_served', 0)->get(); 
+                $queue = $patient->queues()->where('status', 0)->get(); 
                 $patient->queue_status = ($queue->count())?true: false;  
                 $patient->birth_date= Carbon::parse($patient->birth_date)->toFormattedDateString(); 
                 $patient->age = Carbon::parse($patient->birth_date)->diffForHumans();
@@ -105,11 +105,11 @@ class PatientController extends Controller
             $patient->birth_date= Carbon::parse($patient->birth_date)->toFormattedDateString(); 
             $patient->age = Carbon::parse($patient->birth_date)->diffForHumans();
             $patient->registerd_at = Carbon::parse($patient->created_at)->diffForHumans();
-            foreach($queues as $queue){
-                if(!$queue->is_served){
-                    $patient->is_queued = true; 
-                }
-            }
+            // foreach($queues as $queue){
+            //     if(!$queue->is_served){
+            //         $patient->is_queued = true; 
+            //     }
+            // }
             return $patient; 
         }
         return false; 

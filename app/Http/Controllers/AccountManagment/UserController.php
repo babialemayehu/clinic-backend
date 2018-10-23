@@ -162,4 +162,10 @@ class UserController extends \App\Http\Controllers\Controller
         return User::get()->count();  
     }
 
+    public function room_number($room_number){
+        $user = User::find(1); 
+        $user->room_number = $room_number; 
+        $user->save(); 
+        return $user; 
+    }
 }

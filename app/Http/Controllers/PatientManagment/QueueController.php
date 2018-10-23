@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Patient_queue; 
 use App\User; 
 use App\Patient; 
+use App\Hisstory; 
 use Carbon\Carbon; 
 
 class QueueController extends Controller
@@ -53,19 +54,13 @@ class QueueController extends Controller
     }
 
     public function dequeue($patinetId){
-        $patient = Patient_queue::where('patient_id', $patinetId)->where('is_served', 0);
-        $patient->update(["is_served" => 1]);  
+        $patient = Patient_queue::where('patient_id', $patinetId)->where('status', 0);
+        $patient->update(["status" => -1]);  
         return $patient->first(); 
-        // $_responce =[
-        //     "message" => "successfully dequeue the patient ", 
-        //     "status" => 0
-        //  ]; 
-        
-        // return $_responce; 
     }
 
     public function remove($patinetId){
-        $queue = Patient_queue::where('patient_id', $patinetId)->where('is_served', 0); 
+        $queue = Patient_queue::where('patient_id', $patinetId)->where('status', 0); 
         if($queue->get()->count() > 0){
             $queue->delete();
             $patient = Patient::find($patinetId);
@@ -76,7 +71,7 @@ class QueueController extends Controller
     }
     public function visits($id, $limit = -1){
         $patient_id = Patient::where('reg_id', $id)->first()->id; 
-        $patient_queues = Patient_queue::where('is_served', 1)
+        $patient_queues = Patient_queue::where('status', -1)
                             ->where('patient_id', $patient_id)
                             ->orderBy('updated_at'); 
         if($limit > 0){
@@ -96,21 +91,44 @@ class QueueController extends Controller
     }
 
     public function queuedPatients($limit = -1){
-        $queued = Patient_queue::where('is_served', 0)->orderBy('created_at', 'DESC'); 
+        $queued = Patient_queue::where('status','>=', 0)->orderBy('updated_at', 'DESC'); 
         if($limit == -1){
             $queued = $queued->take($limit); 
         }
         $queued = $queued->get(); 
         foreach($queued as $patient){
             $patient->patient = $patient->patient()->first(); 
-            $patient->humanWaitingTime = Carbon::parse($patient->created_at)->diffForHumans(); 
+            $patient->humanWaitingTime = Carbon::parse($patient->updated_at)->diffForHumans(); 
         }
         return $queued; 
 
     }
 
+    public function next(){
+        $auth = User::find(1); 
+        $next = Patient_queue::where('status','>=', 0)
+                            ->where('physician_id', $auth->id)
+                            ->orWhere('physician_id', null)
+                            ->orderBy('updated_at', 'DESC')->first(); 
+        $next->physician_id = $auth->id; 
+        $next->save(); 
+
+        if($next->hisstory_id == null){
+            $hisstory = new Hisstory; 
+            $hisstory->patient_queue_id = $next->id; 
+            $hisstory->save(); 
+            $next->hisstory_id = $hisstory->id; 
+            $next->save(); 
+            $next->hisstory = $hisstory; 
+        }else{
+            $next->hisstory = $next->hisstory()->first(); 
+        }
+
+        $next->patient = $next->patient()->first(); 
+        return $next; 
+    }    
    public function total(){
-       return Patient_queue::where('is_served', 0)->get()->count(); 
+       return Patient_queue::where('status', 0)->get()->count(); 
    }
 
    public function totalServed(){
@@ -118,7 +136,7 @@ class QueueController extends Controller
    }
 
    public function isQueued($patient_id){
-       return Patient_queue::where('is_served', 0)->where('patient_id', $patient_id)->get()->count(); 
+       return Patient_queue::where('status', 0)->where('patient_id', $patient_id)->get()->count(); 
    }
 
    

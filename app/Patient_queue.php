@@ -15,7 +15,7 @@ class Patient_queue extends Model
         'clurk_id', 
         'physician_id', 
         'patient_id', 
-        'is_served',
+        'status',
     ]; 
 
     public function clurk(){
@@ -28,5 +28,9 @@ class Patient_queue extends Model
     
     public function patient(){
         return $this->belongsTo('App\Patient'); 
+    }
+
+    public function hisstory(){
+        return $this->hasOne('App\Hisstory'); 
     }
 }
