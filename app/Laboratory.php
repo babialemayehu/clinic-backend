@@ -18,4 +18,9 @@ class Laboratory extends Model
     public function hisstory(){
         return $this->belongsTo('App\Hisstory'); 
     }
+
+    public function test(){
+        return $this->belongsTo('App\Laboratory_test','laboratory_test_id'); 
+    }
+    
 }

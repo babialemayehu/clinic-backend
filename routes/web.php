@@ -39,6 +39,7 @@ Route::prefix('ajax')
                 Route::get('served total', 'QueueController@totalServed');
                 Route::get('is in queue/{patient_id}', 'QueueController@isQueued'); 
                 Route::get('next', 'QueueController@next'); 
+                Route::get('get/{queue_id}', 'QueueController@get');
             });
             Route::prefix('patient')->group(function(){
                 Route::get('totalNumber', 'PatientController@totalNumber'); 
@@ -49,6 +50,19 @@ Route::prefix('ajax')
         ->group(function(){
             Route::get('search/auto/{key}', 'Test@search_auto'); 
             Route::get('search/{key}', 'Test@search'); 
+            Route::get('requests/{key}', 'LaboratoryContorller@getRequests'); 
+        }); 
+
+        Route::namespace('PharmacyManagement')->prefix('pharmacy')
+        ->group(function(){
+            Route::prefix('drug')
+            ->group(function(){
+                Route::get('search/auto/{key}', 'DrugsController@search_auto'); 
+                Route::get('search/{key}', 'DrugsController@search'); 
+                Route::get('frequencies', 'DrugsController@getFreqencies'); 
+                Route::get('roots', 'DrugsConroller@getRoots'); 
+            }); 
+            
         }); 
     }); 
 
@@ -75,6 +89,14 @@ Route::prefix('ajax')
             Route::post('request', 'LaboratoryContorller@request'); 
             Route::post('search/auto/{key}', 'Test@search_auto'); 
             Route::post('search/{key}', 'Test@search'); 
+        }); 
+
+        Route::namespace('PharmacyManagement')->prefix('pharmacy')
+        ->group(function(){
+            Route::prefix('prescription')
+            ->group(function(){
+                Route::post('prescribe/{hisstory_id}', 'PrescriptionController@prescribe'); 
+            }); 
         }); 
     }); 
 

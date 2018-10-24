@@ -126,7 +126,15 @@ class QueueController extends Controller
 
         $next->patient = $next->patient()->first(); 
         return $next; 
-    }    
+    }  
+    
+    public function get($queue_id){
+        $queue = Patient_queue::find($queue_id); 
+        $queue->physician = $queue->physician()->first(); 
+        $queue->hisstory = $queue->hisstory()->first(); 
+        $queue->patient = $queue->patient()->first();
+        return $queue;
+    }
    public function total(){
        return Patient_queue::where('status', 0)->get()->count(); 
    }

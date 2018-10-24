@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LaboratoryManagement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 Use App\Laboratory; 
+use App\Patient_queue; 
 // use App\Http\Controllers\PatientRecordManagement\HisstoryController; 
 
 class LaboratoryContorller extends Controller
@@ -26,6 +27,14 @@ class LaboratoryContorller extends Controller
         return 'true'; 
     }
 
+    public function getRequests($key){
+        $hisstory_id = Patient_queue::find($key)->hisstory_id; 
+        $requests = Laboratory::where('hisstory_id', $hisstory_id)->get(); 
+        foreach($requests as $request){
+            $request->laboratory_test = $request->test()->first(); 
+        }
+        return $requests; 
+    }
     public function responce(Request $request){
         $this->validate($request, [
             'responces' => 'required', 
