@@ -91,7 +91,7 @@ class QueueController extends Controller
     }
 
     public function queuedPatients($limit = -1){
-        $queued = Patient_queue::where('status','>=', 0)->orderBy('updated_at', 'DESC'); 
+    $queued = Patient_queue::where('status','=', 0)->orderBy('updated_at', 'DESC'); 
         if($limit == -1){
             $queued = $queued->take($limit); 
         }
@@ -106,25 +106,31 @@ class QueueController extends Controller
 
     public function next(){
         $auth = User::find(1); 
-        $next = Patient_queue::where('status','>=', 0)
+        $next = Patient_queue::where('status','=', 0)
                             ->where('physician_id', $auth->id)
                             ->orWhere('physician_id', null)
                             ->orderBy('updated_at', 'DESC')->first(); 
+        if(!$next){
+            return response(json_encode((object)['message'=>"No patinets in the queue"]), 406 );
+        }
         $next->physician_id = $auth->id; 
+        $next->status = 1; 
         $next->save(); 
 
         if($next->hisstory_id == null){
-            $hisstory = new Hisstory; 
-            $hisstory->patient_queue_id = $next->id; 
-            $hisstory->save(); 
-            $next->hisstory_id = $hisstory->id; 
+            $hisstory =  Hisstory::create([
+                'patient_queue_id' => $next->id, 
+            ]); 
+           
+            $next->hisstory_id = $next->hisstory->id; 
             $next->save(); 
-            $next->hisstory = $hisstory; 
         }else{
             $next->hisstory = $next->hisstory()->first(); 
         }
-
-        $next->patient = $next->patient()->first(); 
+        $patinet = $next->patient()->first(); 
+        $patinet->department = $patinet->department()->first(); 
+        $patinet->age = Carbon::parse($patinet->birth_date)->age;
+        $next->patient = $patinet; 
         return $next; 
     }  
     
@@ -134,6 +140,21 @@ class QueueController extends Controller
         $queue->hisstory = $queue->hisstory()->first(); 
         $queue->patient = $queue->patient()->first();
         return $queue;
+    }
+
+    public function saved(){
+        $auth = User::find(1); 
+
+        $queues = Patient_queue::where('physician_id', $auth->id)
+            ->where('status', '>', 0)->orderBy('updated_at')->get(); 
+
+        foreach($queues as $queue){
+            $queue->physician = $queue->physician()->first(); 
+            $queue->hisstory = $queue->hisstory()->first(); 
+            $queue->patient = $queue->patient()->first();
+        }
+
+        return $queues;
     }
    public function total(){
        return Patient_queue::where('status', 0)->get()->count(); 

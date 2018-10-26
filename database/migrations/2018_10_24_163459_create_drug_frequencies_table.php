@@ -15,6 +15,8 @@ class CreateDrugFrequenciesTable extends Migration
     {
         Schema::create('drug_frequencies', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('abr'); 
+            $table->string('discription'); 
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PatientRecordManagement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Hisstory; 
+use App\Diagnosis; 
 
 class HisstoryController extends Controller
 {
@@ -24,5 +25,13 @@ class HisstoryController extends Controller
         $patient->status = 2;
         $patient->save();  
         return $patient; 
+    }
+
+    public function searchDiagnosis($key){
+        if(empty($key) || !isset($key) || $key == "all"){
+            return Diagnosis::get();
+        }
+
+        return Diagnosis::search($key)->get(); 
     }
 }

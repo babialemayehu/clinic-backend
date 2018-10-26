@@ -10,9 +10,9 @@ use App\Drug_root;
 
 class DrugsController extends Controller
 {
-    public function search_auto($key){
-        if(empty($key)){
-            return []; 
+    public function search_auto($key = "all"){
+        if(empty($key) || !isset($key) || $key == "all"){
+            return Drug::get();
         }
         return Drug::search($key)->get(); 
     }

@@ -20,20 +20,14 @@ class PrescriptionController extends Controller
         $prescriptions = []; 
 
         foreach($request->prescriptions as $prescription){
-            $this->validate($request, [
-                'name' => 'required', 
-                'frequency' => 'required', 
-                'root' => 'required', 
-            ]); 
-            $drug_id = Drug::where('name', $request->name)->first()->id; 
-            $frequency_id = Drug_frequency::where('name', $request->frequency)->first()->name; 
-            $root_id =  Drug_root::where('name', $request->root)->first()->id; 
+            $prescription = json_decode(json_encode($prescription)); 
+            $drug_id = Drug::where('name', $prescription->name)->first()->id; 
             $_prescription = Prescription::create([
                 'drug_id' => $drug_id, 
                 'hisstory_id' => $hisstory_id, 
-                'root_id' => $root_id, 
-                'frequency_id' => $frequency_id, 
-                'dose' => $request->doses
+                'root_id' => $prescription->root_id, 
+                'frequency_id' => $prescription->root_id, 
+                'dose' => $prescription->dosage
             ]); 
 
             array_push($prescriptions, $_prescription); 

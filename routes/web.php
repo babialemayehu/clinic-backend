@@ -40,6 +40,7 @@ Route::prefix('ajax')
                 Route::get('is in queue/{patient_id}', 'QueueController@isQueued'); 
                 Route::get('next', 'QueueController@next'); 
                 Route::get('get/{queue_id}', 'QueueController@get');
+                Route::get('saved', 'QueueController@saved'); 
             });
             Route::prefix('patient')->group(function(){
                 Route::get('totalNumber', 'PatientController@totalNumber'); 
@@ -57,12 +58,20 @@ Route::prefix('ajax')
         ->group(function(){
             Route::prefix('drug')
             ->group(function(){
-                Route::get('search/auto/{key}', 'DrugsController@search_auto'); 
+                Route::get('search/auto/{key?}', 'DrugsController@search_auto'); 
                 Route::get('search/{key}', 'DrugsController@search'); 
-                Route::get('frequencies', 'DrugsController@getFreqencies'); 
-                Route::get('roots', 'DrugsConroller@getRoots'); 
+                Route::get('frequencies', 'DrugsController@getFrequencies'); 
+                Route::get('roots', 'DrugsController@getRoots'); 
             }); 
             
+        }); 
+
+        Route::namespace('PatientRecordManagement')
+        ->group(function(){
+            Route::prefix('diagnosises')
+            ->group(function(){
+                Route::get('search/auto/{key}', 'HisstoryController@searchDiagnosis'); 
+            }); 
         }); 
     }); 
 

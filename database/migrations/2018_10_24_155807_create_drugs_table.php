@@ -16,9 +16,10 @@ class CreateDrugsTable extends Migration
         Schema::create('drugs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); 
-            $table->decimal('unit'); 
+            $table->string('unit'); 
             $table->integer('status'); 
             $table->date('expire_date'); 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
