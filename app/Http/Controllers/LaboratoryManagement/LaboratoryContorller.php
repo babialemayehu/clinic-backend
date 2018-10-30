@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 Use App\Laboratory; 
 use App\Patient_queue; 
+use App\Hisstory;
 // use App\Http\Controllers\PatientRecordManagement\HisstoryController; 
 
 class LaboratoryContorller extends Controller
@@ -35,14 +36,14 @@ class LaboratoryContorller extends Controller
         }
         return $requests; 
     }
-    public function responce(Request $request){
+
+    public function responce(\App\Hisstory $hisstory, Request $request){
         $this->validate($request, [
             'responces' => 'required', 
-            'hisstory_id' => 'required' 
         ]); 
-        
         foreach($request->responces as $responce){
-            $lab = Laboratory::find($responce->request_id); 
+            $responce = json_decode(json_encode($responce)); 
+            $lab = Laboratory::find($responce->id); 
             $lab->normality = $responce->normality; 
             $lab->note = $responce->note; 
             $lab->value = $responce->value; 
@@ -50,6 +51,9 @@ class LaboratoryContorller extends Controller
             //HisstoryController::waiting_status($lab->hisstory()->first()); 
         }
 
+        $queue = Patient_queue::where('hisstory_id', $hisstory->id)->first(); 
+        $queue->status = -2; 
+        $queue->save(); 
         return 'true';
     }
 }

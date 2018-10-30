@@ -122,6 +122,8 @@ class PatientController extends Controller
         return $patient; 
     }
 
+
+
      // Dashboard
 
      public function totalNumber(){

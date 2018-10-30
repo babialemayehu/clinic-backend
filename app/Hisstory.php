@@ -18,10 +18,22 @@ class Hisstory extends Model
     ]; 
 
     public function queue(){
-        return $this->belongsTo('App/Patient_queue'); 
+        return $this->belongsTo('App\Patient_queue', 'hisstory_id'); 
     }
 
     public function prescription(){
-        return $this->hasMany('App/Prescription'); 
+        return $this->hasMany('App\Prescription'); 
+    }
+
+    public function diagnosis(){
+        return $this->hasMany('App\Hisstroy_diagnosis'); 
+    }
+
+    public function prescriptions(){
+        return $this->hasMany('App\Prescription');
+    }
+
+    public function laboratories(){
+        return $this->hasMany('App\Laboratory'); 
     }
 }

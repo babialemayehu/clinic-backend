@@ -21,6 +21,7 @@ class CreatePatientQueuesTable extends Migration
             $table->boolean('status')->default(0); 
             $table->integer('queue_number')->default(1); 
             $table->integer('hisstory_id')->nullable(); 
+            $table->integer('_call')->default(1); 
             $table->softDeletes();
             $table->timestamps();
         });

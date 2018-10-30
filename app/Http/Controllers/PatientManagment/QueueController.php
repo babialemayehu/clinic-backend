@@ -85,8 +85,18 @@ class QueueController extends Controller
             $c = Carbon::parse($patient_queue->created_at); 
             $patient_queue->humanWaitingTime = $c->diffForHumans(); 
             $patient_queue->date = $c->toFormattedDateString(); 
+
+            // for physician 
+            $diagnosis = []; 
+            $patient_queue->diagnosis = $patient_queue->hisstory()->first()->diagnosis()->get();
+            foreach($patient_queue->diagnosis as $d){
+                array_push($diagnosis, $d->diagnosis()->first()->name); 
+            }
+            $patient_queue->diagnosis = $diagnosis; 
+            $patient_queue->hisstory = $patient_queue->hisstory()->first(); 
             //$patinet_queue->visitd_at = Carbon::parse($patient_queue->created_at)->diffForHumans(); 
         }
+
         return $patient_queues; 
     }
 
@@ -156,6 +166,14 @@ class QueueController extends Controller
 
         return $queues;
     }
+    
+    public function isEmpty(){
+        return json_encode((Patient_queue::where('status', 0)->get()->count() > 0)? false: true); 
+    }
+
+    public function call(\App\Patient_queue $queue){
+        return ($queue->update(["call", 1]))?'true': 'false'; 
+    }
    public function total(){
        return Patient_queue::where('status', 0)->get()->count(); 
    }
@@ -167,6 +185,7 @@ class QueueController extends Controller
    public function isQueued($patient_id){
        return Patient_queue::where('status', 0)->where('patient_id', $patient_id)->get()->count(); 
    }
+
 
    
 }

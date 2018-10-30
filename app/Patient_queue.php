@@ -15,6 +15,7 @@ class Patient_queue extends Model
         'clurk_id', 
         'physician_id', 
         'patient_id', 
+        'hisstory_id', 
         'status',
     ]; 
 

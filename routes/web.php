@@ -41,6 +41,7 @@ Route::prefix('ajax')
                 Route::get('next', 'QueueController@next'); 
                 Route::get('get/{queue_id}', 'QueueController@get');
                 Route::get('saved', 'QueueController@saved'); 
+                Route::get('isEmpty', 'QueueController@isEmpty'); 
             });
             Route::prefix('patient')->group(function(){
                 Route::get('totalNumber', 'PatientController@totalNumber'); 
@@ -51,7 +52,15 @@ Route::prefix('ajax')
         ->group(function(){
             Route::get('search/auto/{key}', 'Test@search_auto'); 
             Route::get('search/{key}', 'Test@search'); 
-            Route::get('requests/{key}', 'LaboratoryContorller@getRequests'); 
+            Route::get('requests/{key}', 'LaboratoryContorller@getRequests');
+            Route::prefix('queue')
+            ->group(function(){
+                Route::get('list/{limit?}', 'QueueController@requests'); 
+                Route::get('next', 'QueueController@next');
+                Route::get('saved', 'QueueController@saved'); 
+                Route::get('is empty', 'QueueController@isEmpty'); 
+            }); 
+           ; 
         }); 
 
         Route::namespace('PharmacyManagement')->prefix('pharmacy')
@@ -71,6 +80,12 @@ Route::prefix('ajax')
             Route::prefix('diagnosises')
             ->group(function(){
                 Route::get('search/auto/{key}', 'HisstoryController@searchDiagnosis'); 
+                Route::post('new/{hisstory_id}', 'HisstoryController@diangnosis'); 
+            }); 
+
+            Route::prefix('hisstory')
+            ->group(function(){
+                Route::get('view/{queue}', 'HisstoryController@view'); 
             }); 
         }); 
     }); 
@@ -90,12 +105,15 @@ Route::prefix('ajax')
                 Route::post('add/{patinetId}', 'QueueController@queue'); 
                 Route::post('remove/{patinetId}', 'QueueController@dequeue'); 
                 Route::get('recent/{id}', 'QueueController@recentVisists'); 
+                Route::post('call/{queue}', 'QueueController@call'); 
+
             });
         }); 
 
         Route::namespace('LaboratoryManagement')->prefix('lab')
         ->group(function(){
             Route::post('request', 'LaboratoryContorller@request'); 
+            Route::post('responce/{hisstory}', 'LaboratoryContorller@responce'); 
             Route::post('search/auto/{key}', 'Test@search_auto'); 
             Route::post('search/{key}', 'Test@search'); 
         }); 
@@ -105,6 +123,14 @@ Route::prefix('ajax')
             Route::prefix('prescription')
             ->group(function(){
                 Route::post('prescribe/{hisstory_id}', 'PrescriptionController@prescribe'); 
+            }); 
+        }); 
+
+        Route::namespace('PatientRecordManagement')
+        ->group(function(){
+            Route::prefix('diagnosises')
+            ->group(function(){
+                Route::post('new/{hisstory_id}', 'HisstoryController@diangnosis'); 
             }); 
         }); 
     }); 
