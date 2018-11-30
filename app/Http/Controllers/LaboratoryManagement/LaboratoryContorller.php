@@ -25,6 +25,10 @@ class LaboratoryContorller extends Controller
             ]); 
         }
         
+        $queue = Patient_queue::where('hisstory_id', $request->hisstory_id)->first(); 
+        $queue->status = 2; 
+        $queue->save(); 
+
         return 'true'; 
     }
 
@@ -52,7 +56,7 @@ class LaboratoryContorller extends Controller
         }
 
         $queue = Patient_queue::where('hisstory_id', $hisstory->id)->first(); 
-        $queue->status = -2; 
+        $queue->status = 4; 
         $queue->save(); 
         return 'true';
     }

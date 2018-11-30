@@ -18,6 +18,7 @@ class Prescription extends Model
         'root_id', 
         'frequency_id', 
         'dose', 
+        'isDelivered'
     ]; 
 
     public function hisstory(){

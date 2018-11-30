@@ -20,6 +20,7 @@ class CreatePrescriptionsTable extends Migration
             $table->integer('root_id'); 
             $table->integer('frequency_id'); 
             $table->decimal('dose'); 
+            $table->boolean('isDelivered')->default(0); 
             $table->softDeletes();
             $table->timestamps();
         });

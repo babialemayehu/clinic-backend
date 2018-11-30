@@ -71,8 +71,26 @@ Route::prefix('ajax')
                 Route::get('search/{key}', 'DrugsController@search'); 
                 Route::get('frequencies', 'DrugsController@getFrequencies'); 
                 Route::get('roots', 'DrugsController@getRoots'); 
+                
             }); 
-            
+
+            Route::prefix('prescription')
+            ->group(function(){
+                Route::get('requests/{queue}', 'PrescriptionController@requests'); 
+            }); 
+                 
+            Route::prefix('queue')
+            ->group(function(){
+                Route::get('list/{limit}', 'QueueController@requests'); 
+                Route::get('next', 'QueueController@next'); 
+                Route::get('saved', 'QueueController@saved'); 
+                Route::get('is empty', 'QueueController@isEmpty'); 
+            });        
+
+            Route::prefix('order')
+            ->group(function(){
+
+            });
         }); 
 
         Route::namespace('PatientRecordManagement')
@@ -86,6 +104,16 @@ Route::prefix('ajax')
             Route::prefix('hisstory')
             ->group(function(){
                 Route::get('view/{queue}', 'HisstoryController@view'); 
+            }); 
+        }); 
+        
+        Route::namespace('DrugOrderManagement')
+        ->group(function(){
+            Route::prefix('order')
+            ->group(function(){
+                Route::get('get order to store', 'OrderController@getOrderStore'); 
+                Route::get('user orders', 'OrderController@userOrders'); 
+                Route::get('ordered drugs/{order}', 'OrderController@orderedDrugs'); 
             }); 
         }); 
     }); 
@@ -124,6 +152,11 @@ Route::prefix('ajax')
             ->group(function(){
                 Route::post('prescribe/{hisstory_id}', 'PrescriptionController@prescribe'); 
             }); 
+
+            // Route::prefix('order')
+            // ->group(function(){
+            //     Route::post('new', 'OrderController@newOrder'); 
+            // });
         }); 
 
         Route::namespace('PatientRecordManagement')
@@ -132,7 +165,15 @@ Route::prefix('ajax')
             ->group(function(){
                 Route::post('new/{hisstory_id}', 'HisstoryController@diangnosis'); 
             }); 
-        }); 
+        });  
+
+        Route::namespace('DrugOrderManagement')
+        ->group(function(){
+            Route::prefix('order')
+            ->group(function(){
+                Route::post('new', 'OrderController@new'); 
+            }); 
+        });   
     }); 
 
     Route::prefix('update')->group(function(){
@@ -153,13 +194,31 @@ Route::prefix('ajax')
         ->group(function(){
             Route::put('chief_complient/{hisstory}', 'HisstoryController@chief_complient'); 
             Route::put('metrics/{hisstory}', 'HisstoryController@metrics'); 
-            Route::put('status/waiting/{hisstory}', 'HissHisstoryControllertory@waiting_status'); 
+            Route::put('status/waiting/{hisstory}', 'HisstoryController@waiting_status'); 
+            Route::put('close/{queue}', 'HisstoryController@close'); 
         }); 
 
         Route::namespace('LaboratoryManagment')->prefix('lab')
         ->group(function(){
             Route::put('responce', 'LaboratoryContorller@responce'); 
         }); 
+
+        Route::namespace('PharmacyManagement')->prefix('pharmacy')
+        ->group(function(){
+            Route::put('deliver','PrescriptionController@deliver'); 
+            Route::prefix('order')
+            ->group(function(){
+                Route::put('autorize', 'OrderController@autorize'); 
+                Route::put('ship', 'OrderController@ship'); 
+            });
+        }); 
+
+        Route::namespace("OrderManagement")->prefix("order")
+        ->group(function(){
+            Route::put("autorize/{order}", "OrderController@autorize"); 
+            Route::put("isssue/{order}", "OrderController@isssue"); 
+            Route::put("recive/{order}", "OrderController@"); 
+        });
     }); 
 
     Route::prefix('delete')->group(function(){

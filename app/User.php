@@ -14,7 +14,16 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'worker_id','first_name','father_name','grand_father_name','email','phone', 'password','gender','role_id'
+        'worker_id',
+        'first_name',
+        'father_name',
+        'grand_father_name',
+        'email',
+        'phone',
+        'password',
+        'gender',
+        'role_id',
+        'setup_step'
     ];
 
     public function getRouteKeyName()
@@ -22,10 +31,16 @@ class User extends Authenticatable
         return 'worker_id';
     }
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+         'remember_token',
+
     ];
 
     public function role(){
         return $this->belongsTo("App\Role");
     } 
+
+    public function orders(){
+        return $this->hasMany("App\Order", "order_by"); 
+    }
 }

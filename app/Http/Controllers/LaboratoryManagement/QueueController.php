@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Patient_queue; 
 use App\Laboratory; 
 use Carbon\Carbon; 
+use App\Http\Controllers\PatientManagment\QueueController as Queue;
 
 class QueueController extends Controller
 {
@@ -14,20 +15,13 @@ class QueueController extends Controller
         return Patient_queue::where('status', 2)->orderBy('updated_at');
     }
 
-    private function _setUp(&$queue){
-        $queue->patient = $queue->patient()->first(); 
-        $queue->physician = $queue->physician()->first();
-        $queue->humanWaitingTime = Carbon::parse($queue->updated_at)->diffForHumans(); 
-    }
-
-
     public function requests($limit = -1){ 
         $queues = $this->_queue(); 
         if($limit > -1){ $queues->take($limit);  }
 
         $queues = $queues->get();
         foreach($queues as $queue){
-            $this->_setUp($queue); 
+            \App\Http\Controllers\PatientManagment\QueueController::_setUp($queue); 
         }    
 
         return $queues; 
@@ -38,18 +32,17 @@ class QueueController extends Controller
         if($queue != null){
            $queue->status = 3;
             $queue->save();  
-            $this->_setUp($queue); 
+            \App\Http\Controllers\PatientManagment\QueueController::_setUp($queue); 
             return $queue; 
         }else{
             return response(json_encode((object)['message'=>"No patinets in the queue"]), 406 );
         }
-       
     }
 
     public function saved(){
-        $queues = Patient_queue::where('status', '>', 2)->orderBy('updated_at')->get(); 
+        $queues = Patient_queue::where('status', 3)->orderBy('updated_at')->get(); 
         foreach($queues as $queue){
-            $this->_setUp($queue); 
+            \App\Http\Controllers\PatientManagment\QueueController::_setUp($queue); 
         }
 
         return $queues;

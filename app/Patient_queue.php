@@ -17,6 +17,8 @@ class Patient_queue extends Model
         'patient_id', 
         'hisstory_id', 
         'status',
+        'prescription_status',
+        'isClosed'
     ]; 
 
     public function clurk(){

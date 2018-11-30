@@ -19,6 +19,12 @@ class QueueController extends Controller
         $this->auth = User::find(1); 
     } 
 
+    public static function _setUp(&$queue){
+        $queue->patient = $queue->patient()->first(); 
+        $queue->physician = $queue->physician()->first();
+        $queue->humanWaitingTime = Carbon::parse($queue->updated_at)->diffForHumans(); 
+    }
+
     public function autoChoosePhysician(){
         return 20; 
     }
@@ -44,13 +50,6 @@ class QueueController extends Controller
         $patient->patient = $patient->patient()->first(); 
         $patient->humanWaitingTime = Carbon::parse($patient->created_at)->diffForHumans();
         return $patient; 
-        // $_responce =[
-        //    "message" => "successfully queue the patient ". $patient->first_name, 
-        //    "status" => 0
-        // ]; 
-        
-        
-        // return json_encode((object)$_responce); 
     }
 
     public function dequeue($patinetId){
@@ -156,7 +155,9 @@ class QueueController extends Controller
         $auth = User::find(1); 
 
         $queues = Patient_queue::where('physician_id', $auth->id)
-            ->where('status', '>', 0)->orderBy('updated_at')->get(); 
+            ->where('status', '>', 0)
+            ->where('isClosed', 0)
+            ->orderBy('updated_at')->get(); 
 
         foreach($queues as $queue){
             $queue->physician = $queue->physician()->first(); 

@@ -70,4 +70,10 @@ class HisstoryController extends Controller
         }
         return $hisstory; 
     }
+    
+    public function close(\App\Patient_queue $queue){
+        $queue->isClosed = true; 
+        $queue->save(); 
+        return "true"; 
+    }
 }

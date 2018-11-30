@@ -10,4 +10,8 @@ class Drug extends Model
 {
     use SoftDeletes;
     use Searchable;
+
+    public function orders(){
+        return $this->belongsToMany('App\Order'); 
+    }
 }
