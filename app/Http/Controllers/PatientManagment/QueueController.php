@@ -4,7 +4,7 @@ namespace App\Http\Controllers\PatientManagment;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller; 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\Auth;
 use App\Patient_queue; 
 use App\User; 
 use App\Patient; 
@@ -16,7 +16,7 @@ class QueueController extends Controller
     private $auth; 
 
     function __construct(){
-        $this->auth = User::find(1); 
+        $this->auth = Auth::user(); 
     } 
 
     public static function _setUp(&$queue){
@@ -30,7 +30,7 @@ class QueueController extends Controller
     }
 
     public function queue($patinetId){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         $previos_queue = Patient_queue::orderBy('created_at', 'DESC')->take(1);
         
         $previos_queue_number = 0;
@@ -99,22 +99,44 @@ class QueueController extends Controller
         return $patient_queues; 
     }
 
-    public function queuedPatients($limit = -1){
-    $queued = Patient_queue::where('status','=', 0)->orderBy('updated_at', 'DESC'); 
+    public function queuedPatients($limit = -1, $order = 'ASC'){
+        $queued = Patient_queue::where('status','=', 0);
+        if($order = 'ASC'){
+            $queued = $queued->orderBy('updated_at');
+        }else{
+            $queued = $queued->orderBy('updated_at', 'DESC');
+        }
         if($limit == -1){
             $queued = $queued->take($limit); 
         }
         $queued = $queued->get(); 
         foreach($queued as $patient){
             $patient->patient = $patient->patient()->first(); 
-            $patient->humanWaitingTime = Carbon::parse($patient->updated_at)->diffForHumans(); 
+            $patient->humanWaitingTime = Carbon::parse($patient->created_at)->diffForHumans(); 
         }
         return $queued; 
 
     }
 
+    public function publicQueuedPatients($type = 'queue'){
+        if($type == 'queue')
+            $queued = Patient_queue::where('status', 0)->orWhere('_call', 1)->orderBy('created_at'); 
+        else
+            $queued = Patient_queue::where('status', 2)->orWhere('_call', 2)->orderBy('created_at'); 
+
+        $queued_patients = $queued->get(); 
+        
+
+        foreach($queued_patients as $queue){
+            $queue->patient = $queue->patient()->first(); 
+            $queue->humanWaitingTime = Carbon::parse($queue->created_at)->diffForHumans(); 
+            $queue->physician = $queue->physician()->first(); 
+        }
+        $queued->update(['_call'=> 0]); 
+        return $queued_patients; 
+    }
     public function next(){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         $next = Patient_queue::where('status','=', 0)
                             ->where('physician_id', $auth->id)
                             ->orWhere('physician_id', null)
@@ -132,6 +154,7 @@ class QueueController extends Controller
             ]); 
            
             $next->hisstory_id = $next->hisstory->id; 
+            $next->_call = 1; 
             $next->save(); 
         }else{
             $next->hisstory = $next->hisstory()->first(); 
@@ -152,7 +175,7 @@ class QueueController extends Controller
     }
 
     public function saved(){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
 
         $queues = Patient_queue::where('physician_id', $auth->id)
             ->where('status', '>', 0)

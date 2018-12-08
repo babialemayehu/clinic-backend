@@ -22,7 +22,7 @@ class CreatePatientQueuesTable extends Migration
             $table->boolean('prescription_status')->default(0); 
             $table->integer('queue_number')->default(1); 
             $table->integer('hisstory_id')->nullable(); 
-            $table->integer('_call')->default(1); 
+            $table->integer('_call')->default(0); 
             $table->boolean('isClosed')->default(false); 
             $table->softDeletes();
             $table->timestamps();

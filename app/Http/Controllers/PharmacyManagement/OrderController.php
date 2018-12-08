@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PharmacyManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Order;
 use App\User;
 
@@ -14,7 +15,7 @@ class OrderController extends Controller
     }
 
     public function newOrder(Request $request){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
 
        $this->validate([
            'orders' => 'required', 

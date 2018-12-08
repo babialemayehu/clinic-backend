@@ -11,7 +11,8 @@ class Drug_order extends Model
         'drug_id',  
         'ordered_quantity',  
         'adjusted_quantity',  
-        'issued_quantity',  
+        'issued_quantity',
+        'issued_by',   
         'batch_number',  
         'expier_at', 
         'recived_at'

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LaboratoryManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Patient_queue; 
 use App\Laboratory; 
 use Carbon\Carbon; 
@@ -30,7 +31,8 @@ class QueueController extends Controller
     public function next(){
         $queue = $this->_queue()->first(); 
         if($queue != null){
-           $queue->status = 3;
+            $queue->status = 3;
+            $queue->_call = 2; 
             $queue->save();  
             \App\Http\Controllers\PatientManagment\QueueController::_setUp($queue); 
             return $queue; 

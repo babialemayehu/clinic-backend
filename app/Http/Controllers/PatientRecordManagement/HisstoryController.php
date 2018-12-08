@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PatientRecordManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Hisstory; 
 use App\Diagnosis;
 use App\Hisstroy_diagnosis; 

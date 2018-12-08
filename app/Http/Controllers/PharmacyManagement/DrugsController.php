@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PharmacyManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Drug; 
 use App\Drug_frequency; 
 use App\Drug_root; 

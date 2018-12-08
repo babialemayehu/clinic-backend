@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LaboratoryManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 Use App\Laboratory; 
 use App\Patient_queue; 
 use App\Hisstory;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LaboratoryManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Laboratory_test; 
 
 class Test extends Controller

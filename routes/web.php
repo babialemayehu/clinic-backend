@@ -111,9 +111,11 @@ Route::prefix('ajax')
         ->group(function(){
             Route::prefix('order')
             ->group(function(){
+                Route::get('get all', 'OrderController@getOrders'); 
                 Route::get('get order to store', 'OrderController@getOrderStore'); 
                 Route::get('user orders', 'OrderController@userOrders'); 
-                Route::get('ordered drugs/{order}', 'OrderController@orderedDrugs'); 
+                Route::get('ordered drugs/{order}/{option?}', 'OrderController@orderedDrugs'); 
+                Route::get('for store', 'OrderController@orderForStore'); 
             }); 
         }); 
     }); 
@@ -213,11 +215,11 @@ Route::prefix('ajax')
             });
         }); 
 
-        Route::namespace("OrderManagement")->prefix("order")
+        Route::namespace("DrugOrderManagement")->prefix("order")
         ->group(function(){
-            Route::put("autorize/{order}", "OrderController@autorize"); 
-            Route::put("isssue/{order}", "OrderController@isssue"); 
-            Route::put("recive/{order}", "OrderController@"); 
+            Route::put("autorize", "OrderController@autorize"); 
+            Route::put("issue", "OrderController@issue"); 
+            Route::put("recive", "OrderController@recive"); 
         });
     }); 
 
@@ -258,11 +260,22 @@ Route::namespace('Auth')->group(function(){
     Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::post('password/reset', 'ResetPasswordController@reset');
 });
-
+// PUBLIC
+Route::namespace('PatientManagment')
+->group(function(){
+    Route::get('/ajax/public/patients/queue/{type?}', 'QueueController@publicQueuedPatients'); 
+}); 
 // FRONT END VIEWS 
 
 Route::middleware(['auth'])->group(function(){
     Route::get("/admin", "FrontendController@admin"); 
     Route::get("/clurk", "FrontendController@clurk"); 
-});  Route::get("/admin", "FrontendController@admin"); 
-    Route::get("/clurk", "FrontendController@clurk"); 
+    Route::get("/drug_store", "FrontendController@drug_store");   
+    Route::get("/laboratory", "FrontendController@laboratory"); 
+    Route::get("/pharmacy", "FrontendController@pharmacy"); 
+    Route::get("/physician", "FrontendController@physician"); 
+});  
+Route::get("/lab_queue", "FrontendController@lab_queue");  
+Route::get("/queue", "FrontendController@queue"); 
+// Route::get("/admin", "FrontendController@admin"); 
+//     Route::get("/clurk", "FrontendController@clurk"); 

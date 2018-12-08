@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\Auth;
 
 class LoginController extends Controller
 {
@@ -57,9 +57,22 @@ class LoginController extends Controller
             case 1:
                 return '/admin';
             break;
-            case 7: 
-                return '/clurk'; 
+            case 2:
+                return '/clurk';
             break;
+            case 3:
+                return '/physician';
+            break;
+            case 4:
+                return '/laboratory';
+            break;
+            case 5:
+                return '/pharmacy';
+            break;
+            case 6:
+                return '/drug_store';
+            break;
+            
         }
         return '/notFound';
     }

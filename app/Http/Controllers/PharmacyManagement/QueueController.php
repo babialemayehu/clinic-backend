@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PharmacyManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Patient_queue; 
 
 class QueueController extends Controller

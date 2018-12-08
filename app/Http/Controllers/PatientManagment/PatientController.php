@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PatientManagment;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Auth;
 use App\Patient; 
 use App\Department; 
 use App\User; 
@@ -13,7 +14,7 @@ class PatientController extends Controller
 {
     public function newPatient(Request $request){
        // return $request->all(); 
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         $this->validate($request, [
             'reg_id'=> 'required',
             'first_name'=> 'required',

@@ -22,6 +22,7 @@ class CreateDrugOrdersTable extends Migration
             $table->decimal('adjusted_quantity')->nullable(); 
             $table->decimal('issued_quantity')->nullable(); 
             $table->integer('batch_number')->nullable(); 
+            $table->integer('issued_by')->nullable(); 
             $table->date('expier_at')->nullable();
             $table->timestamp('recived_at')->nullable();
             $table->timestamps();

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\AccountManagment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\Welcome; 
@@ -17,7 +17,7 @@ class UserController extends \App\Http\Controllers\Controller
     private $AUTH; 
 
     function __construct(){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
     } 
     public function index()
     {
@@ -92,7 +92,7 @@ class UserController extends \App\Http\Controllers\Controller
 
     //GET
     public function authUser(){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         $auth->profile_pic = url(Storage::url($auth->profile_pic ));
         return $auth; 
     }
@@ -116,7 +116,7 @@ class UserController extends \App\Http\Controllers\Controller
     }
 
     public function currentPassword(Request $request){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         if (!Auth::once(['worker_id'=> $auth->worker_id, 'password'=>$request->currentPassword])){
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406 ); 
         }
@@ -124,7 +124,7 @@ class UserController extends \App\Http\Controllers\Controller
     }
 
     public function changePassword(Request $request){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         if (!Auth::once(['worker_id'=> $auth->worker_id, 'password'=>$request->currentPassword])
             && !$auth->isFirstTime){
             return response(json_encode((object)['message'=>"You have given invalid password"]), 406); 
@@ -139,7 +139,7 @@ class UserController extends \App\Http\Controllers\Controller
     }   
 
     public function uploadProfilePic(Request $request){
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         $imageName =  $auth->worker_id.'.'.$request->file('image')->extension(); 
         $auth->profile_pic = $request->file('image')
         ->storeAs('profile', $imageName, 'public');
@@ -147,12 +147,12 @@ class UserController extends \App\Http\Controllers\Controller
             $auth->setup_step =-1; 
         }
         $auth->save(); 
-        $auth->profile_pic = 'http://clinic/storage/'.$auth->profile_pic;
+        $auth->profile_pic = '//storage/'.$auth->profile_pic;
         return $auth; 
     }
 
     public function logout(Request $request){
-        $user = User::find(1); 
+        $user = Auth::user(); 
         Auth::logout(); 
         $responce =  (object)["redirectTo" => '/', "user" => $user];  
         return json_encode($responce); 
@@ -163,7 +163,7 @@ class UserController extends \App\Http\Controllers\Controller
     }
 
     public function room_number($room_number){
-        $user = User::find(1); 
+        $user = Auth::user(); 
         $user->room_number = $room_number; 
         $user->save(); 
         return $user; 

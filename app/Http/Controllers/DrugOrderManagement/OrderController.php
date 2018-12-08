@@ -4,7 +4,7 @@ namespace App\Http\Controllers\DrugOrderManagement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\Auth;
 use App\Order; 
 use App\Drug; 
 use App\User; 
@@ -15,7 +15,9 @@ class OrderController extends Controller
 {
     private function setupOrder(\App\Order &$order){
         $order->order = $order->orderedBy()->first(); 
+        $order->order->role = $order->order->role()->first(); 
         $order->supplier = $order->supplier()->first(); 
+        $order->selected = true; 
     }
     public function new(Request $request){
         $this->validate($request, [
@@ -23,7 +25,7 @@ class OrderController extends Controller
         ]); 
 
         $request = json_decode(json_encode($request->all())); 
-        $auth = User::find(1); 
+        $auth = Auth::user(); 
         $order = Order::create([
             "order_by" => $auth->id, 
             "supplier_id" => 1
@@ -41,8 +43,10 @@ class OrderController extends Controller
     }
 
     public function userOrders(){
-        $auth = User::find(1); 
-        $orders = $auth->orders()->where("supplier_id", 1)->get(); 
+        $auth = Auth::user(); 
+        $orders = $auth->orders()
+            ->where("supplier_id", 1)
+            ->orderBy('updated_at', 'desc')->get(); 
         
         foreach($orders as $order){
             $drug_orders = $order->drug_orders()->get(); 
@@ -57,18 +61,26 @@ class OrderController extends Controller
         return $orders; 
     }
 
-    public function orderedDrugs(\App\Order $order){
-        $drug_orders = $order->drug_orders()->get(); 
-
+    public function orderedDrugs(\App\Order $order, $option = ""){
+        $drug_orders = $order->drug_orders(); 
+ 
+        switch($option){
+            case 'autorized': 
+                 $drug_orders = $drug_orders->where('autorized_by', '<>', null); 
+            break; 
+        }
+        $drug_orders = $drug_orders->get(); 
         foreach($drug_orders as $drug_order){
-            $durg_order->drug = $drug_order->drug()->get(); 
+            $drug_order->drug = Drug::find($drug_order->drug_id);  
+            $drug_order->selected = ($drug_order->issued_quantity != null); 
         }
         return $drug_orders; 
     }
     
     public function getOrderStore(){
-        $auth = User::find(1); 
-        $orders = $auth->orders()->where("supplier_id", 1)->get(); 
+        $auth = Auth::user(); 
+        $orders = $auth->orders()->where("supplier_id", 1)
+        ->orderBy('updated_at', 'desc')->get(); 
         
         foreach($orders as $order){
            $order->drugs = $order->drug()->get();
@@ -77,46 +89,73 @@ class OrderController extends Controller
     }
 
     public function autorize(\App\Drug_order $order, Request $request){
-        $auth = User::find(1); 
-        $this->validate($request, [
-            "adjusted_quantity" => "required"
-        ]); 
+        $auth = Auth::user(); 
+        // $this->validate($request, [
+        //     "adjusted_quantity" => "required"
+        // ]); 
+        $autorizedOrders= json_decode(json_encode($request->all())); 
 
-        $order->update([
-            "autorized_by" => $auth, 
-            "adjusted_quantity" => $request->adjusted_quantity
-        ]); 
-
-        return $order; 
+        foreach($autorizedOrders as $order){
+            Drug_order::find($order->id)->update([
+                "autorized_by" => ($order->autorized_by == null)?null: $auth->id, 
+                "adjusted_quantity" => (int)$request->adjusted_quantity
+            ]);
+        }
+         
+        return $autorizedOrders; 
     }
 
-    public function isssue(\App\Drug_order $order, Request $request){
-        $auth = User::find(1); 
-
-        $this->validate($request, [
-            "issued_quantity" => 'required', 
-            "batch_number" => 'required', 
-            "expier_at" => 'required'
-        ]); 
-
-        $order->update([
-            "issued_quantity" => $request->issued_quantity, 
-            "batch_number" => $request->batch_number, 
-            "expier_at" => $request->expier_at
-        ]); 
-        
-        return $order; 
+    public function issue(\App\Drug_order $order, Request $request){
+        $auth = Auth::user(); 
+        // return $request->all(); 
+        // $this->validate($request, [
+        //     "issued_quantity" => 'required', 
+        //     "batch_number" => 'required', 
+        //     "expier_at" => 'required'
+        // ]); 
+       /// return $request->all(); 
+        $orders = json_decode(json_encode($request->all())); 
+        foreach($orders as $order){
+            if($order->selected){
+            //return json_encode($order); 
+                $o = Drug_order::find($order->id); 
+                $o->issued_by = $auth->id;
+                $o->issued_quantity = $order->issued_quantity;
+                $o->batch_number = $order->batch_number;
+                $o->expier_at= $order->expier_at;
+                $o->save(); 
+            }
+        }
+     
+        return $orders; 
     }
 
-    public function recive(\App\Drug_order $order){
-        return $order->update(["recived_at" => Carbon::now()]); 
+    public function recive(Request $request){
+        $orders = json_decode(json_encode($request->all())); 
+        foreach($orders as $order){
+            Drug_order::find($order->id)->update(["recived_at" => Carbon::now()]);
+        }
+        return 'true'; 
     }
 
     public function getOrders(){
-        $orders = Order::orderedBy('updated_at', 'DESC')->get(); 
+       $orders = Order::orderBy('created_at')->get();
+       foreach($orders as $order){
+           $this->setupOrder($order); 
+       }
+       return $orders; 
+    } 
+
+    public function orderForStore(){
+        $orders = Order::where('supplier_id', 1)->orderBy('updated_at')->get(); 
+        $filterd_orders = []; 
         foreach($orders as $order){
-            $this->setupOrder($order); 
+            $autorization = $order->drug_orders()->where('autorized_by', '<>', null)->get()->count() > 0; 
+            if($autorization){
+                $this->setupOrder($order); 
+                array_push($filterd_orders, $order); 
+            }
         }
-        return $orders; 
+        return $filterd_orders; 
     }
 }
