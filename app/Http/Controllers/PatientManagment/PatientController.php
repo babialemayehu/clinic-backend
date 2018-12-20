@@ -15,6 +15,7 @@ class PatientController extends Controller
     public function newPatient(Request $request){
        // return $request->all(); 
         $auth = Auth::user(); 
+         
         $this->validate($request, [
             'reg_id'=> 'required',
             'first_name'=> 'required',

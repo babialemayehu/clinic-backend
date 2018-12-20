@@ -3398,27 +3398,27 @@ var HisstoryService = /** @class */ (function () {
         this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     HisstoryService.prototype.chif_complient = function (hisstory_id, complient) {
-        var URL = this.root + "ajax/update/hisstory/chief_complient/" + hisstory_id;
+        var URL = this.root + "/ajax/update/hisstory/chief_complient/" + hisstory_id;
         return this._http.put(URL, { chief_complient: complient });
     };
     HisstoryService.prototype.metrix = function (hisstory_id, matrix) {
-        var URL = this.root + "ajax/update/hisstory/metrics/" + hisstory_id;
+        var URL = this.root + "/ajax/update/hisstory/metrics/" + hisstory_id;
         return this._http.put(URL, matrix);
     };
     HisstoryService.prototype.getDiagnosises = function (key) {
-        var URL = this.root + "ajax/get/diagnosises/search/auto/" + key;
+        var URL = this.root + "/ajax/get/diagnosises/search/auto/" + key;
         return this._http.get(URL);
     };
     HisstoryService.prototype.diagnosises = function (hisstory_id, diagnosises) {
-        var URL = this.root + "ajax/post/diagnosises/new/" + hisstory_id;
+        var URL = this.root + "/ajax/post/diagnosises/new/" + hisstory_id;
         return this._http.post(URL, { diagnosises: diagnosises });
     };
     HisstoryService.prototype.viewHisstroy = function (queue_id) {
-        var URL = this.root + "ajax/get/hisstory/view/" + queue_id;
+        var URL = this.root + "/ajax/get/hisstory/view/" + queue_id;
         return this._http.get(URL);
     };
     HisstoryService.prototype.close = function (queue_id) {
-        var URL = this.root + "ajax/update/hisstory/close/" + queue_id;
+        var URL = this.root + "/ajax/update/hisstory/close/" + queue_id;
         return this._http.put(URL, {});
     };
     HisstoryService = __decorate([
@@ -3465,23 +3465,23 @@ var LaboratoryService = /** @class */ (function () {
         this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     LaboratoryService.prototype.$new = function (hisstory_id, request) {
-        var URL = this.root + "ajax/post/lab/request";
+        var URL = this.root + "/ajax/post/lab/request";
         return this._http.post(URL, request);
     };
     LaboratoryService.prototype.autoComplet = function (key) {
-        var URL = this.root + "ajax/get/lab/search/auto/" + key;
+        var URL = this.root + "/ajax/get/lab/search/auto/" + key;
         return this._http.get(URL);
     };
     LaboratoryService.prototype.search = function (key) {
-        var URL = this.root + "ajax/get/lab/search/" + key;
+        var URL = this.root + "/ajax/get/lab/search/" + key;
         return this._http.get(URL);
     };
     LaboratoryService.prototype.request = function (test, id) {
-        var URL = this.root + "ajax/post/lab/request";
+        var URL = this.root + "/ajax/post/lab/request";
         return this._http.post(URL, { requests: test, hisstory_id: id });
     };
     LaboratoryService.prototype.getRequests = function (queue_id) {
-        var URL = this.root + "ajax/get/lab/requests/" + queue_id;
+        var URL = this.root + "/ajax/get/lab/requests/" + queue_id;
         return this._http.get(URL);
     };
     LaboratoryService = __decorate([
@@ -3684,19 +3684,19 @@ var PharmacyService = /** @class */ (function () {
         this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PharmacyService.prototype.drugAutoComplet = function (key) {
-        var URL = this.root + "ajax/get/pharmacy/drug/search/auto/" + key;
+        var URL = this.root + "/ajax/get/pharmacy/drug/search/auto/" + key;
         return this._http.get(URL);
     };
     PharmacyService.prototype.prescribe = function (hisstroy_id, prescriptions) {
-        var URL = this.root + "ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
+        var URL = this.root + "/ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
         return this._http.post(URL, { prescriptions: prescriptions });
     };
     PharmacyService.prototype.getFrequencies = function () {
-        var URL = this.root + "ajax/get/pharmacy/drug/frequencies";
+        var URL = this.root + "/ajax/get/pharmacy/drug/frequencies";
         return this._http.get(URL);
     };
     PharmacyService.prototype.getRoots = function () {
-        var URL = this.root + "ajax/get/pharmacy/drug/roots";
+        var URL = this.root + "/ajax/get/pharmacy/drug/roots";
         return this._http.get(URL);
     };
     PharmacyService = __decorate([

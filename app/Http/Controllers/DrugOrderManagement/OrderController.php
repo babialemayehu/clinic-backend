@@ -72,7 +72,18 @@ class OrderController extends Controller
         $drug_orders = $drug_orders->get(); 
         foreach($drug_orders as $drug_order){
             $drug_order->drug = Drug::find($drug_order->drug_id);  
-            $drug_order->selected = ($drug_order->issued_quantity != null); 
+            switch(Auth::user()->role()->first()->name){
+                case 'Admin': 
+                    $drug_order->selected = ($drug_order->autorized_by != null); 
+                break;
+                case 'Pharmacy': 
+                    $drug_order->selected = ($drug_order->recived_at != null); 
+                break; 
+                case 'Drug_store': 
+                    $drug_order->selected = ($drug_order->issued_quantity != null); 
+                break; 
+            } 
+            
         }
         return $drug_orders; 
     }
@@ -85,7 +96,7 @@ class OrderController extends Controller
         foreach($orders as $order){
            $order->drugs = $order->drug()->get();
         }
-        return $orders; 
+        return $orders;  
     }
 
     public function autorize(\App\Drug_order $order, Request $request){
@@ -93,16 +104,18 @@ class OrderController extends Controller
         // $this->validate($request, [
         //     "adjusted_quantity" => "required"
         // ]); 
-        $autorizedOrders= json_decode(json_encode($request->all())); 
+        $orders = json_decode(json_encode($request->all())); 
 
-        foreach($autorizedOrders as $order){
-            Drug_order::find($order->id)->update([
-                "autorized_by" => ($order->autorized_by == null)?null: $auth->id, 
-                "adjusted_quantity" => (int)$request->adjusted_quantity
-            ]);
+        foreach($orders as $order){
+            if($order->selected){
+                Drug_order::find($order->id)->update([
+                    "autorized_by" => ($order->autorized_by == null)?null: $auth->id, 
+                    "adjusted_quantity" => (int)$request->adjusted_quantity
+                ]);
+            }  
         }
          
-        return $autorizedOrders; 
+        return $orders ; 
     }
 
     public function issue(\App\Drug_order $order, Request $request){
@@ -133,7 +146,8 @@ class OrderController extends Controller
     public function recive(Request $request){
         $orders = json_decode(json_encode($request->all())); 
         foreach($orders as $order){
-            Drug_order::find($order->id)->update(["recived_at" => Carbon::now()]);
+            if($order->selected)
+                Drug_order::find($order->id)->update(["recived_at" => Carbon::now()]);
         }
         return 'true'; 
     }

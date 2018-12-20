@@ -900,7 +900,7 @@ var ContextComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m6 l5 s12\" style=\"padding: 0px;\">\n      <app-navbar></app-navbar>\n     <mat-card id=\"queue\" style=\"margin-right: 8px; margin-top: 48px\">\n      <div class=\"container\" style=\"border: 1px solid gray; padding: 20%;\">\n        <h3>Video</h3> \n      </div>\n      </mat-card>\n   </div>\n   <div class=\"col m6 l7 s12\">\n     <div class=\"row\" style=\"margin-left: 2px;\">\n        <app-queue></app-queue>\n     </div>\n    \n   </div>\n </div>\n</section>"
+module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m6 l5 s12\" style=\"padding: 0px;\">\n      <app-navbar></app-navbar>\n     <mat-card id=\"queue\" style=\"margin-right: 8px; margin-top: 48px\">\n      <div>\n        <iframe width=\"100%\" height=\"315\" style=\"margin: 0px\" src=\"https://www.youtube.com/embed/4IjfAC14YfM?controls=0&autoplay=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>      </div>\n      </mat-card>\n   </div>\n   <div class=\"col m6 l7 s12\">\n     <div class=\"row\" style=\"margin-left: 2px;\">\n        <app-queue></app-queue>\n     </div>\n    \n   </div>\n </div>\n</section>"
 
 /***/ }),
 
@@ -911,7 +911,7 @@ module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m6 l5 s12
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".no-search {\n  margin-top: 15%; }\n\n.patinet-search {\n  margin-bottom: 24px; }\n\n@media screen and (min-width: 910px) {\n    .patinet-search .search {\n      width: 70%; } }\n\n.mat-card {\n  padding: 5% 7%;\n  padding-bottom: 10%; }\n\n.mat-button {\n  margin-left: 24px;\n  font-weight: 550; }\n\n.mat-button[disabled] {\n  opacity: 0.7;\n  background-color: #ddd;\n  cursor: not-allowed; }\n\n@media screen and (min-width: 910px) {\n  #show-area {\n    width: 80%;\n    margin: auto; } }\n"
+module.exports = ".no-search {\n  margin-top: 15%; }\n\n.patinet-search {\n  margin-bottom: 24px; }\n\n@media screen and (min-width: 910px) {\n    .patinet-search .search {\n      width: 70%; } }\n\n.mat-button {\n  margin-left: 24px;\n  font-weight: 550; }\n\n.mat-button[disabled] {\n  opacity: 0.7;\n  background-color: #ddd;\n  cursor: not-allowed; }\n\n@media screen and (min-width: 910px) {\n  #show-area {\n    width: 80%;\n    margin: auto; } }\n"
 
 /***/ }),
 
@@ -1164,7 +1164,7 @@ var RootURL = "";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
 var User = /** @class */ (function () {
-    function User(id, worker_id, first_name, father_name, grand_father_name, gender, role_id, email, phone, role, profile_pic, setup_step, created_at, updated_at) {
+    function User(id, worker_id, first_name, father_name, grand_father_name, gender, role_id, email, phone, role, profile_pic, setup_step, created_at, updated_at, room_number) {
         this.id = id;
         this.worker_id = worker_id;
         this.first_name = first_name;
@@ -1179,6 +1179,7 @@ var User = /** @class */ (function () {
         this.setup_step = setup_step;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.room_number = room_number;
     }
     return User;
 }());
@@ -1526,7 +1527,7 @@ module.exports = ".active{\n    background: lightyellow; \n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "    <div class=\"row\" [class.hide]=\"empty\">\n      <div class=\"mat-elevation-z8  \" >\n        <table mat-table #table [dataSource]=\"dataSource\" matSort aria-label=\"Elements\">\n          <!-- Id Column -->\n          <ng-container matColumnDef=\"reg_id\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Registral id</th>\n            <td mat-cell *matCellDef=\"let row\"><h4><b>{{row.patient.reg_id}}</b></h4>\n              <p style=\"display:inline;\" class=\"secondery\">({{row.patient.first_name}} {{row.patient.father_name}})</p>\n            </td>\n          </ng-container>\n\n          <ng-container matColumnDef=\"humanWaitingTime\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival</th>\n            <td mat-cell *matCellDef=\"let row\">{{row.humanWaitingTime}}</td>\n          </ng-container>\n\n          <ng-container matColumnDef=\"room\">\n              <th mat-header-cell *matHeaderCellDef mat-sort-header>Room number</th>\n              <td mat-cell *matCellDef=\"let row\">\n                <h5  *ngIf=\"(row.physician)?.room_number == null\" class=\"secondery\">Waiting...</h5>\n                <h3 *ngIf=\"(row.physician)?.room_number != null\"><b>{{row.physician.room_number}}</b></h3>\n              </td>\n            </ng-container>\n\n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" [class.active]=\"row._call == 2\"></tr>\n        </table>\n\n        <mat-paginator #paginator\n          [length]=\"dataSource.data.length\"\n          [pageIndex]=\"0\"\n          [pageSize]=\"50\"\n          [pageSizeOptions]=\"[25, 50, 100, 250]\">\n        </mat-paginator>\n      </div>\n    </div>\n\n    <div class=\"container\" *ngIf=\"empty\">\n        <div class=\"row\">\n          <mat-card style=\"margin-top: 25%\">\n            <div style=\"text-align: center; color: gray; \"> \n                <h4 class=\"secondery\">Empty queue</h4>\n              </div>\n          </mat-card>\n        </div>\n      </div> "
+module.exports = "    <div class=\"row\" [class.hide]=\"empty\">\n      <div class=\"mat-elevation-z8  \" >\n        <table mat-table #table [dataSource]=\"dataSource\" matSort aria-label=\"Elements\">\n          <!-- Id Column -->\n          <ng-container matColumnDef=\"reg_id\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Registral id</th>\n            <td mat-cell *matCellDef=\"let row\"><h4><b>{{row.patient.reg_id}}</b></h4>\n              <p style=\"display:inline;\" class=\"secondery\">({{row.patient.first_name}} {{row.patient.father_name}})</p>\n            </td>\n          </ng-container>\n\n          <ng-container matColumnDef=\"humanWaitingTime\">\n            <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival</th>\n            <td mat-cell *matCellDef=\"let row\">{{row.humanWaitingTime}}</td>\n          </ng-container>\n\n          <ng-container matColumnDef=\"room\">\n              <th mat-header-cell *matHeaderCellDef mat-sort-header>Room number</th>\n              <td mat-cell *matCellDef=\"let row\">\n                <h5  *ngIf=\"(row.physician)?.room_number == null\" class=\"secondery\">Waiting...</h5>\n                <h3 *ngIf=\"(row.physician)?.room_number != null\"><b>{{row.physician.room_number}}</b></h3>\n              </td>\n            </ng-container>\n\n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" [class.active]=\"row._call == 2\"></tr>\n        </table>\n\n        <mat-paginator #paginator\n          [length]=\"dataSource.data.length\"\n          [pageIndex]=\"0\"\n          [pageSize]=\"50\"\n          [pageSizeOptions]=\"[25, 50, 100, 250]\">\n        </mat-paginator>\n      </div>\n    </div>\n\n    <div class=\"container\" *ngIf=\"empty\">\n      <div class=\"row\">\n        <mat-card style=\"margin-top: 25%\">\n          <div style=\"text-align: center; color: gray; \"> \n              <div class=\"container\" style=\"width:220px; height:220px; border-radius: 50%; background-color: #f2f2f2\">\n                <div class=\"row\">\n                  <img src=\"/img/bench.svg\" style=\"width: 150px; height: 150px; color: red; margin-top: 28px\"/>\n                </div>\n              </div> \n              <h4 class=\"secondery\">Empty queue</h4>\n            </div>\n        </mat-card>\n      </div>\n    </div> "
 
 /***/ }),
 
@@ -1544,6 +1545,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _queue_datasource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./queue-datasource */ "./src/app/queue/queue-datasource.ts");
 /* harmony import */ var _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/patient-queue.service */ "./src/app/service/patient-queue.service.ts");
+/* harmony import */ var _lib_app_Speek__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../lib/app/Speek */ "./src/lib/app/Speek.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1553,6 +1555,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -1576,6 +1579,12 @@ var QueueComponent = /** @class */ (function () {
         this._queue.queue_list().subscribe(function (responce) {
             _this.dataSource = new _queue_datasource__WEBPACK_IMPORTED_MODULE_2__["QueueDataSource"](_this.paginator, _this.sort, responce);
             _this.empty = (responce.length == 0);
+            responce.forEach(function (e) {
+                if (e._call == 2) {
+                    var s = new _lib_app_Speek__WEBPACK_IMPORTED_MODULE_4__["Speek"];
+                    s.speek("Id number " + e.patient.reg_id + " please go to room " + e.physician.room_number);
+                }
+            });
         });
     };
     __decorate([
@@ -3452,6 +3461,58 @@ var environment = {
  * because it will have a performance impact when errors are thrown
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+
+/***/ }),
+
+/***/ "./src/lib/app/Speek.ts":
+/*!******************************!*\
+  !*** ./src/lib/app/Speek.ts ***!
+  \******************************/
+/*! exports provided: Speek */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Speek", function() { return Speek; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var Speek = /** @class */ (function () {
+    function Speek(msg, voices) {
+        if (msg === void 0) { msg = new SpeechSynthesisUtterance(); }
+        if (voices === void 0) { voices = speechSynthesis.getVoices(); }
+        var _this = this;
+        this.msg = msg;
+        this.voices = voices;
+        speechSynthesis.addEventListener('voiceschanged', function () {
+            _this.voices = speechSynthesis.getVoices();
+        });
+    }
+    Speek.prototype.speek = function (messege) {
+        this.msg.rate = 250;
+        if (this.voices.length > 0)
+            this.msg.voice = this.voices[0];
+        this.msg.text = messege;
+        speechSynthesis.speak(this.msg);
+    };
+    Speek = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [Object, Object])
+    ], Speek);
+    return Speek;
+}());
+
 
 
 /***/ }),

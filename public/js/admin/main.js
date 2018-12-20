@@ -1580,7 +1580,7 @@ var OrdersListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$orders.length > 0\"\n        class=\"mat-elevation-z0\">\n        \n          <ng-container matColumnDef=\"autorize\">\n            <th mat-header-cell *matHeaderCellDef><mat-checkbox (change)=\"_selectAll($event)\" [checked]=\"selectAll\"></mat-checkbox></th>\n            <td mat-cell *matCellDef=\"let order\">\n              <mat-checkbox \n              (change)=\"select($orders.indexOf(order), $event)\" \n              [checked]=\"selectAll || order.autorized_by != null\"\n              [disabled]=\"order.issued_by != null\"></mat-checkbox>\n            </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"no\">\n            <th mat-header-cell *matHeaderCellDef> No </th>\n            <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n          </ng-container>\n        \n          <ng-container matColumnDef=\"drug\">\n            <th mat-header-cell *matHeaderCellDef> Drug </th>\n            <td mat-cell *matCellDef=\"let order\"> {{order.drug.name}} </td>\n          </ng-container>\n        \n          \n          <ng-container matColumnDef=\"quantity\">\n            <th mat-header-cell *matHeaderCellDef> Quantity </th>\n            <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"autorized\">\n            <th mat-header-cell *matHeaderCellDef> Authorized </th>\n            <td mat-cell *matCellDef=\"let order\"> \n              <mat-icon *ngIf=\"order.autorized_by == null\" style='color:red'>clear</mat-icon>\n              <mat-icon *ngIf=\"order.autorized_by != null\" style='color:green'>check</mat-icon>\n            </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"ordered_quantity\">\n              <th mat-header-cell *matHeaderCellDef>Ordered Quantity </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"adjusted_quantity\">\n              <th mat-header-cell *matHeaderCellDef>Ajusted Quantity </th>\n              <td mat-cell *matCellDef=\"let order\">\n                <input type=\"number\" \n                name=\"adjusted_quantity\" \n                value=\"{{order.ordered_quantity}}\" \n                style=\"width: 80px\"\n                [formControl]=\"adjustedQuantity\"\n                (change)=\"order.adjusted_quantity = adjustedQuantity.value\"\n                *ngIf=\"order.autorized_by == null\"/> \n\n                <span *ngIf=\"order.autorized_by != null\"\n                #adjustedQuantity>{{order.adjusted_quantity}}</span>\n              </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"issued_quantity\">\n              <th mat-header-cell *matHeaderCellDef> Issued Quantity </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.issued_quantity}} </td>\n          </ng-container>\n          \n          <ng-container matColumnDef=\"batch_number\">\n              <th mat-header-cell *matHeaderCellDef>Batch </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.batch_number}} </td>\n          </ng-container>\n          \n      \n          <ng-container matColumnDef=\"is_recived\">\n            <th mat-header-cell *matHeaderCellDef> Is recived </th>\n            <td mat-cell *matCellDef=\"let order\"> \n              <mat-icon *ngIf=\"order.recived_at == null\" style='color:red'>clear</mat-icon>\n              <mat-icon *ngIf=\"order.recived_at != null\" style='color:green'>check</mat-icon>\n            </td>\n          </ng-container>\n        \n          <ng-container matColumnDef=\"expier_at\">\n              <th mat-header-cell *matHeaderCellDef>Expire date </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.expier_at}} </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"recived_at\">\n              <th mat-header-cell *matHeaderCellDef>Recived at </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.recived_at}} </td>\n          </ng-container>\n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n          \n      </table> \n</div>\n<div class=\"row\" *ngIf=\"$orders.length != 0\">\n  <button \n    class=\"right white-text primary\" \n    mat-button color=\"primary\" \n    style=\"margin-right: 2em\"\n    (click)=\"autorize()\"\n    [disabled]=\"this.$selectedOrders.length == 0\">Autorize</button>\n</div>\n  <div class=\"row\" *ngIf=\"$orders.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>There is no order yet</B>\n      </strong></h6>\n    </div>\n  </div>"
+module.exports = "<div class=\"row\">\n    <table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$orders.length > 0\"\n        class=\"mat-elevation-z0\">\n        \n          <ng-container matColumnDef=\"autorize\">\n            <th mat-header-cell *matHeaderCellDef>\n              <mat-checkbox (change)=\"selectAll($event)\" [checked]=\"all\"></mat-checkbox>\n            </th>\n            <td mat-cell *matCellDef=\"let order\">\n              <mat-checkbox \n              (change)=\"select($event, order)\" \n              [checked]=\"order.selected\"\n              [disabled]=\"order.issued_by != null\"></mat-checkbox>\n            </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"no\">\n            <th mat-header-cell *matHeaderCellDef> No </th>\n            <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n          </ng-container>\n        \n          <ng-container matColumnDef=\"drug\">\n            <th mat-header-cell *matHeaderCellDef> Drug </th>\n            <td mat-cell *matCellDef=\"let order\"> {{order.drug.name}} </td>\n          </ng-container>\n        \n          \n          <ng-container matColumnDef=\"quantity\">\n            <th mat-header-cell *matHeaderCellDef> Quantity </th>\n            <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"autorized\">\n            <th mat-header-cell *matHeaderCellDef> Authorized </th>\n            <td mat-cell *matCellDef=\"let order\"> \n              <mat-icon *ngIf=\"order.autorized_by == null\" style='color:red'>clear</mat-icon>\n              <mat-icon *ngIf=\"order.autorized_by != null\" style='color:green'>check</mat-icon>\n            </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"ordered_quantity\">\n              <th mat-header-cell *matHeaderCellDef>Ordered Quantity </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"adjusted_quantity\">\n              <th mat-header-cell *matHeaderCellDef>Ajusted Quantity </th>\n              <td mat-cell *matCellDef=\"let order\">\n                <input type=\"number\" \n                name=\"adjusted_quantity\" \n                value=\"{{order.ordered_quantity}}\" \n                style=\"width: 80px\"\n                [formControl]=\"adjustedQuantity\"\n                (change)=\"order.adjusted_quantity = adjustedQuantity.value\"\n                *ngIf=\"!order.selected\"/> \n\n                <span *ngIf=\"order.selected\"\n                #adjustedQuantity>{{order.adjusted_quantity}}</span>\n              </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"issued_quantity\">\n              <th mat-header-cell *matHeaderCellDef> Issued Quantity </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.issued_quantity}} </td>\n          </ng-container>\n          \n          <ng-container matColumnDef=\"batch_number\">\n              <th mat-header-cell *matHeaderCellDef>Batch </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.batch_number}} </td>\n          </ng-container>\n          \n      \n          <ng-container matColumnDef=\"is_recived\">\n            <th mat-header-cell *matHeaderCellDef> Is recived </th>\n            <td mat-cell *matCellDef=\"let order\"> \n              <mat-icon *ngIf=\"order.recived_at == null\" style='color:red'>clear</mat-icon>\n              <mat-icon *ngIf=\"order.recived_at != null\" style='color:green'>check</mat-icon>\n            </td>\n          </ng-container>\n        \n          <ng-container matColumnDef=\"expier_at\">\n              <th mat-header-cell *matHeaderCellDef>Expire date </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.expier_at}} </td>\n          </ng-container>\n      \n          <ng-container matColumnDef=\"recived_at\">\n              <th mat-header-cell *matHeaderCellDef>Recived at </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.recived_at}} </td>\n          </ng-container>\n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n          \n      </table> \n</div>\n<div class=\"row\" *ngIf=\"$orders.length != 0\">\n  <button \n    class=\"right white-text primary\" \n    mat-button color=\"primary\" \n    style=\"margin-right: 2em\"\n    (click)=\"autorize()\">Autorize</button>\n</div>\n  <div class=\"row\" *ngIf=\"$orders.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>There is no order yet</B>\n      </strong></h6>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -1638,14 +1638,13 @@ var OrdersTableComponent = /** @class */ (function () {
         this.orderDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"]();
         this.$orders = [];
         this.$selectedOrders = [];
-        this.selectAll = false;
         this.adjustedQuantity = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
         this.displayedColumns = [
             'autorize',
             'no',
             'drug',
             'quantity',
-            // 'autorized',
+            //  'autorized',
             'ordered_quantity',
             'adjusted_quantity',
             'issued_quantity',
@@ -1655,20 +1654,9 @@ var OrdersTableComponent = /** @class */ (function () {
         ];
     }
     OrdersTableComponent.prototype.ngOnChanges = function () {
-        var _this = this;
         this.$orders = this.orders;
         this.orderDataSource.data = this.orders;
-        var temp = true;
-        this.$orders.forEach(function (order) {
-            order.adjusted_quantity = order.ordered_quantity;
-            temp = (order.autorized_by != null);
-            if (temp) {
-                _this.$selectedOrders.push(order);
-            }
-        });
-        this.selectAll = temp;
-        console.log(this.$selectedOrders);
-        console.log(this.$orders);
+        this.refresh();
     };
     OrdersTableComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1676,37 +1664,31 @@ var OrdersTableComponent = /** @class */ (function () {
             _this.$auth = user;
         });
     };
-    OrdersTableComponent.prototype.select = function (i, e) {
-        if (e.checked) {
-            this.$orders[i].autorized_by = this.$auth.id;
-            this.$selectedOrders.push(this.$orders[i]);
-            if (this.$selectedOrders.length == this.$orders.length) {
-                this.selectAll = true;
+    OrdersTableComponent.prototype.select = function (e, order) {
+        order.selected = e.checked;
+        this.refresh();
+    };
+    OrdersTableComponent.prototype.selectAll = function (e) {
+        this.$orders.forEach(function (order) {
+            if (order.issued_by != null) {
+                if (e.checked) {
+                    order.selected = true;
+                }
+                else
+                    order.selected = false;
             }
-        }
-        else {
-            this.$orders[i].autorized_by = null;
-            this.$selectedOrders.splice(this.$selectedOrders.indexOf(this.$orders[i]), 1);
-            this.selectAll = false;
-        }
+        });
         this.orderDataSource.data = this.orders;
     };
-    OrdersTableComponent.prototype._selectAll = function (e) {
-        var _this = this;
-        this.selectAll = e.checked;
-        if (e.checked) {
-            this.$orders.forEach(function (order) {
-                order.autorized_by = _this.$auth.id;
-            });
-            this.$selectedOrders = this.$orders;
-        }
-        else {
-            this.$selectedOrders.forEach(function (order) {
-                order.autorized_by = null;
-            });
-            this.$selectedOrders = [];
-        }
-        this.orderDataSource.data = this.orders;
+    OrdersTableComponent.prototype.refresh = function () {
+        var temp = true;
+        this.$orders.forEach(function (order) {
+            order.adjusted_quantity = order.ordered_quantity;
+            if (!order.selected) {
+                temp = false;
+            }
+        });
+        this.all = temp;
     };
     OrdersTableComponent.prototype.autorize = function () {
         var _this = this;
@@ -1717,10 +1699,10 @@ var OrdersTableComponent = /** @class */ (function () {
                 dialog: "confirm"
             }
         });
-        var orders = this.$selectedOrders;
+        //let orders = this.$selectedOrders; 
         dialogRef.afterClosed().subscribe(function (response) {
             if (response.responce) {
-                _this._order.autorize(_this.$selectedOrders)
+                _this._order.autorize(_this.$orders)
                     .subscribe(function (r) {
                     console.log("successs");
                     _this._route.navigate(["/drugs"]);
@@ -3101,7 +3083,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var UploadComponent = /** @class */ (function () {
     function UploadComponent(_user) {
         this._user = _user;
-        this.pic = "http://clinic/storage/avatar.jpg";
+        this.pic = "/storage/avatar.jpg";
         this.status = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     UploadComponent.prototype.ngOnInit = function () {

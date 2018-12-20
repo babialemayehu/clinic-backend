@@ -23,7 +23,8 @@ class Patient extends Model
         'gender',
         'department_id',
         'accadamic_year',
-        'college_id'
+        'college_id',
+        'clurk_id'
     ];
 
     public function toSearchableArray()

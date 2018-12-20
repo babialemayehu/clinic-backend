@@ -1697,7 +1697,7 @@ var OrdersListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$orders.length > 0\"\n  class=\"mat-elevation-z0\">\n  \n  <ng-container matColumnDef=\"recived\">\n    <th mat-header-cell *matHeaderCellDef><mat-checkbox (change)=\"_selectAll($event)\" [checked]=\"selectAll\"></mat-checkbox></th>\n    <td mat-cell *matCellDef=\"let order\">\n      <mat-checkbox \n      (change)=\"select($orders.indexOf(order), $event)\" \n      [checked]=\"selectAll || order.is_recived != null\"\n      [disabled]=\"order.issued_by == null\"></mat-checkbox>\n    </td>\n  </ng-container>\n\n    <ng-container matColumnDef=\"no\">\n      <th mat-header-cell *matHeaderCellDef> No </th>\n      <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"drug\">\n      <th mat-header-cell *matHeaderCellDef> Drug </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.drug.name}} </td>\n    </ng-container>\n  \n    \n    <ng-container matColumnDef=\"quantity\">\n      <th mat-header-cell *matHeaderCellDef> Quantity </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"autorized\">\n      <th mat-header-cell *matHeaderCellDef> Authorized </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.autorized_by == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.autorized_by != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"ordered_quantity\">\n        <th mat-header-cell *matHeaderCellDef>Ordered Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"adjusted_quantity\">\n        <th mat-header-cell *matHeaderCellDef>Ajusted Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.adjusted_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"issued_quantity\">\n        <th mat-header-cell *matHeaderCellDef> Issued Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.issued_quantity}} </td>\n    </ng-container>\n    \n    <ng-container matColumnDef=\"batch_number\">\n        <th mat-header-cell *matHeaderCellDef>Batch </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.batch_number}} </td>\n    </ng-container>\n    \n\n    <ng-container matColumnDef=\"is_recived\">\n      <th mat-header-cell *matHeaderCellDef> Is recived </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.recived_at == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.recived_at != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"expier_at\">\n        <th mat-header-cell *matHeaderCellDef>Expiredate </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.expier_at}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"recived_at\">\n        <th mat-header-cell *matHeaderCellDef>Recived at </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.recived_at}} </td>\n    </ng-container>\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    \n  </table> \n  <div class=\"row\" *ngIf=\"$orders.length != 0\">\n    <button \n      class=\"right white-text primary\" \n      mat-button color=\"primary\" \n      style=\"margin: 3em\"\n      (click)=\"recive()\"\n      [disabled]=\"this.$selectedOrders.length == 0\">Recived</button>\n  </div>\n  <div class=\"row\" *ngIf=\"$orders.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>There is no order yet</B>\n      </strong></h6>\n    </div>\n  </div>"
+module.exports = "<table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$orders.length > 0\"\n  class=\"mat-elevation-z0\">\n  \n  <ng-container matColumnDef=\"recived\">\n    <th mat-header-cell *matHeaderCellDef>\n      <mat-checkbox (change)=\"selectAll($event)\" [checked]=\"all\"></mat-checkbox>\n    </th>\n    <td mat-cell *matCellDef=\"let order\">\n      <mat-checkbox \n      (change)=\"select($event,$orders)\" \n      [checked]=\"order.selected\"\n      [disabled]=\"!(order.issued_quantity != null && order.recived_at == null)\"></mat-checkbox>\n    </td>\n  </ng-container>\n\n    <ng-container matColumnDef=\"no\">\n      <th mat-header-cell *matHeaderCellDef> No </th>\n      <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"drug\">\n      <th mat-header-cell *matHeaderCellDef> Drug </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.drug.name}} </td>\n    </ng-container>\n  \n    \n    <ng-container matColumnDef=\"quantity\">\n      <th mat-header-cell *matHeaderCellDef> Quantity </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"autorized\">\n      <th mat-header-cell *matHeaderCellDef> Authorized </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.autorized_by == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.autorized_by != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"ordered_quantity\">\n        <th mat-header-cell *matHeaderCellDef>Ordered Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.ordered_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"adjusted_quantity\">\n        <th mat-header-cell *matHeaderCellDef>Ajusted Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.adjusted_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"issued_quantity\">\n        <th mat-header-cell *matHeaderCellDef> Issued Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.issued_quantity}} </td>\n    </ng-container>\n    \n    <ng-container matColumnDef=\"batch_number\">\n        <th mat-header-cell *matHeaderCellDef>Batch </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.batch_number}} </td>\n    </ng-container>\n    \n\n    <ng-container matColumnDef=\"is_recived\">\n      <th mat-header-cell *matHeaderCellDef> Is recived </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.recived_at == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.recived_at != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"expier_at\">\n        <th mat-header-cell *matHeaderCellDef>Expiredate </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.expier_at}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"recived_at\">\n        <th mat-header-cell *matHeaderCellDef>Recived at </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.recived_at}} </td>\n    </ng-container>\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    \n  </table> \n  <div class=\"row\" *ngIf=\"$orders.length != 0\">\n    <button \n      class=\"right white-text primary\" \n      mat-button color=\"primary\" \n      style=\"margin: 3em\"\n      (click)=\"recive()\">Recived</button>\n  </div>\n  <div class=\"row\" *ngIf=\"$orders.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>There is no order yet</B>\n      </strong></h6>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -1726,6 +1726,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _service_order_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/order.service */ "./src/app/service/order.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _alert_alert_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../alert/alert.component */ "./src/app/alert/alert.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1739,14 +1740,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var OrdersTableComponent = /** @class */ (function () {
-    function OrdersTableComponent(_order, _router) {
+    function OrdersTableComponent(_dialog, _order, _router) {
+        this._dialog = _dialog;
         this._order = _order;
         this._router = _router;
         this.orderDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"]();
         this.$orders = [];
         this.$selectedOrders = [];
-        this.selectAll = false;
         this.displayedColumns = [
             'recived',
             'no',
@@ -1764,40 +1766,51 @@ var OrdersTableComponent = /** @class */ (function () {
     OrdersTableComponent.prototype.ngOnChanges = function () {
         this.$orders = this.orders;
         this.orderDataSource.data = this.orders;
+        this.refresh();
     };
     OrdersTableComponent.prototype.ngOnInit = function () {
     };
-    OrdersTableComponent.prototype.select = function (i, e) {
-        if (e.checked) {
-            this.$selectedOrders.push(this.$orders[i]);
-            if (this.$selectedOrders.length == this.$orders.length) {
-                this.selectAll = true;
+    OrdersTableComponent.prototype.select = function (e, order) {
+        order.selected = e.checked;
+        this.refresh();
+    };
+    OrdersTableComponent.prototype.selectAll = function (e) {
+        this.$orders.forEach(function (order) {
+            if ((order.issued_quantity != null && order.recived_at == null)) {
+                if (e.checked) {
+                    order.selected = true;
+                }
+                else
+                    order.selected = false;
             }
-        }
-        else {
-            this.$selectedOrders.splice(this.$selectedOrders.indexOf(this.$orders[i]), 1);
-            this.selectAll = false;
-        }
+        });
         this.orderDataSource.data = this.orders;
     };
-    OrdersTableComponent.prototype._selectAll = function (e) {
-        this.selectAll = e.checked;
-        if (e.checked) {
-            this.$orders.forEach(function (order) {
-            });
-            this.$selectedOrders = this.$orders;
-        }
-        else {
-            this.$selectedOrders.forEach(function (order) {
-            });
-            this.$selectedOrders = [];
-        }
-        this.orderDataSource.data = this.orders;
+    OrdersTableComponent.prototype.refresh = function () {
+        var temp = true;
+        this.$orders.forEach(function (order) {
+            order.adjusted_quantity = order.ordered_quantity;
+            if ((order.issued_quantity != null && order.recived_at == null))
+                if (!order.selected) {
+                    temp = false;
+                }
+        });
+        this.all = temp;
     };
     OrdersTableComponent.prototype.recive = function () {
         var _this = this;
-        this._order.recived(this.$selectedOrders).subscribe(function (responce) {
-            _this._router.navigate(["/drug"]);
+        var dialogRef = this._dialog.open(_alert_alert_component__WEBPACK_IMPORTED_MODULE_4__["AlertComponent"], {
+            width: "400px",
+            data: {
+                message: "Are you shure you have recived selected drugss",
+                dialog: "confirm"
+            }
+        });
+        //let orders = this.$selectedOrders; 
+        dialogRef.afterClosed().subscribe(function (response) {
+            _this._order.recived(_this.$orders).subscribe(function (responce) {
+                _this._router.navigate(["/drug"]);
+            });
         });
     };
     __decorate([
@@ -1810,7 +1823,7 @@ var OrdersTableComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./orders-table.component.html */ "./src/app/orders-table/orders-table.component.html"),
             styles: [__webpack_require__(/*! ./orders-table.component.scss */ "./src/app/orders-table/orders-table.component.scss")]
         }),
-        __metadata("design:paramtypes", [_service_order_service__WEBPACK_IMPORTED_MODULE_2__["OrderService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"], _service_order_service__WEBPACK_IMPORTED_MODULE_2__["OrderService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], OrdersTableComponent);
     return OrdersTableComponent;
 }());
@@ -3640,27 +3653,27 @@ var PharmacyService = /** @class */ (function () {
         this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PharmacyService.prototype.drugAutoComplet = function (key) {
-        var URL = this.root + "ajax/get/pharmacy/drug/search/auto/" + key;
+        var URL = this.root + "/ajax/get/pharmacy/drug/search/auto/" + key;
         return this._http.get(URL);
     };
     PharmacyService.prototype.prescribe = function (hisstroy_id, prescriptions) {
-        var URL = this.root + "ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
+        var URL = this.root + "/ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
         return this._http.post(URL, { prescriptions: prescriptions });
     };
     PharmacyService.prototype.getFrequencies = function () {
-        var URL = this.root + "ajax/get/pharmacy/drug/frequencies";
+        var URL = this.root + "/ajax/get/pharmacy/drug/frequencies";
         return this._http.get(URL);
     };
     PharmacyService.prototype.getRoots = function () {
-        var URL = this.root + "ajax/get/pharmacy/drug/roots";
+        var URL = this.root + "/ajax/get/pharmacy/drug/roots";
         return this._http.get(URL);
     };
     PharmacyService.prototype.getRequests = function (queue_id) {
-        var URL = this.root + "ajax/get/pharmacy/prescription/requests/" + queue_id;
+        var URL = this.root + "/ajax/get/pharmacy/prescription/requests/" + queue_id;
         return this._http.get(URL);
     };
     PharmacyService.prototype.deliver = function (prescriptions) {
-        var URL = this.root + "ajax/update/pharmacy/deliver";
+        var URL = this.root + "/ajax/update/pharmacy/deliver";
         return this._http.put(URL, { prescriptions: prescriptions });
     };
     PharmacyService = __decorate([

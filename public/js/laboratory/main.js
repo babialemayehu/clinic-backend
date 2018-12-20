@@ -3003,27 +3003,27 @@ var LaboratoryService = /** @class */ (function () {
         this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     LaboratoryService.prototype.$new = function (hisstory_id, request) {
-        var URL = this.root + "ajax/post/lab/request";
+        var URL = this.root + "/ajax/post/lab/request";
         return this._http.post(URL, request);
     };
     LaboratoryService.prototype.autoComplet = function (key) {
-        var URL = this.root + "ajax/get/lab/search/auto/" + key;
+        var URL = this.root + "/ajax/get/lab/search/auto/" + key;
         return this._http.get(URL);
     };
     LaboratoryService.prototype.search = function (key) {
-        var URL = this.root + "ajax/get/lab/search/" + key;
+        var URL = this.root + "/ajax/get/lab/search/" + key;
         return this._http.get(URL);
     };
     LaboratoryService.prototype.request = function (test, id) {
-        var URL = this.root + "ajax/post/lab/request";
+        var URL = this.root + "/ajax/post/lab/request";
         return this._http.post(URL, { requests: test, hisstory_id: id });
     };
     LaboratoryService.prototype.getRequests = function (queue_id) {
-        var URL = this.root + "ajax/get/lab/requests/" + queue_id;
+        var URL = this.root + "/ajax/get/lab/requests/" + queue_id;
         return this._http.get(URL);
     };
     LaboratoryService.prototype.respond = function (hisstory_id, requests) {
-        var URL = this.root + "ajax/post/lab/responce/" + hisstory_id;
+        var URL = this.root + "/ajax/post/lab/responce/" + hisstory_id;
         return this._http.post(URL, { responces: requests });
     };
     LaboratoryService = __decorate([
