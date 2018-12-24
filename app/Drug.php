@@ -14,4 +14,11 @@ class Drug extends Model
     public function orders(){
         return $this->belongsToMany('App\Order'); 
     }
+    public function drug_order(){
+        return $this->hasMany('App\Drug_order'); 
+    }
+    
+    public function prescriptions(){
+        return $this->hasMany('App\Prescription'); 
+    }
 }

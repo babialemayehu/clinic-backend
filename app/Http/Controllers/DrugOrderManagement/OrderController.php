@@ -109,7 +109,7 @@ class OrderController extends Controller
         foreach($orders as $order){
             if($order->selected){
                 Drug_order::find($order->id)->update([
-                    "autorized_by" => ($order->autorized_by == null)?null: $auth->id, 
+                    "autorized_by" => $auth->id, 
                     "adjusted_quantity" => (int)$request->adjusted_quantity
                 ]);
             }  

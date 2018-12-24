@@ -6,6 +6,7 @@ use App\User;
 
 class Auth extends _Auth{
     public static function user(){
-        return User::find(1); 
+       return _Auth::user(); 
+       return User::find(9); 
     }
 }

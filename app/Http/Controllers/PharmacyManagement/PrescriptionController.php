@@ -49,9 +49,9 @@ class PrescriptionController extends Controller
         $prescriptions = json_decode(json_encode($request->prescriptions)); 
 
         foreach($prescriptions as $prescription){
-            $delivery = $prescription->isDeliverd; 
+            $delivery = $prescription->isDelivered; 
             $prescription = Prescription::find($prescription->id); 
-            $prescription->isDeliverd = $delivery; 
+            $prescription->isDelivered = $delivery; 
             $prescription->save(); 
         }
 

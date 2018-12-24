@@ -1370,7 +1370,7 @@ var User = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"primary\" >\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n          <a href=\"#\" class=\"brand-logo\">DMU Clinic</a>\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n            <li *ngFor=\"let item of menuItems\"><a [routerLink]=\"item.href\">{{item.text}}</a></li>\n          </ul>\n      </div>\n  </div>\n  <div>\n    <span href=\"#\" data-target=\"slide-out\" class=\"sidenav-trigger\">\n      <i class=\"material-icons\">menu</i>\n    </span>\n  </div>\n  <div class=\"container \">\n    <span class='right hide-on-large-only '>\n          <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\n            <mat-icon>more_vert</mat-icon>\n          </button>\n    </span>\n  </div>\n\n</nav>\n\n<mat-menu #appMenu=\"matMenu\">\n  <button mat-menu-item [routerLink]=\"item.href\" *ngFor=\"let item of menuItems\">{{item.text}}</button>\n</mat-menu>\n"
+module.exports = "<nav class=\"primary\" >\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n          <a href=\"#\" class=\"brand-logo\">DMU Clinic</a>\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n            <li *ngFor=\"let item of menuItems\"><a [routerLink]=\"item.href\">{{item.text}}</a></li>\n          </ul>\n      </div>\n  </div>\n  <div>\n    <span href=\"#\" data-target=\"slide-out\" class=\"sidenav-trigger\">\n      <button mat-icon-button>\n        <mat-card>manu</mat-card>\n      </button>\n    </span>\n  </div>\n  <div class=\"container \">\n    <span class='right hide-on-large-only '>\n          <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\n            <mat-icon>more_vert</mat-icon>\n          </button>\n    </span>\n  </div>\n\n</nav>\n\n<mat-menu #appMenu=\"matMenu\">\n  <button mat-menu-item [routerLink]=\"item.href\" *ngFor=\"let item of menuItems\">{{item.text}}</button>\n</mat-menu>\n"
 
 /***/ }),
 
@@ -2259,6 +2259,7 @@ var PrescriptionComponent = /** @class */ (function () {
         this._pharmacy.deliver(this.$requests).subscribe(function (response) {
             _this.loading = false;
             _this.update.onFinish++;
+            _this.next();
         });
     };
     PrescriptionComponent.prototype.call = function () {

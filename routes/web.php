@@ -189,7 +189,8 @@ Route::prefix('ajax')
 
         Route::namespace('PatientManagment')
         ->group(function(){
-            Route::put('patient/{id}', 'PatientController@update');        
+            Route::put('patient/{id}', 'PatientController@update');   
+            Route::put('lab/result/seen/{queue}', 'QueueController@labSeen');      
         }); 
 
         Route::namespace('PatientRecordManagement')->prefix('hisstory')
@@ -203,6 +204,7 @@ Route::prefix('ajax')
         Route::namespace('LaboratoryManagment')->prefix('lab')
         ->group(function(){
             Route::put('responce', 'LaboratoryContorller@responce'); 
+            
         }); 
 
         Route::namespace('PharmacyManagement')->prefix('pharmacy')
@@ -226,7 +228,7 @@ Route::prefix('ajax')
     Route::prefix('delete')->group(function(){
         Route::namespace('AccountManagment')
         ->group(function(){
-            Route::delete('user/{id}', 'UserController@destroy');  
+            Route::delete('user/{user}', 'UserController@destroy');  
         });     
         Route::namespace('PatientManagment')
         ->group(function(){

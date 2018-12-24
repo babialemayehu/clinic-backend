@@ -47,7 +47,7 @@ class UserController extends \App\Http\Controllers\Controller
             'first_name' => ucfirst($request['first_name']),
             'father_name' => ucfirst($request['father_name']), 
             'grand_father_name' => ucfirst($request['grand_father_name']), 
-            'worker_id' => $request['worker_id'],
+            'worker_id' => strtoupper($request['worker_id']),
             'email' => $request['email'],
             'phone' => $request['phone'],
             'password' => Hash::make($password),
@@ -83,11 +83,11 @@ class UserController extends \App\Http\Controllers\Controller
         return $user; 
     }
 
-    public function destroy($id)
+    public function destroy($user)
     {
-        // return $id; 
-        // User::findOrFail($id)->delete(); 
-        return User::findOrFail($id);
+        $user = User::findOrFail($user); 
+        $user->delete();
+        return $user; 
     }
 
     //GET

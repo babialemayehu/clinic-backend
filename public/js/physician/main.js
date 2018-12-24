@@ -260,6 +260,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lab_result_lab_result_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./lab-result/lab-result.component */ "./src/app/lab-result/lab-result.component.ts");
 /* harmony import */ var _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./prescription/prescription.component */ "./src/app/prescription/prescription.component.ts");
 /* harmony import */ var _start_start_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./start/start.component */ "./src/app/start/start.component.ts");
+/* harmony import */ var _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./hisstory/laboratory-request/laboratory-request.component */ "./src/app/hisstory/laboratory-request/laboratory-request.component.ts");
+/* harmony import */ var _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./hisstory/prescription/prescription.component */ "./src/app/hisstory/prescription/prescription.component.ts");
+/* harmony import */ var _prescription_table_prescription_table_component__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./prescription-table/prescription-table.component */ "./src/app/prescription-table/prescription-table.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -292,6 +295,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 // context menu
 
 // import { ContextMenu } from './context/context.menu';
+
+
+
 
 
 
@@ -367,6 +373,10 @@ var AppModule = /** @class */ (function () {
                 _lab_result_lab_result_component__WEBPACK_IMPORTED_MODULE_50__["LabResultComponent"],
                 _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_51__["PrescriptionComponent"],
                 _start_start_component__WEBPACK_IMPORTED_MODULE_52__["StartComponent"],
+                _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_53__["LaboratoryRequestComponent"],
+                _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_54__["PrescriptionComponent"],
+                _prescription_table_prescription_table_component__WEBPACK_IMPORTED_MODULE_55__["PrescriptionTableComponent"]
+                // ContextMenu,
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -957,7 +967,7 @@ var ContextComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m4 l3 s12\">\n      <mat-card id=\"queue\">\n        <app-queue-min [loadTriggr]=\"update.queue\"></app-queue-min>\n      </mat-card>\n   </div>\n   <div class=\"col m8 l9 s12\">  \n     <div id=\"show-area\">\n<!-- STATE 0 -->\n       <section *ngIf=\"state == 0\">\n        <mat-card style=\"margin: 10%\">\n          <div class=\"progress\" [class.hide]=\"!loading\" >\n            <div class=\"indeterminate\"></div>\n          </div>\n          <div [class.form-loading]=\"loading\">\n            <h3 class=\"center\">Wellcome</h3>\n            <h6 class=\"center\">Do you want to start treatement?</h6>\n            <br>\n            <div style=\"width: 80%; margin:auto\">\n              <app-room-number \n              (status)=\"onStatus($event)\" \n              [roomNumber]=\"($auth)?.room_number\"\n              ></app-room-number>           \n            </div>\n            \n            <div style=\"width: 100%; text-align: center;\">\n              <button mat-flat-button color=\"primary\" (click)=\"next()\">Start</button>\n            </div>\n          </div> \n        </mat-card>\n       </section>\n<!-- STATE 1 -->\n       <section *ngIf=\"state == 1\">\n         <div class=\"row\">\n           <div class=\"col m7 s12\">\n            <mat-card>\n              <app-patinet-view [patient]=\"patient\"></app-patinet-view>\n            </mat-card>\n          </div>\n          <div class=\"col m5 s12\">\n            <mat-card>\n              <app-recent-visits [patient]=\"patient\" icon=\"launch\"></app-recent-visits>\n            </mat-card>\n          </div>\n         </div>    \n          <mat-card class=\"row\">\n            <app-history-form [hisstory]=\"hisstory\" ></app-history-form>\n            <div class=\"row\" id=\"buttons\">    \n              <!-- <button mat-stroked-button (click)=\"next()\" color=\"priamry\" class=\"right\"><span>Next </span> <mat-icon>navigate_next</mat-icon></button> -->\n              <button mat-flat-button (click)=\"finish()\" color=\"primary\" class=\"right\">Finish</button>  \n            </div>\n          </mat-card> \n       </section>\n<!-- STATE 2    -->\n       <section *ngIf=\"state == 2\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-laboratory [queue]=\"$queue\" ></app-laboratory> \n       </section>\n<!-- STATE 3 -->\n       <section *ngIf=\"state == 3\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-pharmacy [queue]=\"$queue\" (status)=\"$state($event) \"></app-pharmacy>\n       </section>\n<!-- STATE 5  -->\n       <section *ngIf=\"state == 5\">\n          <mat-card style=\"margin: 15%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                  <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                    <h6><strong class=\"secondery center\">\n                      <B>There is no patient in the queue. <br>You will be notified when new patient arrived</B>\n                    </strong></h6>\n                    \n                  </div>\n              </div>\n            </div>\n          </mat-card>\n       </section>\n<!-- STATE 6  -->\n      <section *ngIf=\"state == 6\">\n          <mat-card style=\"margin: 15%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                  <h6><strong class=\"secondery center\">\n                    <B>New patient arrived</B>\n                  </strong></h6>\n                </div>\n              </div>\n              <div class=\" center\">\n                <button mat-flat-button (click)=\"next()\">Accept</button> \n              </div>\n            </div>\n          </mat-card>\n      </section>\n<!-- STATE 7  -->\n    <section *ngIf=\"state == 7\">\n      <mat-card style=\"margin: 15%;\">\n        <div class=\"container\">\n          <div class=\"row\">\n              <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                <h6><strong class=\"secondery center\">\n                  <B>You have finished all of your cases <br><span class=\"small\">Plase click next if you want to accept another patient</span></B>\n                </strong></h6>\n                \n              </div>\n          </div>\n          <div class=\" center\">\n            <button mat-flat-button color=\"primary\" (click)=\"next()\">next <mat-icon>navigate_next</mat-icon></button> \n          </div>\n        </div>\n      </mat-card>\n    </section>\n     </div> \n   </div>\n </div>\n</section>\n<div [hidden]=\"state == 0 || state == 5\">\n  <app-floating-action-btn (action)=\"$state($event)\" ></app-floating-action-btn>\n</div>\n<app-saved-states \n[activeQueueId]=\"($queue)?.id\"\n[update] = 'update.states'\n[next] = 'update.stateNext'\n(open) = \"open($event)\"\n></app-saved-states>"
+module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m4 l3 s12\">\n      <mat-card id=\"queue\">\n        <app-queue-min [loadTriggr]=\"update.queue\"></app-queue-min>\n      </mat-card>\n   </div>\n   <div class=\"col m8 l9 s12\">  \n     <div id=\"show-area\">\n<!-- STATE 0 -->\n       <section *ngIf=\"state == 0\">\n        <mat-card style=\"margin: 10%\">\n          <div class=\"progress\" [class.hide]=\"!loading\" >\n            <div class=\"indeterminate\"></div>\n          </div>\n          <div [class.form-loading]=\"loading\">\n            <h3 class=\"center\">Wellcome</h3>\n            <h6 class=\"center\">Do you want to start treatement?</h6>\n            <br>\n            <div style=\"width: 80%; margin:auto\">\n              <app-room-number \n              (status)=\"onStatus($event)\" \n              [roomNumber]=\"($auth)?.room_number\"\n              ></app-room-number>           \n            </div>\n            \n            <div style=\"width: 100%; text-align: center;\">\n              <button mat-flat-button color=\"primary\" (click)=\"next()\">Start</button>\n            </div>\n          </div> \n        </mat-card>\n       </section>\n<!-- STATE 1 -->\n       <section *ngIf=\"state == 1\">\n         <div class=\"row\">\n           <div class=\"col m7 s12\">\n            <mat-card>\n              <app-patinet-view [patient]=\"patient\"></app-patinet-view>\n            </mat-card>\n          </div>\n          <div class=\"col m5 s12\">\n            <mat-card>\n              <app-recent-visits [patient]=\"patient\" icon=\"launch\"></app-recent-visits>\n            </mat-card>\n          </div>\n         </div>    \n          <mat-card class=\"row\">\n            <app-history-form [hisstory]=\"hisstory\" ></app-history-form>\n            <div class=\"row\" id=\"buttons\">    \n              <!-- <button mat-stroked-button (click)=\"next()\" color=\"priamry\" class=\"right\"><span>Next </span> <mat-icon>navigate_next</mat-icon></button> -->\n              <button mat-flat-button (click)=\"finish()\" color=\"primary\" class=\"right\">Finish</button>  \n            </div>\n          </mat-card> \n       </section>\n<!-- STATE 2    --> \n       <section *ngIf=\"state == 2\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-laboratory [queue]=\"$queue\" ></app-laboratory> \n       </section>\n<!-- STATE 3 -->\n       <section *ngIf=\"state == 3\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-pharmacy [queue]=\"$queue\" (status)=\"$state($event) \"></app-pharmacy>\n       </section>\n<!-- STATE 5  -->\n       <section *ngIf=\"state == 5\">\n          <mat-card style=\"margin: 10%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                  <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                    <div class=\"img\" style=\"border-radius: 50%; background: #fbfbfb; padding: 24px;margin:auto; width: 170px; height: 170px; border-radius: 50%\">\n                      <img src=\"/img/bench.svg\" style=\"width: 100px; height: 100px;margin-top: 13px\">\n                    </div>\n                    <br>\n                    <h6><strong class=\"secondery center\">\n                      <B>There is no patient in the queue. <br>You will be notified when new patient arrived</B>\n                    </strong></h6>\n                    \n                  </div>\n              </div>\n            </div>\n          </mat-card>\n       </section>\n<!-- STATE 6  -->\n      <section *ngIf=\"state == 6\">\n          <mat-card style=\"margin: 15%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                  <h6><strong class=\"secondery center\">\n                    <B>New patient arrived</B>\n                  </strong></h6>\n                </div>\n              </div>\n              <div class=\" center\">\n                <button mat-flat-button (click)=\"next()\">Accept</button> \n              </div>\n            </div>\n          </mat-card>\n      </section>\n<!-- STATE 7  -->\n    <section *ngIf=\"state == 7\">\n      <mat-card style=\"margin: 15%;\">\n        <div class=\"container\">\n          <div class=\"row\">\n              <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                <h6><strong class=\"secondery center\">\n                  <B>You have finished all of your cases <br><span class=\"small\">Plase click next if you want to accept another patient</span></B>\n                </strong></h6>\n                \n              </div>\n          </div>\n          <div class=\" center\">\n            <button mat-flat-button color=\"primary\" (click)=\"next()\">next <mat-icon>navigate_next</mat-icon></button> \n          </div>\n        </div>\n      </mat-card>\n    </section>\n     </div> \n   </div>\n </div>\n</section>\n<div [hidden]=\"state == 0 || state == 5\">\n  <app-floating-action-btn (action)=\"$state($event)\" ></app-floating-action-btn>\n</div>\n<app-saved-states \n[activeQueueId]=\"($queue)?.id\"\n[update] = 'update.states'\n[next] = 'update.stateNext'\n(open) = \"open($event)\"\n></app-saved-states>"
 
 /***/ }),
 
@@ -1046,9 +1056,10 @@ var DashboardComponent = /** @class */ (function () {
     DashboardComponent.prototype.next = function () {
         var _this = this;
         this.loading = true;
-        this._queue.next().subscribe(function (responce) {
+        this._queue.next().subscribe(function (queue) {
             _this.loading = false;
-            _this.open(responce);
+            _this._router.navigate(['/hisstory/' + queue.hisstory.id]);
+            //this.open(queue); 
         }, function (error) {
             _this.loading = false;
             _this.state = 5;
@@ -1078,9 +1089,16 @@ var DashboardComponent = /** @class */ (function () {
         this._queue.call(this.$queue.id).subscribe(function (Response) { });
     };
     DashboardComponent.prototype.$state = function (num) {
+        console.log(num);
         switch (num) {
             case 1:
                 this.next();
+                break;
+            case 2:
+                this._router.navigate(['/lab/request/' + this.$queue.id]);
+                break;
+            case 3:
+                this._router.navigate(['/prescription/prescribe/' + this.$queue.id]);
                 break;
             case 4:
                 this.call();
@@ -1316,7 +1334,7 @@ var DiagnosisComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"FAB\" (click)=\"open()\" (mouseenter)=\"open()\" (mouseleave)=\"close()\">\n  <ul id=\"options\" class=\"options\">\n    <li (click)=\"action.emit(4)\">\n      <button mat-mini-fab class=\"red\">\n        <img src=\"assets/speaker.svg\" style=\"width: 1.4rem;\"/>\n      </button>\n    </li>\n\n    <li (click)=\"action.emit(3)\">\n      <button mat-mini-fab class=\"yellow\">\n        <img src=\"assets/drug.svg\" style=\"width: 1.4rem;\"/>\n      </button>\n    </li>\n\n    <li (click)=\"action.emit(2)\">\n      <button mat-mini-fab class=\"green\">\n        <img src=\"assets/flask-full.svg\" style=\"width: 1.4rem;\"/>\n      </button>\n    </li>\n\n    <li (click)=\"action.emit(1)\">\n      <button mat-mini-fab class=\"blue white-text\">\n        <mat-icon>navigate_next</mat-icon>\n      </button>\n    </li>\n  </ul>\n  <button mat-fab color=\"accent\" class=\"white-text\" (hover)=\"console.log('hover')\">\n    <mat-icon>add</mat-icon>\n  </button>\n</div>"
+module.exports = "<div id=\"FAB\" (click)=\"open()\" (mouseenter)=\"open()\" (mouseleave)=\"close()\">\n  <ul id=\"options\" class=\"options\">\n    <li (click)=\"action.emit(4)\">\n      <button mat-mini-fab class=\"red\">\n        <img src=\"/img/speaker.svg\" style=\"width: 1.4rem;\"/>\n      </button>\n    </li>\n\n    <li (click)=\"action.emit(3)\">\n      <button mat-mini-fab class=\"yellow\">\n        <img src=\"/img/drug.svg\" style=\"width: 1.4rem;\"/>\n      </button>\n    </li>\n\n    <li (click)=\"action.emit(2)\">\n      <button mat-mini-fab class=\"green\">\n        <img src=\"/img/flask-full.svg\" style=\"width: 1.4rem;\"/>\n      </button>\n    </li>\n\n    <li (click)=\"action.emit(1)\">\n      <button mat-mini-fab class=\"blue white-text\">\n        <mat-icon>navigate_next</mat-icon>\n      </button>\n    </li>\n  </ul>\n  <button mat-fab color=\"accent\" class=\"white-text\" (hover)=\"console.log('hover')\">\n    <mat-icon>add</mat-icon>\n  </button>\n</div>"
 
 /***/ }),
 
@@ -1407,6 +1425,164 @@ var FloatingActionBtnComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialog"], _service_role_service__WEBPACK_IMPORTED_MODULE_3__["RoleService"]])
     ], FloatingActionBtnComponent);
     return FloatingActionBtnComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/hisstory/laboratory-request/laboratory-request.component.html":
+/*!*******************************************************************************!*\
+  !*** ./src/app/hisstory/laboratory-request/laboratory-request.component.html ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section>\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n       <mat-card id=\"queue\">\n         <app-queue-min [loadTriggr]=\"update.queue\"></app-queue-min>\n       </mat-card>\n    </div>\n    <div class=\"col m8 l9 s12 \">  \n      <div  style=\"margin-left: 24px; margin-right: 24px\">\n          <ul style=\"list-style: none; display: inline-block\">\n            <li style=\"display: inline-block\">\n              <button mat-icon-button [routerLink]=\"'/hisstory/'+ $queue_id\">\n                <mat-icon>arrow_back</mat-icon>\n              </button>\n            </li>\n            <li style=\"display: inline-block\">\n              <button mat-icon-button [routerLink]=\"'/lab/result/'+ $queue_id\">\n                <mat-icon>send</mat-icon> \n              </button>\n            </li>\n          </ul>\n          <span *ngIf=\"$queue\">\n            <app-laboratory [queue]=\"$queue\" ></app-laboratory> \n          </span>\n          \n      </div>\n    </div>\n  </div>\n</section>"
+
+/***/ }),
+
+/***/ "./src/app/hisstory/laboratory-request/laboratory-request.component.scss":
+/*!*******************************************************************************!*\
+  !*** ./src/app/hisstory/laboratory-request/laboratory-request.component.scss ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/hisstory/laboratory-request/laboratory-request.component.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/app/hisstory/laboratory-request/laboratory-request.component.ts ***!
+  \*****************************************************************************/
+/*! exports provided: LaboratoryRequestComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LaboratoryRequestComponent", function() { return LaboratoryRequestComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/patient-queue.service */ "./src/app/service/patient-queue.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var LaboratoryRequestComponent = /** @class */ (function () {
+    function LaboratoryRequestComponent(_activeRoute, _route, _queue) {
+        this._activeRoute = _activeRoute;
+        this._route = _route;
+        this._queue = _queue;
+        this.$queue = null;
+        this.update = {
+            queue: 0
+        };
+    }
+    LaboratoryRequestComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._activeRoute.params.subscribe(function (param) {
+            _this.$queue_id = param.queue_id;
+            _this._queue.getQueue(param.queue_id).subscribe(function (queue) {
+                _this.$queue = queue;
+            });
+        });
+    };
+    LaboratoryRequestComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-laboratory-request',
+            template: __webpack_require__(/*! ./laboratory-request.component.html */ "./src/app/hisstory/laboratory-request/laboratory-request.component.html"),
+            styles: [__webpack_require__(/*! ./laboratory-request.component.scss */ "./src/app/hisstory/laboratory-request/laboratory-request.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_2__["PatientQueueService"]])
+    ], LaboratoryRequestComponent);
+    return LaboratoryRequestComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/hisstory/prescription/prescription.component.html":
+/*!*******************************************************************!*\
+  !*** ./src/app/hisstory/prescription/prescription.component.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section>\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n       <mat-card id=\"queue\">\n         <app-queue-min loadTriggr=\"1\"></app-queue-min>\n       </mat-card>\n    </div>\n    <div class=\"col m8 l9 s12\">  \n      <button mat-icon-button>\n        <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n      </button>\n      <app-pharmacy [queue]=\"$queue\" (status)=\"$state($event) \"></app-pharmacy>\n    </div>\n  </div>\n</section>"
+
+/***/ }),
+
+/***/ "./src/app/hisstory/prescription/prescription.component.scss":
+/*!*******************************************************************!*\
+  !*** ./src/app/hisstory/prescription/prescription.component.scss ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/hisstory/prescription/prescription.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/hisstory/prescription/prescription.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: PrescriptionComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrescriptionComponent", function() { return PrescriptionComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/patient-queue.service */ "./src/app/service/patient-queue.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PrescriptionComponent = /** @class */ (function () {
+    function PrescriptionComponent(_activeRoute, _route, _queue) {
+        this._activeRoute = _activeRoute;
+        this._route = _route;
+        this._queue = _queue;
+    }
+    PrescriptionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._activeRoute.params.subscribe(function (param) {
+            _this.$queue_id = param.queue_id;
+            _this._queue.getQueue(param.queue_id).subscribe(function (queue) {
+                _this.$queue = queue;
+            });
+        });
+    };
+    PrescriptionComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-hisstory-prescription',
+            template: __webpack_require__(/*! ./prescription.component.html */ "./src/app/hisstory/prescription/prescription.component.html"),
+            styles: [__webpack_require__(/*! ./prescription.component.scss */ "./src/app/hisstory/prescription/prescription.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_2__["PatientQueueService"]])
+    ], PrescriptionComponent);
+    return PrescriptionComponent;
 }());
 
 
@@ -1542,7 +1718,7 @@ var HistoryFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"container\"> -->\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n      <app-left-side></app-left-side>\n    </div>\n\n      <div class=\"col m8 l9 s12\">\n        <mat-card style=\"width: 90; margin: auto\">\n          <button mat-icon-button [routerLink]=\"'/hisstory/'+queue_id\"><mat-icon>arrow_back</mat-icon></button>\n          <h5 style=\"margin-left: 3em; display: inline\">Laboratory Requests</h5>\n          <app-lab-result [tests]=\"requests\"></app-lab-result>\n          <!-- <table mat-table [dataSource]=\"requestDatasource\" \n          class=\"mat-elevation-z0\">\n\n            <ng-container matColumnDef=\"no\">\n                <th mat-header-cell *matHeaderCellDef> No </th>\n                <td mat-cell *matCellDef=\"let request\"> {{requests.indexOf(request)+1}} </td>\n              </ng-container>\n\n            <ng-container matColumnDef=\"name\">\n              <th mat-header-cell *matHeaderCellDef> Name </th>\n              <td mat-cell *matCellDef=\"let request\"> {{request.laboratory_test.name}} </td>\n            </ng-container>\n\n            <ng-container matColumnDef=\"normality\">\n              <th mat-header-cell *matHeaderCellDef> Normality </th>\n              <td mat-cell *matCellDef=\"let request\">\n                <span *ngIf=\"request.normality == null\" class='secondery small'>Pending..</span>\n                <span *ngIf=\"request.normality != null\">\n                  <mat-icon *ngIf=\"request.normality\" style=\"color: green\">done</mat-icon>\n                  <mat-icon *ngIf=\"!request.normality\" style=\"color: red\">close</mat-icon>\n                </span>\n                \n              </td>\n            </ng-container>\n\n            <ng-container matColumnDef=\"value\">\n              <th mat-header-cell *matHeaderCellDef> Value </th>\n              <td mat-cell *matCellDef=\"let request\"> {{request.value }} </td>\n            </ng-container>\n\n            <ng-container matColumnDef=\"note\">\n              <th mat-header-cell *matHeaderCellDef> Note </th>\n              <td mat-cell *matCellDef=\"let request\"> {{request.note}} </td>\n            </ng-container>\n\n            <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n            <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n          </table> -->\n        </mat-card>\n      </div>    \n  </div>\n<!-- </div> -->\n<app-saved-states \n[activeQueueId]=\"queue_id\"\n(open) = \"open($event)\"\n></app-saved-states>"
+module.exports = "<!-- <div class=\"container\"> -->\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n      <mat-card id=\"queue\">\n        <app-queue-min loadTriggr=\"1\"></app-queue-min>\n      </mat-card>\n    </div>\n\n      <div class=\"col m8 l9 s12\">\n        <ul style=\"list-style: none\">\n          <li style=\"display: inline\"><button mat-icon-button [routerLink]=\"'/lab/request/'+queue_id\"><mat-icon>arrow_back</mat-icon></button></li>\n          <li style=\"display: inline\"><button mat-icon-button [routerLink]=\"'/hisstory/'+queue_id\"><mat-icon>home</mat-icon></button></li>\n        </ul>\n\n        \n        <mat-card style=\"width: 90; margin: auto; padding: 48px\">\n          \n          <h5>Laboratory Requests</h5>\n          <app-lab-result [tests]=\"requests\"></app-lab-result>\n\n        </mat-card>\n      </div>    \n  </div>\n<!-- </div> -->\n<app-saved-states \n[activeQueueId]=\"queue_id\"\n(open) = \"open($event)\"\n></app-saved-states>"
 
 /***/ }),
 
@@ -1756,6 +1932,9 @@ var LaboratoryComponent = /** @class */ (function () {
         this.add = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]();
         this.filter = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]();
     }
+    LaboratoryComponent.prototype.ngOnChanges = function () {
+        console.log(this.queue);
+    };
     LaboratoryComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._lab.autoComplet("all").subscribe(function (tests) { _this.testAuto = tests; });
@@ -1880,7 +2059,7 @@ var LeftSideComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RootURL", function() { return RootURL; });
-var RootURL = "";
+var RootURL = '';
 
 
 /***/ }),
@@ -1927,7 +2106,7 @@ var User = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"primary\" >\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n          <a routerLink=\"/\" class=\"brand-logo\">DMU Clinic</a>\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n            <li *ngFor=\"let item of menuItems\"><a [href]=\"item.href\">{{item.text}}</a></li>\n          </ul>\n      </div>\n  </div>\n  <div>\n    <span href=\"#\" data-target=\"slide-out\" class=\"sidenav-trigger\"><i class=\"material-icons\">menu</i></span>\n  </div>\n  <div class=\"container \">\n    <span class='right hide-on-large-only '>\n          <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\n            <mat-icon>more_vert</mat-icon>\n          </button>\n    </span>\n  </div>\n\n</nav>\n\n<mat-menu #appMenu=\"matMenu\">\n  <button mat-menu-item [routerLink]=\"item.href\" *ngFor=\"let item of menuItems\">{{item.text}}</button>\n</mat-menu>\n"
+module.exports = "<nav class=\"primary\" >\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n          <a routerLink=\"/\" class=\"brand-logo\">DMU Clinic</a>\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n            <li *ngFor=\"let item of menuItems\"><a [href]=\"item.href\">{{item.text}}</a></li>\n          </ul>\n      </div>\n  </div>\n  <div>\n    <span href=\"#\" data-target=\"slide-out\" class=\"sidenav-trigger\"><button mat-icon-button><mat-icon>menu</mat-icon></button></span>\n  </div>\n  <div class=\"container \">\n    <span class='right hide-on-large-only '>\n          <button mat-icon-button [matMenuTriggerFor]=\"appMenu\">\n            <mat-icon>more_vert</mat-icon>\n          </button>\n    </span>\n  </div>\n\n</nav>\n\n<mat-menu #appMenu=\"matMenu\">\n  <button mat-menu-item [routerLink]=\"item.href\" *ngFor=\"let item of menuItems\">{{item.text}}</button>\n</mat-menu>\n"
 
 /***/ }),
 
@@ -1965,9 +2144,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent() {
-        this.menuItems = [
-            { href: 'users', text: 'Users' }
-        ];
+        this.menuItems = [];
     }
     NavbarComponent.prototype.ngOnInit = function () {
     };
@@ -2271,12 +2448,14 @@ var PharmacyComponent = /** @class */ (function () {
     };
     PharmacyComponent.prototype.send = function () {
         var _this = this;
+        console.log(this.queue);
         this.loading = true;
         this._pharmacy.prescribe(this.queue.hisstory.id, this.prescriptions).subscribe(function (value) {
             _this.loading = false;
             _this.prescriptions = [];
             _this.drugDataSource.data = _this.prescriptions;
             _this.status.emit(1);
+            _this._route.navigate(['prescription/prescribed/' + _this.queue.id]);
         });
     };
     Object.defineProperty(PharmacyComponent.prototype, "name", {
@@ -2324,6 +2503,82 @@ var PharmacyComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/prescription-table/prescription-table.component.html":
+/*!**********************************************************************!*\
+  !*** ./src/app/prescription-table/prescription-table.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<table mat-table [dataSource]=\"prescriptionDatasource\"  *ngIf=\"(prescriptions)?.length > 1\"\n  class=\"mat-elevation-z0\">\n  \n    <!-- number Column -->\n    <ng-container matColumnDef=\"no\">\n        <th mat-header-cell *matHeaderCellDef> No </th>\n        <td mat-cell *matCellDef=\"let prescription\"> {{prescriptions.indexOf(prescription)+1}} </td>\n      </ng-container>\n  \n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <th mat-header-cell *matHeaderCellDef> Name </th>\n      <td mat-cell *matCellDef=\"let prescription\"> {{prescription.name}} </td>\n    </ng-container>\n  \n    <!-- Name Column -->\n    <ng-container matColumnDef=\"dose\">\n        <th mat-header-cell *matHeaderCellDef> Dose </th>\n        <td mat-cell *matCellDef=\"let prescription\"> {{prescription.dose}} </td>\n      </ng-container>\n  \n    <!-- Name Column -->\n    <ng-container matColumnDef=\"root\">\n        <th mat-header-cell *matHeaderCellDef> Root </th>\n        <td mat-cell *matCellDef=\"let prescription\"> {{prescription.root}} </td>\n      </ng-container>\n  \n    <!-- Name Column -->\n    <ng-container matColumnDef=\"frequency\">\n        <th mat-header-cell *matHeaderCellDef> Freqency </th>\n        <td mat-cell *matCellDef=\"let prescription\"> {{prescription.frequency}} </td>\n      </ng-container>\n  \n    <!-- icon Column -->\n    <!-- <ng-container matColumnDef=\"icon\">\n      <th mat-header-cell *matHeaderCellDef></th>\n      <td mat-cell *matCellDef=\"let prescription\" style=\"text-align: right\">\n        <button mat-icon-button class=\"danger-text\" (click)=\"remove(prescription)\">\n          <mat-icon>remove_circle_outline</mat-icon>\n        </button>  \n      </td>\n    </ng-container> -->\n  \n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n  <div class=\"row\" *ngIf=\"(prescriptions)?.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>No prescriptions</B>\n      </strong></h6>\n    </div>\n  </div>"
+
+/***/ }),
+
+/***/ "./src/app/prescription-table/prescription-table.component.scss":
+/*!**********************************************************************!*\
+  !*** ./src/app/prescription-table/prescription-table.component.scss ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/prescription-table/prescription-table.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/prescription-table/prescription-table.component.ts ***!
+  \********************************************************************/
+/*! exports provided: PrescriptionTableComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrescriptionTableComponent", function() { return PrescriptionTableComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var PrescriptionTableComponent = /** @class */ (function () {
+    function PrescriptionTableComponent() {
+        this.prescriptions = [];
+        this.prescriptionDatasource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"]();
+        this.displayedColumns = ["no", "name", "frequency", "root", "dose"];
+    }
+    PrescriptionTableComponent.prototype.ngOnChanges = function () {
+        console.log(this.prescriptions);
+        this.prescriptionDatasource.data = this.prescriptions;
+    };
+    PrescriptionTableComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], PrescriptionTableComponent.prototype, "prescriptions", void 0);
+    PrescriptionTableComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-prescription-table',
+            template: __webpack_require__(/*! ./prescription-table.component.html */ "./src/app/prescription-table/prescription-table.component.html"),
+            styles: [__webpack_require__(/*! ./prescription-table.component.scss */ "./src/app/prescription-table/prescription-table.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PrescriptionTableComponent);
+    return PrescriptionTableComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/prescription/prescription.component.html":
 /*!**********************************************************!*\
   !*** ./src/app/prescription/prescription.component.html ***!
@@ -2331,7 +2586,7 @@ var PharmacyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<table mat-table [dataSource]=\"prescriptionDatasource\"  *ngIf=\"prescriptions.length > 1\"\nclass=\"mat-elevation-z0\">\n\n  <!-- number Column -->\n  <ng-container matColumnDef=\"no\">\n      <th mat-header-cell *matHeaderCellDef> No </th>\n      <td mat-cell *matCellDef=\"let prescription\"> {{prescriptions.indexOf(prescription)+1}} </td>\n    </ng-container>\n\n  <!-- Name Column -->\n  <ng-container matColumnDef=\"name\">\n    <th mat-header-cell *matHeaderCellDef> Name </th>\n    <td mat-cell *matCellDef=\"let prescription\"> {{prescription.name}} </td>\n  </ng-container>\n\n  <!-- Name Column -->\n  <ng-container matColumnDef=\"dose\">\n      <th mat-header-cell *matHeaderCellDef> Dose </th>\n      <td mat-cell *matCellDef=\"let prescription\"> {{prescription.dose}} </td>\n    </ng-container>\n\n  <!-- Name Column -->\n  <ng-container matColumnDef=\"root\">\n      <th mat-header-cell *matHeaderCellDef> Root </th>\n      <td mat-cell *matCellDef=\"let prescription\"> {{prescription.root}} </td>\n    </ng-container>\n\n  <!-- Name Column -->\n  <ng-container matColumnDef=\"frequency\">\n      <th mat-header-cell *matHeaderCellDef> Freqency </th>\n      <td mat-cell *matCellDef=\"let prescription\"> {{prescription.frequency}} </td>\n    </ng-container>\n\n  <!-- icon Column -->\n  <!-- <ng-container matColumnDef=\"icon\">\n    <th mat-header-cell *matHeaderCellDef></th>\n    <td mat-cell *matCellDef=\"let prescription\" style=\"text-align: right\">\n      <button mat-icon-button class=\"danger-text\" (click)=\"remove(prescription)\">\n        <mat-icon>remove_circle_outline</mat-icon>\n      </button>  \n    </td>\n  </ng-container> -->\n\n  <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n  <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n</table>\n<div class=\"row\" *ngIf=\"prescriptions.length == 0\">\n  <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n    <h6><strong class=\"tertiary center\">\n      <B>No prescriptions</B>\n    </strong></h6>\n  </div>\n</div>"
+module.exports = "<section>\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n       <mat-card id=\"queue\">\n         <app-queue-min loadTriggr=\"1\"></app-queue-min>\n       </mat-card>\n    </div>\n    <div class=\"col m8 l9 s12\">  \n      <div id=\"show-area\">\n          <!-- <ul style=\"list-style: none\">\n            <li style=\"display: inline\"><button mat-icon-button [routerLink]=\"'/lab/request/'+queue_id\"><mat-icon>arrow_back</mat-icon></button></li> \n            <li style=\"display: inline\"><button mat-icon-button [routerLink]=\"'/hisstory/'+queue_id\"><mat-icon>arrow_back</mat-icon></button></li>\n          </ul> -->\n        <ul style=\"list-style: none\">\n          <li style=\"display:inline\"><button mat-icon-button [routerLink]=\"'/hisstory/'+queue_id\"><mat-icon>arrow_back</mat-icon></button></li>\n        </ul>\n        <mat-card>\n          <app-prescription-table [prescriptions]=\"$prescriptions\"></app-prescription-table>\n        </mat-card>\n        \n      </div>\n    </div>\n  </div>\n </section>\n"
 
 /***/ }),
 
@@ -2357,7 +2612,9 @@ module.exports = ""
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrescriptionComponent", function() { return PrescriptionComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm5/table.es5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _service_hisstory_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/hisstory.service */ "./src/app/service/hisstory.service.ts");
+/* harmony import */ var _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../service/patient-queue.service */ "./src/app/service/patient-queue.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2369,28 +2626,36 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var PrescriptionComponent = /** @class */ (function () {
-    function PrescriptionComponent() {
-        this.prescriptions = [];
-        this.prescriptionDatasource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"]();
-        this.displayedColumns = ["no", "name", "frequency", "root", "dose"];
+    function PrescriptionComponent(_activeRoute, _queue, _hisstory) {
+        this._activeRoute = _activeRoute;
+        this._queue = _queue;
+        this._hisstory = _hisstory;
+        this.$prescriptions = [];
     }
     PrescriptionComponent.prototype.ngOnChanges = function () {
-        this.prescriptionDatasource.data = this.prescriptions;
     };
     PrescriptionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._activeRoute.params.subscribe(function (param) {
+            _this.$prescriptions = param.queue_id;
+            _this._queue.getQueue(param.queue_id).subscribe(function (queue) {
+                _this.queue_id = queue.id;
+                _this._hisstory.viewHisstroy(queue.hisstory.id).subscribe(function (hisstory) {
+                    _this.$prescriptions = hisstory.prescriptions;
+                });
+            });
+        });
     };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Array)
-    ], PrescriptionComponent.prototype, "prescriptions", void 0);
     PrescriptionComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-prescription',
             template: __webpack_require__(/*! ./prescription.component.html */ "./src/app/prescription/prescription.component.html"),
             styles: [__webpack_require__(/*! ./prescription.component.scss */ "./src/app/prescription/prescription.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_3__["PatientQueueService"], _service_hisstory_service__WEBPACK_IMPORTED_MODULE_2__["HisstoryService"]])
     ], PrescriptionComponent);
     return PrescriptionComponent;
 }());
@@ -3130,6 +3395,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _upload_profile_pic_route_route_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload_profile_pic/route/route.component */ "./src/app/upload_profile_pic/route/route.component.ts");
 /* harmony import */ var _lab_responce_lab_responce_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lab-responce/lab-responce.component */ "./src/app/lab-responce/lab-responce.component.ts");
 /* harmony import */ var _view_hisstory_view_hisstory_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./view-hisstory/view-hisstory.component */ "./src/app/view-hisstory/view-hisstory.component.ts");
+/* harmony import */ var _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./hisstory/laboratory-request/laboratory-request.component */ "./src/app/hisstory/laboratory-request/laboratory-request.component.ts");
+/* harmony import */ var _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./hisstory/prescription/prescription.component */ "./src/app/hisstory/prescription/prescription.component.ts");
+/* harmony import */ var _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./prescription/prescription.component */ "./src/app/prescription/prescription.component.ts");
+
+
+
 
 
 
@@ -3152,6 +3423,9 @@ var appRoutes = [
     { path: 'settings/change password', component: _change_password_route_change_password_route_component__WEBPACK_IMPORTED_MODULE_3__["ChangePasswordRouteComponent"] },
     { path: 'lab/result/:queue_id', component: _lab_responce_lab_responce_component__WEBPACK_IMPORTED_MODULE_7__["LabResponceComponent"] },
     { path: 'view/hisstroy/:queue_id', component: _view_hisstory_view_hisstory_component__WEBPACK_IMPORTED_MODULE_8__["ViewHisstoryComponent"] },
+    { path: 'lab/request/:queue_id', component: _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_9__["LaboratoryRequestComponent"] },
+    { path: 'prescription/prescribe/:queue_id', component: _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_10__["PrescriptionComponent"] },
+    { path: 'prescription/prescribed/:queue_id', component: _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_11__["PrescriptionComponent"] }
 ];
 
 
@@ -3164,7 +3438,7 @@ var appRoutes = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id='saved-stats-bar'>\n  <div \n  *ngFor=\"let queue of savedQueues\"\n  [style.width]=\"width\" \n  id=\"tab\" \n  [class.active]=\"queue.id == active\"\n  (click)=\"$open(queue)\">\n    <ul>\n      <li>.</li>\n      <li>{{queue.patient.reg_id}}</li>\n      <li>.</li>\n    </ul>\n  </div> \n</div>\n"
+module.exports = "<div id='saved-stats-bar'>\n  <div \n  *ngFor=\"let queue of savedQueues\"\n  [style.width]=\"width\" \n  id=\"tab\" \n  [class.active]=\"queue.id == active\"\n  (click)=\"$open(queue)\">\n    <ul>\n      <li>.</li>\n      <li>{{queue.patient.reg_id}}<span style=\"color:red\" *ngIf=\"queue.status==4\">*</span></li>\n      <li>.</li>\n    </ul>\n  </div> \n</div>\n"
 
 /***/ }),
 
@@ -3191,6 +3465,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SavedStatesComponent", function() { return SavedStatesComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_patient_queue_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/patient-queue.service */ "./src/app/service/patient-queue.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3202,6 +3477,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var Operation;
 (function (Operation) {
     Operation[Operation["NEXT"] = 0] = "NEXT";
@@ -3210,8 +3486,9 @@ var Operation;
     Operation[Operation["CHOOSE_SIDE"] = 3] = "CHOOSE_SIDE";
 })(Operation || (Operation = {}));
 var SavedStatesComponent = /** @class */ (function () {
-    function SavedStatesComponent(_queue) {
+    function SavedStatesComponent(_queue, _router) {
         this._queue = _queue;
+        this._router = _router;
         this.open = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.savedQueues = [];
     }
@@ -3273,7 +3550,18 @@ var SavedStatesComponent = /** @class */ (function () {
         });
     };
     SavedStatesComponent.prototype.$open = function (queue) {
-        this.open.emit(queue);
+        var _this = this;
+        var to;
+        switch (queue.status) {
+            case 4:
+                to = 'lab/result/' + queue.hisstory.id;
+                this._queue.labSeen(queue.id).subscribe(function () { _this.getSaved(); });
+                break;
+            default:
+                to = 'hisstory/' + queue.hisstory.id;
+        }
+        this._router.navigate([to]);
+        //this.open.emit(queue); 
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
@@ -3298,7 +3586,7 @@ var SavedStatesComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./saved-states.component.html */ "./src/app/saved-states/saved-states.component.html"),
             styles: [__webpack_require__(/*! ./saved-states.component.scss */ "./src/app/saved-states/saved-states.component.scss")]
         }),
-        __metadata("design:paramtypes", [_service_patient_queue_service__WEBPACK_IMPORTED_MODULE_1__["PatientQueueService"]])
+        __metadata("design:paramtypes", [_service_patient_queue_service__WEBPACK_IMPORTED_MODULE_1__["PatientQueueService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
     ], SavedStatesComponent);
     return SavedStatesComponent;
 }());
@@ -3573,6 +3861,10 @@ var PatientQueueService = /** @class */ (function () {
         var URL = this.root + "/ajax/post/queue/call/" + queue_id;
         return this._http.post(URL, {});
     };
+    PatientQueueService.prototype.labSeen = function (queue_id) {
+        var URL = this.root + "/ajax/update/lab/result/seen/" + queue_id;
+        return this._http.put(URL, {});
+    };
     PatientQueueService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -3697,6 +3989,10 @@ var PharmacyService = /** @class */ (function () {
     };
     PharmacyService.prototype.getRoots = function () {
         var URL = this.root + "/ajax/get/pharmacy/drug/roots";
+        return this._http.get(URL);
+    };
+    PharmacyService.prototype.prescription = function (hisstroy_id) {
+        var URL = this.root + "/ajax/get/pharmacy/prescription/prescribed/" + hisstroy_id;
         return this._http.get(URL);
     };
     PharmacyService = __decorate([
@@ -4896,7 +5192,7 @@ var UsersComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <div class=\"row\" *ngIf=\"(hisstory)?true:false\">\n    <div class=\"col m8 s12 offset-m2\">\n      <div class=\"row\">\n        <mat-card>\n          <!-- <h5>History</h5> -->\n          <div class=\"container\">\n              <div class=\"row\">\n                  <h6><strong>Chif complient</strong></h6>\n                  <p *ngIf=\"hisstory.chief_complaint\">{{hisstory.chief_complaint}}</p>\n                  <p *ngIf=\"!hisstory.chief_complaint\" class=\"secondery\" style=\"opacity: 0.3\"><b>No complaint</b></p>\n              </div>\n          </div>\n          <div>\n              <div class=\"row\">\n                  <div class=\"col m3\">\n                    <div class=\"col s4\" style=\"margin-top: 16px\">\n                        <img src=\"assets/thermometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                    </div>\n                    <div class=\"col s8\" style=\"padding-left: 4px\">\n                      <p>Temprature</p>\n                      <h5 *ngIf=\"hisstory.temprature\">{{hisstory.temprature}}oC</h5>\n                      <h6 *ngIf=\"!hisstory.temprature\" class=\"secondery\">Not mesured</h6>\n                    </div>\n                    \n                  </div>\n                  <div class=\"col m3\">\n                      <div class=\"col s4\" style=\"margin-top: 16px\">\n                          <img src=\"assets/sphygmomanometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                      </div>\n                      <div class=\"col s8\" style=\"padding-left: 4px\">\n                        <p>BP</p>\n                        <h5 *ngIf=\"hisstory.BP\">{{hisstory.BP}}</h5>\n                        <h6 *ngIf=\"!hisstory.BP\" class=\"secondery\">Not mesured</h6>\n                      </div>\n                    \n                  </div>\n                  <div class=\"col m3\">\n                      <div class=\"col s4\" style=\"margin-top: 16px\">\n                          <img src=\"assets/thermometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                      </div>\n                      <div class=\"col s8\" style=\"padding-left: 4px\">\n                        <p>Puls rate</p>\n                        <h5 *ngIf=\"hisstory.puls_rate\">{{hisstory.puls_rate}}</h5>\n                        <h6 *ngIf=\"!hisstory.puls_rate\" class=\"secondery\">Not mesured</h6>\n                      </div>                \n                  </div>\n                  <div class=\"col m3\">\n                      <div class=\"col s4\" style=\"margin-top: 16px\">\n                          <img src=\"assets/thermometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                      </div>\n                      <div class=\"col s8\" style=\"padding-left: 4px\">\n                        <p>Respiratory rate</p>\n                        <h5 *ngIf=\"hisstory.respiratory_rate\">{{hisstory.respiratory_rate}}</h5>\n                        <h6 *ngIf=\"!hisstory.respiratory_rate\" class=\"secondery\">Not mesured</h6>\n                      </div>\n                     \n                  </div>\n              </div>   \n          </div>     \n        </mat-card>\n      </div>\n\n      <div class=\"row\">  \n        <mat-card>\n          <h5>Laboratory results</h5>\n          <app-lab-result [tests]=\"(hisstory)?.labResults\"></app-lab-result>\n        </mat-card>\n      </div>\n\n      <div class=\"row\">\n        <mat-card>\n          <h5>Prescription</h5>\n          <app-prescription [prescriptions]=\"(hisstory)?.prescriptions \"></app-prescription>\n        </mat-card>\n      </div>\n       \n     \n      \n    </div>\n  </div>\n</section>"
+module.exports = "<section>\n  <div class=\"row\" *ngIf=\"(hisstory)?true:false\">\n    <div class=\"col m8 s12 offset-m2\">\n      <div class=\"row\">\n        <mat-card>\n          <!-- <h5>History</h5> -->\n          <div class=\"container\">\n              <div class=\"row\">\n                  <h6><strong>Chif complient</strong></h6>\n                  <p *ngIf=\"hisstory.chief_complaint\">{{hisstory.chief_complaint}}</p>\n                  <p *ngIf=\"!hisstory.chief_complaint\" class=\"secondery\" style=\"opacity: 0.3\"><b>No complaint</b></p>\n              </div>\n          </div>\n          <div>\n              <div class=\"row\">\n                  <div class=\"col m3\">\n                    <div class=\"col s4\" style=\"margin-top: 16px\">\n                        <img src=\"/img/thermometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                    </div>\n                    <div class=\"col s8\" style=\"padding-left: 4px\">\n                      <p>Temprature</p>\n                      <h5 *ngIf=\"hisstory.temprature\">{{hisstory.temprature}}oC</h5>\n                      <h6 *ngIf=\"!hisstory.temprature\" class=\"secondery\">Not mesured</h6>\n                    </div>\n                    \n                  </div>\n                  <div class=\"col m3\">\n                      <div class=\"col s4\" style=\"margin-top: 16px\">\n                          <img src=\"/img/sphygmomanometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                      </div>\n                      <div class=\"col s8\" style=\"padding-left: 4px\">\n                        <p>BP</p>\n                        <h5 *ngIf=\"hisstory.BP\">{{hisstory.BP}}</h5>\n                        <h6 *ngIf=\"!hisstory.BP\" class=\"secondery\">Not mesured</h6>\n                      </div>\n                    \n                  </div>\n                  <div class=\"col m3\">\n                      <div class=\"col s4\" style=\"margin-top: 16px\">\n                          <img src=\"/img/thermometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                      </div>\n                      <div class=\"col s8\" style=\"padding-left: 4px\">\n                        <p>Puls rate</p>\n                        <h5 *ngIf=\"hisstory.puls_rate\">{{hisstory.puls_rate}}</h5>\n                        <h6 *ngIf=\"!hisstory.puls_rate\" class=\"secondery\">Not mesured</h6>\n                      </div>                \n                  </div>\n                  <div class=\"col m3\">\n                      <div class=\"col s4\" style=\"margin-top: 16px\">\n                          <img src=\"/img/thermometer.svg\" style=\"width: 3rem; margin-top: 12px\"/>\n                      </div>\n                      <div class=\"col s8\" style=\"padding-left: 4px\">\n                        <p>Respiratory rate</p>\n                        <h5 *ngIf=\"hisstory.respiratory_rate\">{{hisstory.respiratory_rate}}</h5>\n                        <h6 *ngIf=\"!hisstory.respiratory_rate\" class=\"secondery\">Not mesured</h6>\n                      </div>\n                     \n                  </div>\n              </div>   \n          </div>     \n        </mat-card>\n      </div>\n\n      <div class=\"row\">  \n        <mat-card>\n          <h5>Laboratory results</h5>\n          <app-lab-result [tests]=\"(hisstory)?.labResults\"></app-lab-result>\n        </mat-card>\n      </div>\n\n      <div class=\"row\">\n        <mat-card>\n          <h5>Prescription</h5>\n          <app-prescription-table [prescriptions]=\"(hisstory)?.prescriptions \"></app-prescription-table>\n        </mat-card>\n      </div>\n       \n     \n      \n    </div>\n  </div>\n</section>"
 
 /***/ }),
 

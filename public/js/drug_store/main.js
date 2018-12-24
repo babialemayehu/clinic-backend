@@ -159,7 +159,7 @@ var AppComponent = /** @class */ (function () {
     function AppComponent(_dialog, _user) {
         this._dialog = _dialog;
         this._user = _user;
-        this.title = 'Admin';
+        this.title = 'admin2';
         this.profilePic = 'assets/avatar.jpg';
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -260,8 +260,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _orders_table_orders_table_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./orders-table/orders-table.component */ "./src/app/orders-table/orders-table.component.ts");
 /* harmony import */ var _orders_list_orders_list_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./orders-list/orders-list.component */ "./src/app/orders-list/orders-list.component.ts");
 /* harmony import */ var _ordered_drugs_ordered_drugs_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./ordered-drugs/ordered-drugs.component */ "./src/app/ordered-drugs/ordered-drugs.component.ts");
-/* harmony import */ var _drug_requests_drug_requests_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./drug-requests/drug-requests.component */ "./src/app/drug-requests/drug-requests.component.ts");
-/* harmony import */ var _drug_requests_requests_table_requests_table_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./drug-requests/requests-table/requests-table.component */ "./src/app/drug-requests/requests-table/requests-table.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -295,8 +293,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 // context menu
 
 // import { ContextMenu } from './context/context.menu';
-
-
 
 
 
@@ -369,8 +365,6 @@ var AppModule = /** @class */ (function () {
                 _orders_table_orders_table_component__WEBPACK_IMPORTED_MODULE_49__["OrdersTableComponent"],
                 _orders_list_orders_list_component__WEBPACK_IMPORTED_MODULE_50__["OrdersListComponent"],
                 _ordered_drugs_ordered_drugs_component__WEBPACK_IMPORTED_MODULE_51__["OrderedDrugsComponent"],
-                _drug_requests_drug_requests_component__WEBPACK_IMPORTED_MODULE_52__["DrugRequestsComponent"],
-                _drug_requests_requests_table_requests_table_component__WEBPACK_IMPORTED_MODULE_53__["RequestsTableComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -1037,6 +1031,7 @@ var DashboardComponent = /** @class */ (function () {
             }
         });
     };
+    DashboardComponent.prototype.onStatus = function (e) { };
     DashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-dashboard',
@@ -1051,239 +1046,6 @@ var DashboardComponent = /** @class */ (function () {
             _service_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]])
     ], DashboardComponent);
     return DashboardComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/drug-requests.component.html":
-/*!************************************************************!*\
-  !*** ./src/app/drug-requests/drug-requests.component.html ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <h4>Drug requests</h4>\n    <app-drug-requests-table [orders]=\"$orders\"></app-drug-requests-table>\n  </div>\n</div>\n\n"
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/drug-requests.component.scss":
-/*!************************************************************!*\
-  !*** ./src/app/drug-requests/drug-requests.component.scss ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/drug-requests.component.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/drug-requests/drug-requests.component.ts ***!
-  \**********************************************************/
-/*! exports provided: DrugRequestsComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DrugRequestsComponent", function() { return DrugRequestsComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _service_order_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/order.service */ "./src/app/service/order.service.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var DrugRequestsComponent = /** @class */ (function () {
-    function DrugRequestsComponent(_order) {
-        this._order = _order;
-        this.$orders = [];
-    }
-    DrugRequestsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._order.orderForStore().subscribe(function (orders) { _this.$orders = orders; });
-    };
-    DrugRequestsComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-drug-requests',
-            template: __webpack_require__(/*! ./drug-requests.component.html */ "./src/app/drug-requests/drug-requests.component.html"),
-            styles: [__webpack_require__(/*! ./drug-requests.component.scss */ "./src/app/drug-requests/drug-requests.component.scss")]
-        }),
-        __metadata("design:paramtypes", [_service_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"]])
-    ], DrugRequestsComponent);
-    return DrugRequestsComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/requests-table/requests-table-datasource.ts":
-/*!***************************************************************************!*\
-  !*** ./src/app/drug-requests/requests-table/requests-table-datasource.ts ***!
-  \***************************************************************************/
-/*! exports provided: RequestsTableDataSource */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsTableDataSource", function() { return RequestsTableDataSource; });
-/* harmony import */ var _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/cdk/collections */ "./node_modules/@angular/cdk/esm5/collections.es5.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-var RequestsTableDataSource = /** @class */ (function (_super) {
-    __extends(RequestsTableDataSource, _super);
-    function RequestsTableDataSource(paginator, sort, data) {
-        var _this = _super.call(this) || this;
-        _this.paginator = paginator;
-        _this.sort = sort;
-        _this.data = data;
-        return _this;
-    }
-    RequestsTableDataSource.prototype.connect = function () {
-        var _this = this;
-        var dataMutations = [
-            Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(this.data),
-            this.paginator.page,
-            this.sort.sortChange
-        ];
-        this.paginator.length = this.data.length;
-        return rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"].apply(void 0, dataMutations).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function () {
-            return _this.getPagedData(_this.getSortedData(_this.data.slice()));
-        }));
-    };
-    RequestsTableDataSource.prototype.disconnect = function () { };
-    RequestsTableDataSource.prototype.getPagedData = function (data) {
-        var startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-        return data.splice(startIndex, this.paginator.pageSize);
-    };
-    RequestsTableDataSource.prototype.getSortedData = function (data) {
-        var _this = this;
-        if (!this.sort.active || this.sort.direction === '') {
-            return data;
-        }
-        return data.sort(function (a, b) {
-            var isAsc = _this.sort.direction === 'asc';
-            switch (_this.sort.active) {
-                case 'by': return compare(a.order.first_name, b.order.father_name, isAsc);
-                case 'from': return compare(a.order.role.name, b.order.role.name, isAsc);
-                case 'date': return compare(a.created_at, b.created_at, isAsc);
-                default: return 0;
-            }
-        });
-    };
-    return RequestsTableDataSource;
-}(_angular_cdk_collections__WEBPACK_IMPORTED_MODULE_0__["DataSource"]));
-
-function compare(a, b, isAsc) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-}
-
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/requests-table/requests-table.component.css":
-/*!***************************************************************************!*\
-  !*** ./src/app/drug-requests/requests-table/requests-table.component.css ***!
-  \***************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/requests-table/requests-table.component.html":
-/*!****************************************************************************!*\
-  !*** ./src/app/drug-requests/requests-table/requests-table.component.html ***!
-  \****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"mat-elevation-z8\">\n  <table mat-table #table [dataSource]=\"dataSource\" matSort aria-label=\"Elements\">\n    <ng-container matColumnDef=\"no\">\n      <th mat-header-cell *matHeaderCellDef mat-sort-header>No</th>\n      <td mat-cell *matCellDef=\"let row\">{{orders.indexOf(row)+1}}</td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"by\">\n      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ordered by</th>\n      <td mat-cell *matCellDef=\"let row\">{{row.order.first_name + \" \"+ row.order.father_name}}</td>\n    </ng-container>\n\n     <ng-container matColumnDef=\"from\">\n      <th mat-header-cell *matHeaderCellDef mat-sort-header>From</th>\n      <td mat-cell *matCellDef=\"let row\">{{row.order.role.name}}</td>\n    </ng-container>\n\n     <ng-container matColumnDef=\"at\">\n      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ordered at</th>\n      <td mat-cell *matCellDef=\"let row\">{{row.created_at}}</td>\n    </ng-container>\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" [routerLink]=\"'/ordered drugs/'+row.id\"></tr>\n  </table>\n\n  <mat-paginator #paginator\n    [length]=\"dataSource.data.length\"\n    [pageIndex]=\"0\"\n    [pageSize]=\"50\"\n    [pageSizeOptions]=\"[25, 50, 100, 250]\">\n  </mat-paginator>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/drug-requests/requests-table/requests-table.component.ts":
-/*!**************************************************************************!*\
-  !*** ./src/app/drug-requests/requests-table/requests-table.component.ts ***!
-  \**************************************************************************/
-/*! exports provided: RequestsTableComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsTableComponent", function() { return RequestsTableComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _requests_table_datasource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./requests-table-datasource */ "./src/app/drug-requests/requests-table/requests-table-datasource.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var RequestsTableComponent = /** @class */ (function () {
-    function RequestsTableComponent() {
-        this.displayedColumns = ["no", "by", "from", "at"];
-    }
-    RequestsTableComponent.prototype.ngOnChanges = function () {
-        this.dataSource = new _requests_table_datasource__WEBPACK_IMPORTED_MODULE_2__["RequestsTableDataSource"](this.paginator, this.sort, this.orders);
-    };
-    RequestsTableComponent.prototype.ngOnInit = function () {
-        this.dataSource = new _requests_table_datasource__WEBPACK_IMPORTED_MODULE_2__["RequestsTableDataSource"](this.paginator, this.sort, this.orders);
-    };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"]),
-        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatPaginator"])
-    ], RequestsTableComponent.prototype, "paginator", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSort"]),
-        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatSort"])
-    ], RequestsTableComponent.prototype, "sort", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Array)
-    ], RequestsTableComponent.prototype, "orders", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Number)
-    ], RequestsTableComponent.prototype, "update", void 0);
-    RequestsTableComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-drug-requests-table',
-            template: __webpack_require__(/*! ./requests-table.component.html */ "./src/app/drug-requests/requests-table/requests-table.component.html"),
-            styles: [__webpack_require__(/*! ./requests-table.component.css */ "./src/app/drug-requests/requests-table/requests-table.component.css")]
-        })
-    ], RequestsTableComponent);
-    return RequestsTableComponent;
 }());
 
 
@@ -1552,6 +1314,21 @@ var FloatingActionBtnComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/model/RootURL.ts":
+/*!**********************************!*\
+  !*** ./src/app/model/RootURL.ts ***!
+  \**********************************/
+/*! exports provided: RootURL */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RootURL", function() { return RootURL; });
+var RootURL = "";
+
+
+/***/ }),
+
 /***/ "./src/app/model/User.ts":
 /*!*******************************!*\
   !*** ./src/app/model/User.ts ***!
@@ -1633,7 +1410,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent() {
         this.menuItems = [
-            { href: 'requests', text: 'requests' }
+            { href: 'drug', text: 'Drug' }
         ];
     }
     NavbarComponent.prototype.ngOnInit = function () {
@@ -1778,7 +1555,7 @@ var OrderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col m12\">\n    <app-orders-table [orders]=\"$durg_orders\" (issue)=\"issue($event)\"></app-orders-table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col m12\">\n    <app-orders-table [orders]=\"$durg_orders\"></app-orders-table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1819,22 +1596,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var OrderedDrugsComponent = /** @class */ (function () {
-    function OrderedDrugsComponent(_order, _activeRoute, _router) {
+    function OrderedDrugsComponent(_order, _activeRoute) {
         this._order = _order;
         this._activeRoute = _activeRoute;
-        this._router = _router;
         this.$durg_orders = [];
     }
     OrderedDrugsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._activeRoute.params.subscribe(function (param) {
-            _this._order.orderedDrugs(param.order_id, "autorized").subscribe(function (drug_orders) { _this.$durg_orders = drug_orders; });
-        });
-    };
-    OrderedDrugsComponent.prototype.issue = function ($orders) {
-        var _this = this;
-        this._order.issue($orders).subscribe(function (responce) {
-            _this._router.navigate(['/requests']);
+            _this._order.orderedDrugs(param.order_id).subscribe(function (drug_orders) { console.log(drug_orders); _this.$durg_orders = drug_orders; });
         });
     };
     OrderedDrugsComponent = __decorate([
@@ -1843,7 +1613,7 @@ var OrderedDrugsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./ordered-drugs.component.html */ "./src/app/ordered-drugs/ordered-drugs.component.html"),
             styles: [__webpack_require__(/*! ./ordered-drugs.component.scss */ "./src/app/ordered-drugs/ordered-drugs.component.scss")]
         }),
-        __metadata("design:paramtypes", [_service_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_service_order_service__WEBPACK_IMPORTED_MODULE_1__["OrderService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], OrderedDrugsComponent);
     return OrderedDrugsComponent;
 }());
@@ -1859,7 +1629,7 @@ var OrderedDrugsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div classs=\"contatiner\">\n  <div class=\"row\">\n    <div class=\"col m8 offset-m2\">\n      <h5>Orders</h5>\n      <mat-list>\n        <mat-list-item *ngFor=\"let $order of $orders\" style=\"margin: 16px 0px\">\n          <a [routerLink]=\"['/ordered drugs/'+$order.id]\" style=\"width: 100%;\"> \n              <mat-card id=\"order\"  style=\"padding: 16px 36px; \">\n                <span>{{$orders.indexOf($order)+1}}. </span>\n                <span>{{$order.drugs}}</span>\n                <span class=\"secondery right\">{{$order.created_at}}</span>\n              </mat-card>\n            </a>\n        </mat-list-item>\n      </mat-list>\n    </div>\n    \n  </div>\n</div>\n"
+module.exports = "<div classs=\"contatiner\">\n  <div class=\"row\">\n    <div class=\"col m8 offset-m2\">\n      <h5>Orders</h5>\n      <table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"($orders)?.length > 0\"\n        class=\"mat-elevation-z0\">\n        \n        <ng-container matColumnDef=\"recived\">\n          <th mat-header-cell *matHeaderCellDef><mat-checkbox (change)=\"_selectAll($event)\" [checked]=\"selectAll\"></mat-checkbox></th>\n          <td mat-cell *matCellDef=\"let order\">\n            <mat-checkbox \n            (change)=\"select($orders.indexOf(order), $event)\" \n            [checked]=\"selectAll || order.is_recived != null\"\n            [disabled]=\"order.issued_by == null\"></mat-checkbox>\n          </td>\n        </ng-container>\n      \n          <ng-container matColumnDef=\"no\">\n            <th mat-header-cell *matHeaderCellDef> No </th>\n            <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n          </ng-container>\n\n          <ng-container matColumnDef=\"ordered_by\">\n              <th mat-header-cell *matHeaderCellDef>Ordered by </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.order.first_name}} {{order.order.father_name}} </td>\n          </ng-container> \n          \n          <ng-container matColumnDef=\"ordered_at\">\n              <th mat-header-cell *matHeaderCellDef>Ordered at </th>\n              <td mat-cell *matCellDef=\"let order\"> {{order.created_at}} </td>\n          </ng-container>\n        \n      \n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\" [routerLink]=\"'/ordered drugs/'+row.id\"></tr>\n          \n        </table> \n\n        <div class=\"row\" *ngIf=\"($orders)?.length == 0\">\n          <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n            <h6><strong class=\"tertiary center\">\n              <B>There is no order yet</B>\n            </strong></h6>\n          </div>\n        </div>\n    </div>\n    \n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1886,6 +1656,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrdersListComponent", function() { return OrdersListComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_order_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../service/order.service */ "./src/app/service/order.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1897,14 +1668,21 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var OrdersListComponent = /** @class */ (function () {
     function OrdersListComponent(_order) {
         this._order = _order;
         this.$orders = [];
+        this.orderDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"]();
+        this.displayedColumns = ['no', 'ordered_by', 'ordered_at'];
     }
     OrdersListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._order.getUserOrders().subscribe(function (responce) { _this.$orders = responce; });
+        this._order.getOrders().subscribe(function (responce) {
+            console.log(responce);
+            _this.$orders = responce;
+            _this.orderDataSource.data = responce;
+        });
     };
     OrdersListComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1928,7 +1706,7 @@ var OrdersListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$orders.length > 0\"\n  class=\"mat-elevation-z0\">\n  \n    <ng-container matColumnDef=\"deliverd\">\n      <th mat-header-cell *matHeaderCellDef></th>\n      <td mat-cell *matCellDef=\"let order\"><mat-checkbox (change)=\"select($orders.indexOf(order), $event)\"></mat-checkbox></td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"no\">\n      <th mat-header-cell *matHeaderCellDef> No </th>\n      <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"drug\">\n      <th mat-header-cell *matHeaderCellDef> Drug </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.drug.name}} </td>\n    </ng-container>\n  \n    \n    <ng-container matColumnDef=\"quantity\">\n      <th mat-header-cell *matHeaderCellDef> Quantity </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.adjusted_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"autorized\">\n      <th mat-header-cell *matHeaderCellDef> Authorized </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.autorized_by == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.autorized_by != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"issued_quantity\">\n        <th mat-header-cell *matHeaderCellDef> Issued Quantity </th>\n        <td mat-cell *matCellDef=\"let order\">\n          <input *ngIf=\"order.recived_at == null\" type=\"number\" name=\"issuded_q\" #issue \n          (change)=\"order.issued_quantity = issue.value\"\n          [value]=\"order.issued_quantity\">\n          <span *ngIf=\"order.recived_at != null\">{{order.issued_quantity}}</span> \n        </td>\n    </ng-container>\n    \n    <ng-container matColumnDef=\"batch_number\">\n        <th mat-header-cell *matHeaderCellDef>Batch </th>\n        <td mat-cell *matCellDef=\"let order\">\n          <input *ngIf=\"order.recived_at == null\" type=\"number\" name=\"batch_number\" #batch\n          (change)=\"order.batch_number = batch.value\"\n          [value]=\"order.batch_number\">\n          <span *ngIf=\"order.recived_at != null\">{{order.batch_number}}</span> \n        </td>\n    </ng-container>\n    \n    <ng-container matColumnDef=\"expier_at\">\n        <th mat-header-cell *matHeaderCellDef>Expire date </th>\n        <td mat-cell *matCellDef=\"let order\"> \n          <input *ngIf=\"order.recived_at == null\" type=\"date\" name=\"issuded_q\" #expire_date\n          (change)=\"order.expier_at = expire_date.value\"\n          [value]=\"order.expier_at\">\n          <span *ngIf=\"order.recived_at != null\">{{order.expier_at}}</span> \n        </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"is_recived\">\n      <th mat-header-cell *matHeaderCellDef> Is recived </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.recived_at == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.recived_at != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"recived_at\">\n        <th mat-header-cell *matHeaderCellDef>Recived at </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.recived_at}} </td>\n    </ng-container>\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    \n  </table> \n  <div class=\"row\" *ngIf=\"$orders.length != 0\" class=\"primary white-text right\" style=\"margin: 2em 4em\">\n    <button mat-button (click)=\"issue.emit($orders)\">Issue</button>\n  </div>\n  <div class=\"row\" *ngIf=\"$orders.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>There is no order yet</B>\n      </strong></h6>\n    </div>\n  </div>"
+module.exports = "<table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$orders.length > 0\"\n  class=\"mat-elevation-z0\">\n  \n  <ng-container matColumnDef=\"recived\">\n    <th mat-header-cell *matHeaderCellDef><mat-checkbox (change)=\"_selectAll($event)\" [checked]=\"all\" ></mat-checkbox></th>\n    <td mat-cell *matCellDef=\"let order\">\n      <mat-checkbox \n      (change)=\"order.selected = $event.checked;\" \n      [checked]=\"order.selected\"\n      [disabled]=\"order.recived_at != null\" ></mat-checkbox>\n    </td>\n  </ng-container>\n\n    <ng-container matColumnDef=\"no\">\n      <th mat-header-cell *matHeaderCellDef> No </th>\n      <td mat-cell *matCellDef=\"let order\"> {{$orders.indexOf(order)+1}} </td>\n    </ng-container>\n  \n    <ng-container matColumnDef=\"drug\">\n      <th mat-header-cell *matHeaderCellDef> Drug </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.drug.name}} </td>\n    </ng-container>\n  \n    \n    <ng-container matColumnDef=\"quantity\">\n      <th mat-header-cell *matHeaderCellDef> Quantity </th>\n      <td mat-cell *matCellDef=\"let order\"> {{order.adjusted_quantity}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"autorized\">\n      <th mat-header-cell *matHeaderCellDef> Authorized </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.autorized_by == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.autorized_by != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"issued_quantity\">\n        <th mat-header-cell *matHeaderCellDef> Issued Quantity </th>\n        <td mat-cell *matCellDef=\"let order\"> \n          <input *ngIf=\"order.recived_at == null\" type=\"number\" [value]=\"order.issued_quantity\" (change)=\"order.issued_quantity = $event.srcElement.value\">\n          <span *ngIf=\"order.recived_at != null\">{{order.issued_quantity}}</span>\n        </td>\n    </ng-container>\n    \n    <ng-container matColumnDef=\"batch_number\">\n        <th mat-header-cell *matHeaderCellDef>Batch </th>\n        <td mat-cell *matCellDef=\"let order\">\n          <input *ngIf=\"order.recived_at == null\" type=\"number\" [value]=\"order.batch_number\" (change)=\"order.batch_number = $event.srcElement.value\">\n          <span *ngIf=\"order.recived_at != null\">{{order.batch_number}}</span>\n        </td>\n    </ng-container>\n    \n    <ng-container matColumnDef=\"expier_at\">\n        <th mat-header-cell *matHeaderCellDef>Expiredate </th>\n        <td mat-cell *matCellDef=\"let order\"> \n          <input *ngIf=\"order.recived_at == null\" type=\"date\" [value]=\"order.expier_at\" (change)=\"order.expier_at = $event.srcElement.value\">\n          <span *ngIf=\"order.recived_at != null\">{{order.expier_at}}</span>\n        </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"is_recived\">\n      <th mat-header-cell *matHeaderCellDef> Is recived </th>\n      <td mat-cell *matCellDef=\"let order\"> \n        <mat-icon *ngIf=\"order.recived_at == null\" style='color:red'>clear</mat-icon>\n        <mat-icon *ngIf=\"order.recived_at != null\" style='color:green'>check</mat-icon>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"recived_at\">\n        <th mat-header-cell *matHeaderCellDef>Recived at </th>\n        <td mat-cell *matCellDef=\"let order\"> {{order.recived_at}} </td>\n    </ng-container>\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    \n  </table> \n  <div class=\"row\" *ngIf=\"$orders.length != 0\">\n    <button \n      class=\"right white-text primary\" \n      mat-button color=\"primary\" \n      style=\"margin: 3em\"\n      (click)=\"issue()\"\n     >Issue</button>\n  </div>\n  <div class=\"row\" *ngIf=\"$orders.length == 0\">\n    <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n      <h6><strong class=\"tertiary center\">\n        <B>There is no order yet</B>\n      </strong></h6>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -1939,7 +1717,7 @@ module.exports = "<table mat-table [dataSource]=\"orderDataSource\" *ngIf=\"$ord
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "input {\n  width: 150px; }\n"
+module.exports = ""
 
 /***/ }),
 
@@ -1955,6 +1733,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrdersTableComponent", function() { return OrdersTableComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _service_order_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/order.service */ "./src/app/service/order.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1966,11 +1746,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var OrdersTableComponent = /** @class */ (function () {
-    function OrdersTableComponent() {
+    function OrdersTableComponent(_order, _router) {
+        this._order = _order;
+        this._router = _router;
         this.orderDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"]();
         this.$orders = [];
+        this.$selectedOrders = [];
+        this.all = true;
         this.displayedColumns = [
+            'recived',
             'no',
             'drug',
             'quantity',
@@ -1981,29 +1768,59 @@ var OrdersTableComponent = /** @class */ (function () {
             'is_recived',
             'recived_at'
         ];
-        this.issue = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     OrdersTableComponent.prototype.ngOnChanges = function () {
+        var _this = this;
         this.$orders = this.orders;
         this.orderDataSource.data = this.orders;
+        this.$orders.forEach(function (order) {
+            if (!order.selected) {
+                _this.all = false;
+            }
+        });
     };
+    OrdersTableComponent.prototype.log = function () { console.log("alskjdsf"); };
     OrdersTableComponent.prototype.ngOnInit = function () {
+    };
+    OrdersTableComponent.prototype.select = function (i, e) {
+    };
+    OrdersTableComponent.prototype._selectAll = function (e) {
+        if (e.checked) {
+            this.$orders.forEach(function (order) {
+                order.selected = true;
+            });
+        }
+        else {
+            this.$orders.forEach(function (order) {
+                order.selected = false;
+            });
+        }
+        this.orderDataSource.data = this.$orders;
+    };
+    OrdersTableComponent.prototype.issue = function () {
+        var _this = this;
+        this._order.issue(this.$orders).subscribe(function (responce) {
+            _this._router.navigate(["/drug"]);
+        });
+    };
+    OrdersTableComponent.prototype.change = function (e) {
+        console.log(e);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
     ], OrdersTableComponent.prototype, "orders", void 0);
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
-        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"])
-    ], OrdersTableComponent.prototype, "issue", void 0);
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('selectAll'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], OrdersTableComponent.prototype, "selectAll", void 0);
     OrdersTableComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-orders-table',
             template: __webpack_require__(/*! ./orders-table.component.html */ "./src/app/orders-table/orders-table.component.html"),
             styles: [__webpack_require__(/*! ./orders-table.component.scss */ "./src/app/orders-table/orders-table.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_service_order_service__WEBPACK_IMPORTED_MODULE_2__["OrderService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], OrdersTableComponent);
     return OrdersTableComponent;
 }());
@@ -3220,8 +3037,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _drug_route_drug_route_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./drug-route/drug-route.component */ "./src/app/drug-route/drug-route.component.ts");
 /* harmony import */ var _order_order_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./order/order.component */ "./src/app/order/order.component.ts");
 /* harmony import */ var _ordered_drugs_ordered_drugs_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ordered-drugs/ordered-drugs.component */ "./src/app/ordered-drugs/ordered-drugs.component.ts");
-/* harmony import */ var _drug_requests_drug_requests_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./drug-requests/drug-requests.component */ "./src/app/drug-requests/drug-requests.component.ts");
-
 
 
 
@@ -3246,8 +3061,7 @@ var appRoutes = [
     { path: 'settings/change password', component: _change_password_route_change_password_route_component__WEBPACK_IMPORTED_MODULE_2__["ChangePasswordRouteComponent"] },
     { path: 'prescription/:queue_id', component: _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_7__["PrescriptionComponent"] },
     { path: 'prescription/requests/empty', component: _empty_queue_empty_queue_component__WEBPACK_IMPORTED_MODULE_6__["EmptyQueueComponent"] },
-    { path: 'ordered drugs/:order_id', component: _ordered_drugs_ordered_drugs_component__WEBPACK_IMPORTED_MODULE_10__["OrderedDrugsComponent"] },
-    { path: 'requests', component: _drug_requests_drug_requests_component__WEBPACK_IMPORTED_MODULE_11__["DrugRequestsComponent"] }
+    { path: 'ordered drugs/:order_id', component: _ordered_drugs_ordered_drugs_component__WEBPACK_IMPORTED_MODULE_10__["OrderedDrugsComponent"] }
 ];
 
 
@@ -3478,6 +3292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LaboratoryQueueService", function() { return LaboratoryQueueService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3489,10 +3304,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var LaboratoryQueueService = /** @class */ (function () {
     function LaboratoryQueueService(_http) {
         this._http = _http;
-        this.root = "http://clinic";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     LaboratoryQueueService.prototype.queue_list = function (limit) {
         if (limit === void 0) { limit = -1; }
@@ -3536,6 +3352,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderService", function() { return OrderService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3547,10 +3364,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var OrderService = /** @class */ (function () {
     function OrderService(_http) {
         this._http = _http;
-        this.root = "http://clinic";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     OrderService.prototype.newOrder = function (orders) {
         var URL = this.root + "/ajax/post/order/new";
@@ -3560,17 +3378,12 @@ var OrderService = /** @class */ (function () {
         var URL = this.root + "/ajax/get/order/get order to store";
         return this._http.get(URL);
     };
-    OrderService.prototype.getUserOrders = function () {
-        var URL = this.root + "/ajax/get/order/user orders";
-        return this._http.get(URL);
-    };
-    OrderService.prototype.orderedDrugs = function (order_id, option) {
-        if (option === void 0) { option = ""; }
-        var URL = this.root + "/ajax/get/order/ordered drugs/" + order_id + "/" + option;
-        return this._http.get(URL);
-    };
-    OrderService.prototype.orderForStore = function () {
+    OrderService.prototype.getOrders = function () {
         var URL = this.root + "/ajax/get/order/for store";
+        return this._http.get(URL);
+    };
+    OrderService.prototype.orderedDrugs = function (order_id) {
+        var URL = this.root + "/ajax/get/order/ordered drugs/" + order_id;
         return this._http.get(URL);
     };
     OrderService.prototype.issue = function (orders) {
@@ -3602,6 +3415,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatientQueueService", function() { return PatientQueueService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3613,10 +3427,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var PatientQueueService = /** @class */ (function () {
     function PatientQueueService(_http) {
         this._http = _http;
-        this.root = "http://clinic";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PatientQueueService.prototype.queue = function (patient_id) {
         var URL = this.root + "/ajax/post/queue/add/" + patient_id;
@@ -3689,6 +3504,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PatientService", function() { return PatientService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3700,10 +3516,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var PatientService = /** @class */ (function () {
     function PatientService(_http) {
         this._http = _http;
-        this.root = "http://clinic";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PatientService.prototype.create = function (patient) {
         var URL = this.root + "/ajax/post/patient/new";
@@ -3754,6 +3571,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PharmacyQueueService", function() { return PharmacyQueueService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3765,10 +3583,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var PharmacyQueueService = /** @class */ (function () {
     function PharmacyQueueService(_http) {
         this._http = _http;
-        this.root = "http://clinic";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PharmacyQueueService.prototype.queue_list = function (limit) {
         if (limit === void 0) { limit = -1; }
@@ -3812,6 +3631,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PharmacyService", function() { return PharmacyService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3823,33 +3643,34 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var PharmacyService = /** @class */ (function () {
     function PharmacyService(_http) {
         this._http = _http;
-        this.$root = "http://clinic/";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PharmacyService.prototype.drugAutoComplet = function (key) {
-        var URL = this.$root + "ajax/get/pharmacy/drug/search/auto/" + key;
+        var URL = this.root + "/ajax/get/pharmacy/drug/search/auto/" + key;
         return this._http.get(URL);
     };
     PharmacyService.prototype.prescribe = function (hisstroy_id, prescriptions) {
-        var URL = this.$root + "ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
+        var URL = this.root + "/ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
         return this._http.post(URL, { prescriptions: prescriptions });
     };
     PharmacyService.prototype.getFrequencies = function () {
-        var URL = this.$root + "ajax/get/pharmacy/drug/frequencies";
+        var URL = this.root + "/ajax/get/pharmacy/drug/frequencies";
         return this._http.get(URL);
     };
     PharmacyService.prototype.getRoots = function () {
-        var URL = this.$root + "ajax/get/pharmacy/drug/roots";
+        var URL = this.root + "/ajax/get/pharmacy/drug/roots";
         return this._http.get(URL);
     };
     PharmacyService.prototype.getRequests = function (queue_id) {
-        var URL = this.$root + "ajax/get/pharmacy/prescription/requests/" + queue_id;
+        var URL = this.root + "/ajax/get/pharmacy/prescription/requests/" + queue_id;
         return this._http.get(URL);
     };
     PharmacyService.prototype.deliver = function (prescriptions) {
-        var URL = this.$root + "ajax/update/pharmacy/deliver";
+        var URL = this.root + "/ajax/update/pharmacy/deliver";
         return this._http.put(URL, { prescriptions: prescriptions });
     };
     PharmacyService = __decorate([
@@ -3877,6 +3698,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RoleService", function() { return RoleService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3888,10 +3710,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var RoleService = /** @class */ (function () {
     function RoleService(http) {
         this.http = http;
-        this.root = 'http://clinic';
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     RoleService.prototype.getRoles = function () {
         var $url = this.root + "/ajax/get/roles except admin";
@@ -3922,6 +3745,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return UserService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _model_RootURL__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/RootURL */ "./src/app/model/RootURL.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3933,10 +3757,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
-        this.root = "http://clinic";
+        this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     UserService.prototype.postCreateUser = function (data) {
         var $url = this.root + "/ajax/post/create user";
@@ -3979,6 +3804,12 @@ var UserService = /** @class */ (function () {
     UserService.prototype.roomNumber = function (number) {
         var $url = this.root + "/ajax/update/room number/" + number;
         return this.http.put($url, {});
+    };
+    UserService.prototype.uploadPic = function (img) {
+        var $url = this.root + "/ajax/file/upload/profile pic";
+        var fd = new FormData();
+        fd.append('image', img, img.name);
+        return this.http.post($url, fd);
     };
     UserService.prototype.logout = function () {
         var $url = this.root + "/ajax/post/logout";
@@ -4237,7 +4068,7 @@ var SidenavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"container\">\n  <div class=\"row\">\n    <div class=\"col s12 m6 l6 offset-m3 offset-l3\">\n        <mat-card class=\"form-container\" >\n          <app-upload></app-upload>\n        </mat-card>\n    </div>\n  </div>\n</section>"
+module.exports = "<section class=\"container\">\n  <div class=\"row\">\n    <div class=\"col s12 m6 l6 offset-m3 offset-l3\">\n        <mat-card class=\"form-container\" >\n          <div class=\"progress\" [class.hide]=\"!loading\" >\n            <div class=\"indeterminate\"></div>\n          </div>\n          <app-upload (status)=\"onUpload()\"></app-upload>\n        </mat-card>\n    </div>\n  </div>\n</section>"
 
 /***/ }),
 
@@ -4275,8 +4106,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var RouteComponent = /** @class */ (function () {
     function RouteComponent() {
+        this.loading = false;
     }
     RouteComponent.prototype.ngOnInit = function () {
+    };
+    RouteComponent.prototype.onUpload = function (observ) {
+        this.loading = ('waiting' == observ);
     };
     RouteComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -4300,7 +4135,7 @@ var RouteComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <div id=\"profile\">\n    <img [src]=\"pic\"/>\n  </div>\n  <button mat-flat-button color=\"primary\">Upload profile picture</button>\n</section>"
+module.exports = "<section>\n  <div id=\"profile\">\n    <img [src]=\"pic\"/>\n  </div>\n  <input type=\"file\" hidden #image (change)=\"selected($event)\">\n  <button mat-flat-button (click)=\"image.click()\" color=\"primary\">Upload profile picture</button>\n</section>"
 
 /***/ }),
 
@@ -4341,7 +4176,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var UploadComponent = /** @class */ (function () {
     function UploadComponent(_user) {
         this._user = _user;
-        this.pic = "http://clinic/storage/avatar.jpg";
+        this.pic = "/storage/avatar.jpg";
+        this.status = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     UploadComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -4349,6 +4185,19 @@ var UploadComponent = /** @class */ (function () {
             _this.pic = result.profile_pic;
         });
     };
+    UploadComponent.prototype.selected = function (img) {
+        var _this = this;
+        var obs = this._user.uploadPic(img.target.files[0]);
+        this.status.emit('waiting');
+        obs.subscribe(function (user) {
+            _this.pic = user.profile_pic;
+            _this.status.emit(true);
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], UploadComponent.prototype, "status", void 0);
     UploadComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-upload',

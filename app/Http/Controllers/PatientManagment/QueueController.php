@@ -180,7 +180,7 @@ class QueueController extends Controller
         $queues = Patient_queue::where('physician_id', $auth->id)
             ->where('status', '>', 0)
             ->where('isClosed', 0)
-            ->orderBy('updated_at')->get(); 
+            ->orderBy('created_at')->get(); 
 
         foreach($queues as $queue){
             $queue->physician = $queue->physician()->first(); 
@@ -191,15 +191,18 @@ class QueueController extends Controller
         return $queues;
     }
     
+    public function labSeen(\App\Patient_queue $queue){
+        return json_encode($queue->update(['status'=> 5])); 
+    }
     public function isEmpty(){
         return json_encode((Patient_queue::where('status', 0)->get()->count() > 0)? false: true); 
     }
 
     public function call(\App\Patient_queue $queue){
-        return ($queue->update(["call", 1]))?'true': 'false'; 
+        return ($queue->update("call", 1))?'true': 'false'; 
     }
    public function total(){
-       return Patient_queue::where('status', 0)->get()->count(); 
+       return Patient_queue::where(['status', 0])->get()->count(); 
    }
 
    public function totalServed(){
