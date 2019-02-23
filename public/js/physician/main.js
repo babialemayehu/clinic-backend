@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"head-color {{data.color}}\" ></div>\n<div class=\"container\" style=\"width: 400px; padding: 0px 10% 0px 10%;\"> \n  <h5 style=\"margin-top: 0px\">{{data.title}}</h5> \n  <p [innerHTML]=\"data.message\"></p>\n  \n  <strong>\n    <button (click)=\"confirm()\" mat-button class=\"right white black-text \">OK</button>\n    <button *ngIf=\"data.dialog == 'confirm'\" (click)=\"close()\" mat-button class=\"right white black-text \">CANCLE</button>\n  </strong>\n\n</div> "
+module.exports = "<div class=\"head-color {{data.color}}\" ></div>\n<div class=\"container\" style=\"width: 400px; padding: 0px 10% 0px 10%;\"> \n  <h5 style=\"margin-top: 0px\">{{data.title}}</h5> \n  <p [innerHTML]=\"data.message\"></p>\n  <mat-checkbox (change)=\"data.onCheck($event)\" [checked]=\"data.checkboxStatus\">{{data.checkbox}}</mat-checkbox><br>\n  <strong>\n    <button (click)=\"confirm()\" mat-button class=\"right white black-text \">OK</button>\n    <button *ngIf=\"data.dialog == 'confirm'\" (click)=\"close()\" mat-button class=\"right white black-text \">CANCLE</button>\n  </strong>\n\n</div> "
 
 /***/ }),
 
@@ -225,50 +225,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _alert_alert_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./alert/alert.component */ "./src/app/alert/alert.component.ts");
 /* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _users_users_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./users/users.component */ "./src/app/users/users.component.ts");
-/* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./service/user.service */ "./src/app/service/user.service.ts");
-/* harmony import */ var _user_table_user_table_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./user-table/user-table.component */ "./src/app/user-table/user-table.component.ts");
-/* harmony import */ var _context_context_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./context/context.component */ "./src/app/context/context.component.ts");
-/* harmony import */ var _lib_context_menu_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../lib/context-menu.module */ "./src/lib/context-menu.module.ts");
-/* harmony import */ var _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./context-menu/context-menu.component */ "./src/app/context-menu/context-menu.component.ts");
-/* harmony import */ var _user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/user-profile/user-profile.component.ts");
-/* harmony import */ var _user_profile_modal_user_profile_modal_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./user-profile-modal/user-profile-modal.component */ "./src/app/user-profile-modal/user-profile-modal.component.ts");
-/* harmony import */ var _user_profile_route_user_profile_route_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./user-profile-route/user-profile-route.component */ "./src/app/user-profile-route/user-profile-route.component.ts");
-/* harmony import */ var _settings_settings_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./settings/settings.component */ "./src/app/settings/settings.component.ts");
-/* harmony import */ var _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./change-password/change-password.component */ "./src/app/change-password/change-password.component.ts");
-/* harmony import */ var _change_password_route_change_password_route_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./change-password-route/change-password-route.component */ "./src/app/change-password-route/change-password-route.component.ts");
-/* harmony import */ var _patient_search_patient_search_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./patient-search/patient-search.component */ "./src/app/patient-search/patient-search.component.ts");
-/* harmony import */ var _patinet_view_patinet_view_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./patinet-view/patinet-view.component */ "./src/app/patinet-view/patinet-view.component.ts");
-/* harmony import */ var _recent_visits_recent_visits_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./recent-visits/recent-visits.component */ "./src/app/recent-visits/recent-visits.component.ts");
-/* harmony import */ var _card_title_card_title_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./card-title/card-title.component */ "./src/app/card-title/card-title.component.ts");
-/* harmony import */ var _queue_min_queue_min_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./queue-min/queue-min.component */ "./src/app/queue-min/queue-min.component.ts");
-/* harmony import */ var _queue_queue_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./queue/queue.component */ "./src/app/queue/queue.component.ts");
-/* harmony import */ var _visits_visits_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./visits/visits.component */ "./src/app/visits/visits.component.ts");
-/* harmony import */ var _setup_dialog_setup_dialog_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./setup-dialog/setup-dialog.component */ "./src/app/setup-dialog/setup-dialog.component.ts");
-/* harmony import */ var _upload_profile_pic_upload_upload_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./upload_profile_pic/upload/upload.component */ "./src/app/upload_profile_pic/upload/upload.component.ts");
-/* harmony import */ var _upload_profile_pic_route_route_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./upload_profile_pic/route/route.component */ "./src/app/upload_profile_pic/route/route.component.ts");
-/* harmony import */ var _room_number_room_number_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./room-number/room-number.component */ "./src/app/room-number/room-number.component.ts");
-/* harmony import */ var _history_form_history_form_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./history-form/history-form.component */ "./src/app/history-form/history-form.component.ts");
-/* harmony import */ var _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./laboratory/laboratory.component */ "./src/app/laboratory/laboratory.component.ts");
-/* harmony import */ var _pharmacy_pharmacy_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./pharmacy/pharmacy.component */ "./src/app/pharmacy/pharmacy.component.ts");
-/* harmony import */ var _lab_responce_lab_responce_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./lab-responce/lab-responce.component */ "./src/app/lab-responce/lab-responce.component.ts");
-/* harmony import */ var _left_side_left_side_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./left-side/left-side.component */ "./src/app/left-side/left-side.component.ts");
-/* harmony import */ var _saved_states_saved_states_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./saved-states/saved-states.component */ "./src/app/saved-states/saved-states.component.ts");
-/* harmony import */ var _diagnosis_diagnosis_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./diagnosis/diagnosis.component */ "./src/app/diagnosis/diagnosis.component.ts");
-/* harmony import */ var _view_hisstory_view_hisstory_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./view-hisstory/view-hisstory.component */ "./src/app/view-hisstory/view-hisstory.component.ts");
-/* harmony import */ var _lab_result_lab_result_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./lab-result/lab-result.component */ "./src/app/lab-result/lab-result.component.ts");
-/* harmony import */ var _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./prescription/prescription.component */ "./src/app/prescription/prescription.component.ts");
-/* harmony import */ var _start_start_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./start/start.component */ "./src/app/start/start.component.ts");
-/* harmony import */ var _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./hisstory/laboratory-request/laboratory-request.component */ "./src/app/hisstory/laboratory-request/laboratory-request.component.ts");
-/* harmony import */ var _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./hisstory/prescription/prescription.component */ "./src/app/hisstory/prescription/prescription.component.ts");
-/* harmony import */ var _prescription_table_prescription_table_component__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./prescription-table/prescription-table.component */ "./src/app/prescription-table/prescription-table.component.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _users_users_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./users/users.component */ "./src/app/users/users.component.ts");
+/* harmony import */ var _service_user_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./service/user.service */ "./src/app/service/user.service.ts");
+/* harmony import */ var _user_table_user_table_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./user-table/user-table.component */ "./src/app/user-table/user-table.component.ts");
+/* harmony import */ var _context_context_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./context/context.component */ "./src/app/context/context.component.ts");
+/* harmony import */ var _lib_context_menu_module__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../lib/context-menu.module */ "./src/lib/context-menu.module.ts");
+/* harmony import */ var _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./context-menu/context-menu.component */ "./src/app/context-menu/context-menu.component.ts");
+/* harmony import */ var _user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/user-profile/user-profile.component.ts");
+/* harmony import */ var _user_profile_modal_user_profile_modal_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./user-profile-modal/user-profile-modal.component */ "./src/app/user-profile-modal/user-profile-modal.component.ts");
+/* harmony import */ var _user_profile_route_user_profile_route_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./user-profile-route/user-profile-route.component */ "./src/app/user-profile-route/user-profile-route.component.ts");
+/* harmony import */ var _settings_settings_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./settings/settings.component */ "./src/app/settings/settings.component.ts");
+/* harmony import */ var _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./change-password/change-password.component */ "./src/app/change-password/change-password.component.ts");
+/* harmony import */ var _change_password_route_change_password_route_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./change-password-route/change-password-route.component */ "./src/app/change-password-route/change-password-route.component.ts");
+/* harmony import */ var _patient_search_patient_search_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./patient-search/patient-search.component */ "./src/app/patient-search/patient-search.component.ts");
+/* harmony import */ var _patinet_view_patinet_view_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./patinet-view/patinet-view.component */ "./src/app/patinet-view/patinet-view.component.ts");
+/* harmony import */ var _recent_visits_recent_visits_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./recent-visits/recent-visits.component */ "./src/app/recent-visits/recent-visits.component.ts");
+/* harmony import */ var _card_title_card_title_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./card-title/card-title.component */ "./src/app/card-title/card-title.component.ts");
+/* harmony import */ var _queue_min_queue_min_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./queue-min/queue-min.component */ "./src/app/queue-min/queue-min.component.ts");
+/* harmony import */ var _queue_queue_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./queue/queue.component */ "./src/app/queue/queue.component.ts");
+/* harmony import */ var _visits_visits_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./visits/visits.component */ "./src/app/visits/visits.component.ts");
+/* harmony import */ var _setup_dialog_setup_dialog_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./setup-dialog/setup-dialog.component */ "./src/app/setup-dialog/setup-dialog.component.ts");
+/* harmony import */ var _upload_profile_pic_upload_upload_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./upload_profile_pic/upload/upload.component */ "./src/app/upload_profile_pic/upload/upload.component.ts");
+/* harmony import */ var _upload_profile_pic_route_route_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./upload_profile_pic/route/route.component */ "./src/app/upload_profile_pic/route/route.component.ts");
+/* harmony import */ var _room_number_room_number_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./room-number/room-number.component */ "./src/app/room-number/room-number.component.ts");
+/* harmony import */ var _history_form_history_form_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./history-form/history-form.component */ "./src/app/history-form/history-form.component.ts");
+/* harmony import */ var _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./laboratory/laboratory.component */ "./src/app/laboratory/laboratory.component.ts");
+/* harmony import */ var _pharmacy_pharmacy_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./pharmacy/pharmacy.component */ "./src/app/pharmacy/pharmacy.component.ts");
+/* harmony import */ var _lab_responce_lab_responce_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./lab-responce/lab-responce.component */ "./src/app/lab-responce/lab-responce.component.ts");
+/* harmony import */ var _left_side_left_side_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./left-side/left-side.component */ "./src/app/left-side/left-side.component.ts");
+/* harmony import */ var _saved_states_saved_states_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./saved-states/saved-states.component */ "./src/app/saved-states/saved-states.component.ts");
+/* harmony import */ var _diagnosis_diagnosis_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./diagnosis/diagnosis.component */ "./src/app/diagnosis/diagnosis.component.ts");
+/* harmony import */ var _view_hisstory_view_hisstory_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./view-hisstory/view-hisstory.component */ "./src/app/view-hisstory/view-hisstory.component.ts");
+/* harmony import */ var _lab_result_lab_result_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./lab-result/lab-result.component */ "./src/app/lab-result/lab-result.component.ts");
+/* harmony import */ var _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./prescription/prescription.component */ "./src/app/prescription/prescription.component.ts");
+/* harmony import */ var _start_start_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./start/start.component */ "./src/app/start/start.component.ts");
+/* harmony import */ var _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./hisstory/laboratory-request/laboratory-request.component */ "./src/app/hisstory/laboratory-request/laboratory-request.component.ts");
+/* harmony import */ var _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./hisstory/prescription/prescription.component */ "./src/app/hisstory/prescription/prescription.component.ts");
+/* harmony import */ var _prescription_table_prescription_table_component__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./prescription-table/prescription-table.component */ "./src/app/prescription-table/prescription-table.component.ts");
+/* harmony import */ var _patient_side_view_side_view_component__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./patient/side-view/side-view.component */ "./src/app/patient/side-view/side-view.component.ts");
+/* harmony import */ var _patient_taskbar_view_taskbar_view_component__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./patient/taskbar-view/taskbar-view.component */ "./src/app/patient/taskbar-view/taskbar-view.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -328,6 +332,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -341,41 +347,43 @@ var AppModule = /** @class */ (function () {
                 _registeration_form_registeration_form_component__WEBPACK_IMPORTED_MODULE_14__["RegisterationFormComponent"],
                 _alert_alert_component__WEBPACK_IMPORTED_MODULE_16__["AlertComponent"],
                 _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_17__["DashboardComponent"],
-                _users_users_component__WEBPACK_IMPORTED_MODULE_19__["UsersComponent"],
-                _user_table_user_table_component__WEBPACK_IMPORTED_MODULE_21__["UserTableComponent"],
-                _context_context_component__WEBPACK_IMPORTED_MODULE_22__["ContextComponent"],
-                _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_24__["ContextMenuComponent"],
-                _user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_25__["UserProfileComponent"],
-                _user_profile_modal_user_profile_modal_component__WEBPACK_IMPORTED_MODULE_26__["UserProfileModalComponent"],
-                _user_profile_route_user_profile_route_component__WEBPACK_IMPORTED_MODULE_27__["UserProfileRouteComponent"],
-                _settings_settings_component__WEBPACK_IMPORTED_MODULE_28__["SettingsComponent"],
-                _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_29__["ChangePasswordComponent"],
-                _change_password_route_change_password_route_component__WEBPACK_IMPORTED_MODULE_30__["ChangePasswordRouteComponent"],
-                _patient_search_patient_search_component__WEBPACK_IMPORTED_MODULE_31__["PatientSearchComponent"],
-                _patinet_view_patinet_view_component__WEBPACK_IMPORTED_MODULE_32__["PatinetViewComponent"],
-                _recent_visits_recent_visits_component__WEBPACK_IMPORTED_MODULE_33__["RecentVisitsComponent"],
-                _card_title_card_title_component__WEBPACK_IMPORTED_MODULE_34__["CardTitleComponent"],
-                _queue_min_queue_min_component__WEBPACK_IMPORTED_MODULE_35__["QueueMinComponent"],
-                _queue_queue_component__WEBPACK_IMPORTED_MODULE_36__["QueueComponent"],
-                _visits_visits_component__WEBPACK_IMPORTED_MODULE_37__["VisitsComponent"],
-                _setup_dialog_setup_dialog_component__WEBPACK_IMPORTED_MODULE_38__["SetupDialogComponent"],
-                _upload_profile_pic_upload_upload_component__WEBPACK_IMPORTED_MODULE_39__["UploadComponent"],
-                _upload_profile_pic_route_route_component__WEBPACK_IMPORTED_MODULE_40__["RouteComponent"],
-                _room_number_room_number_component__WEBPACK_IMPORTED_MODULE_41__["RoomNumberComponent"],
-                _history_form_history_form_component__WEBPACK_IMPORTED_MODULE_42__["HistoryFormComponent"],
-                _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_43__["LaboratoryComponent"],
-                _pharmacy_pharmacy_component__WEBPACK_IMPORTED_MODULE_44__["PharmacyComponent"],
-                _lab_responce_lab_responce_component__WEBPACK_IMPORTED_MODULE_45__["LabResponceComponent"],
-                _left_side_left_side_component__WEBPACK_IMPORTED_MODULE_46__["LeftSideComponent"],
-                _saved_states_saved_states_component__WEBPACK_IMPORTED_MODULE_47__["SavedStatesComponent"],
-                _diagnosis_diagnosis_component__WEBPACK_IMPORTED_MODULE_48__["DiagnosisComponent"],
-                _view_hisstory_view_hisstory_component__WEBPACK_IMPORTED_MODULE_49__["ViewHisstoryComponent"],
-                _lab_result_lab_result_component__WEBPACK_IMPORTED_MODULE_50__["LabResultComponent"],
-                _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_51__["PrescriptionComponent"],
-                _start_start_component__WEBPACK_IMPORTED_MODULE_52__["StartComponent"],
-                _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_53__["LaboratoryRequestComponent"],
-                _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_54__["PrescriptionComponent"],
-                _prescription_table_prescription_table_component__WEBPACK_IMPORTED_MODULE_55__["PrescriptionTableComponent"]
+                _users_users_component__WEBPACK_IMPORTED_MODULE_20__["UsersComponent"],
+                _user_table_user_table_component__WEBPACK_IMPORTED_MODULE_22__["UserTableComponent"],
+                _context_context_component__WEBPACK_IMPORTED_MODULE_23__["ContextComponent"],
+                _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_25__["ContextMenuComponent"],
+                _user_profile_user_profile_component__WEBPACK_IMPORTED_MODULE_26__["UserProfileComponent"],
+                _user_profile_modal_user_profile_modal_component__WEBPACK_IMPORTED_MODULE_27__["UserProfileModalComponent"],
+                _user_profile_route_user_profile_route_component__WEBPACK_IMPORTED_MODULE_28__["UserProfileRouteComponent"],
+                _settings_settings_component__WEBPACK_IMPORTED_MODULE_29__["SettingsComponent"],
+                _change_password_change_password_component__WEBPACK_IMPORTED_MODULE_30__["ChangePasswordComponent"],
+                _change_password_route_change_password_route_component__WEBPACK_IMPORTED_MODULE_31__["ChangePasswordRouteComponent"],
+                _patient_search_patient_search_component__WEBPACK_IMPORTED_MODULE_32__["PatientSearchComponent"],
+                _patinet_view_patinet_view_component__WEBPACK_IMPORTED_MODULE_33__["PatinetViewComponent"],
+                _recent_visits_recent_visits_component__WEBPACK_IMPORTED_MODULE_34__["RecentVisitsComponent"],
+                _card_title_card_title_component__WEBPACK_IMPORTED_MODULE_35__["CardTitleComponent"],
+                _queue_min_queue_min_component__WEBPACK_IMPORTED_MODULE_36__["QueueMinComponent"],
+                _queue_queue_component__WEBPACK_IMPORTED_MODULE_37__["QueueComponent"],
+                _visits_visits_component__WEBPACK_IMPORTED_MODULE_38__["VisitsComponent"],
+                _setup_dialog_setup_dialog_component__WEBPACK_IMPORTED_MODULE_39__["SetupDialogComponent"],
+                _upload_profile_pic_upload_upload_component__WEBPACK_IMPORTED_MODULE_40__["UploadComponent"],
+                _upload_profile_pic_route_route_component__WEBPACK_IMPORTED_MODULE_41__["RouteComponent"],
+                _room_number_room_number_component__WEBPACK_IMPORTED_MODULE_42__["RoomNumberComponent"],
+                _history_form_history_form_component__WEBPACK_IMPORTED_MODULE_43__["HistoryFormComponent"],
+                _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_44__["LaboratoryComponent"],
+                _pharmacy_pharmacy_component__WEBPACK_IMPORTED_MODULE_45__["PharmacyComponent"],
+                _lab_responce_lab_responce_component__WEBPACK_IMPORTED_MODULE_46__["LabResponceComponent"],
+                _left_side_left_side_component__WEBPACK_IMPORTED_MODULE_47__["LeftSideComponent"],
+                _saved_states_saved_states_component__WEBPACK_IMPORTED_MODULE_48__["SavedStatesComponent"],
+                _diagnosis_diagnosis_component__WEBPACK_IMPORTED_MODULE_49__["DiagnosisComponent"],
+                _view_hisstory_view_hisstory_component__WEBPACK_IMPORTED_MODULE_50__["ViewHisstoryComponent"],
+                _lab_result_lab_result_component__WEBPACK_IMPORTED_MODULE_51__["LabResultComponent"],
+                _prescription_prescription_component__WEBPACK_IMPORTED_MODULE_52__["PrescriptionComponent"],
+                _start_start_component__WEBPACK_IMPORTED_MODULE_53__["StartComponent"],
+                _hisstory_laboratory_request_laboratory_request_component__WEBPACK_IMPORTED_MODULE_54__["LaboratoryRequestComponent"],
+                _hisstory_prescription_prescription_component__WEBPACK_IMPORTED_MODULE_55__["PrescriptionComponent"],
+                _prescription_table_prescription_table_component__WEBPACK_IMPORTED_MODULE_56__["PrescriptionTableComponent"],
+                _patient_side_view_side_view_component__WEBPACK_IMPORTED_MODULE_57__["SideViewComponent"],
+                _patient_taskbar_view_taskbar_view_component__WEBPACK_IMPORTED_MODULE_58__["TaskbarViewComponent"]
                 // ContextMenu,
             ],
             imports: [
@@ -384,39 +392,41 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_15__["HttpClientModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"].forRoot(_routes__WEBPACK_IMPORTED_MODULE_2__["appRoutes"]),
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__["BrowserAnimationsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatButtonModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatCheckboxModule"],
                 _angular_material_input__WEBPACK_IMPORTED_MODULE_9__["MatInputModule"],
                 _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_10__["LayoutModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatToolbarModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatSidenavModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatGridListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatCardModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatMenuModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatTableModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatPaginatorModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatSortModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatDialogModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatSelectModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatAutocompleteModule"],
-                _lib_context_menu_module__WEBPACK_IMPORTED_MODULE_23__["ContextMenuModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatDatepickerModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatNativeDateModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatChipsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatToolbarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatSidenavModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatGridListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatCardModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatTableModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatPaginatorModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatSortModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatDialogModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatSelectModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatAutocompleteModule"],
+                _lib_context_menu_module__WEBPACK_IMPORTED_MODULE_24__["ContextMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatDatepickerModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatNativeDateModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatChipsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_19__["MatTooltipModule"]
             ],
             entryComponents: [
                 _registeration_form_registeration_form_component__WEBPACK_IMPORTED_MODULE_14__["RegisterationFormComponent"],
                 _alert_alert_component__WEBPACK_IMPORTED_MODULE_16__["AlertComponent"],
                 // ContextMenu, 
-                _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_24__["ContextMenuComponent"],
-                _user_profile_modal_user_profile_modal_component__WEBPACK_IMPORTED_MODULE_26__["UserProfileModalComponent"],
-                _setup_dialog_setup_dialog_component__WEBPACK_IMPORTED_MODULE_38__["SetupDialogComponent"],
-                _diagnosis_diagnosis_component__WEBPACK_IMPORTED_MODULE_48__["DiagnosisComponent"]
+                _context_menu_context_menu_component__WEBPACK_IMPORTED_MODULE_25__["ContextMenuComponent"],
+                _user_profile_modal_user_profile_modal_component__WEBPACK_IMPORTED_MODULE_27__["UserProfileModalComponent"],
+                _setup_dialog_setup_dialog_component__WEBPACK_IMPORTED_MODULE_39__["SetupDialogComponent"],
+                _diagnosis_diagnosis_component__WEBPACK_IMPORTED_MODULE_49__["DiagnosisComponent"]
             ],
             providers: [
-                _service_user_service__WEBPACK_IMPORTED_MODULE_20__["UserService"],
+                _service_user_service__WEBPACK_IMPORTED_MODULE_21__["UserService"],
+                ngx_cookie_service__WEBPACK_IMPORTED_MODULE_18__["CookieService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
@@ -967,7 +977,7 @@ var ContextComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m4 l3 s12\">\n      <mat-card id=\"queue\">\n        <app-queue-min [loadTriggr]=\"update.queue\"></app-queue-min>\n      </mat-card>\n   </div>\n   <div class=\"col m8 l9 s12\">  \n     <div id=\"show-area\">\n<!-- STATE 0 -->\n       <section *ngIf=\"state == 0\">\n        <mat-card style=\"margin: 10%\">\n          <div class=\"progress\" [class.hide]=\"!loading\" >\n            <div class=\"indeterminate\"></div>\n          </div>\n          <div [class.form-loading]=\"loading\">\n            <h3 class=\"center\">Wellcome</h3>\n            <h6 class=\"center\">Do you want to start treatement?</h6>\n            <br>\n            <div style=\"width: 80%; margin:auto\">\n              <app-room-number \n              (status)=\"onStatus($event)\" \n              [roomNumber]=\"($auth)?.room_number\"\n              ></app-room-number>           \n            </div>\n            \n            <div style=\"width: 100%; text-align: center;\">\n              <button mat-flat-button color=\"primary\" (click)=\"next()\">Start</button>\n            </div>\n          </div> \n        </mat-card>\n       </section>\n<!-- STATE 1 -->\n       <section *ngIf=\"state == 1\">\n         <div class=\"row\">\n           <div class=\"col m7 s12\">\n            <mat-card>\n              <app-patinet-view [patient]=\"patient\"></app-patinet-view>\n            </mat-card>\n          </div>\n          <div class=\"col m5 s12\">\n            <mat-card>\n              <app-recent-visits [patient]=\"patient\" icon=\"launch\"></app-recent-visits>\n            </mat-card>\n          </div>\n         </div>    \n          <mat-card class=\"row\">\n            <app-history-form [hisstory]=\"hisstory\" ></app-history-form>\n            <div class=\"row\" id=\"buttons\">    \n              <!-- <button mat-stroked-button (click)=\"next()\" color=\"priamry\" class=\"right\"><span>Next </span> <mat-icon>navigate_next</mat-icon></button> -->\n              <button mat-flat-button (click)=\"finish()\" color=\"primary\" class=\"right\">Finish</button>  \n            </div>\n          </mat-card> \n       </section>\n<!-- STATE 2    --> \n       <section *ngIf=\"state == 2\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-laboratory [queue]=\"$queue\" ></app-laboratory> \n       </section>\n<!-- STATE 3 -->\n       <section *ngIf=\"state == 3\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-pharmacy [queue]=\"$queue\" (status)=\"$state($event) \"></app-pharmacy>\n       </section>\n<!-- STATE 5  -->\n       <section *ngIf=\"state == 5\">\n          <mat-card style=\"margin: 10%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                  <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                    <div class=\"img\" style=\"border-radius: 50%; background: #fbfbfb; padding: 24px;margin:auto; width: 170px; height: 170px; border-radius: 50%\">\n                      <img src=\"/img/bench.svg\" style=\"width: 100px; height: 100px;margin-top: 13px\">\n                    </div>\n                    <br>\n                    <h6><strong class=\"secondery center\">\n                      <B>There is no patient in the queue. <br>You will be notified when new patient arrived</B>\n                    </strong></h6>\n                    \n                  </div>\n              </div>\n            </div>\n          </mat-card>\n       </section>\n<!-- STATE 6  -->\n      <section *ngIf=\"state == 6\">\n          <mat-card style=\"margin: 15%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                  <h6><strong class=\"secondery center\">\n                    <B>New patient arrived</B>\n                  </strong></h6>\n                </div>\n              </div>\n              <div class=\" center\">\n                <button mat-flat-button (click)=\"next()\">Accept</button> \n              </div>\n            </div>\n          </mat-card>\n      </section>\n<!-- STATE 7  -->\n    <section *ngIf=\"state == 7\">\n      <mat-card style=\"margin: 15%;\">\n        <div class=\"container\">\n          <div class=\"row\">\n              <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                <h6><strong class=\"secondery center\">\n                  <B>You have finished all of your cases <br><span class=\"small\">Plase click next if you want to accept another patient</span></B>\n                </strong></h6>\n                \n              </div>\n          </div>\n          <div class=\" center\">\n            <button mat-flat-button color=\"primary\" (click)=\"next()\">next <mat-icon>navigate_next</mat-icon></button> \n          </div>\n        </div>\n      </mat-card>\n    </section>\n     </div> \n   </div>\n </div>\n</section>\n<div [hidden]=\"state == 0 || state == 5\">\n  <app-floating-action-btn (action)=\"$state($event)\" ></app-floating-action-btn>\n</div>\n<app-saved-states \n[activeQueueId]=\"($queue)?.id\"\n[update] = 'update.states'\n[next] = 'update.stateNext'\n(open) = \"open($event)\"\n></app-saved-states>"
+module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m4 l3 s12\">\n     <mat-card *ngIf=\"patient\">\n        <app-patient-side-view [patient]=\"patient\"></app-patient-side-view>\n     </mat-card>\n     \n      <mat-card id=\"queue\">\n        <app-queue-min [loadTriggr]=\"update.queue\"></app-queue-min>\n      </mat-card>\n   </div>\n   <div class=\"col m8 l9 s12\">  \n     <div id=\"show-area\">\n<!-- STATE 0 -->\n       <section *ngIf=\"state == 0\">\n        <mat-card style=\"margin: 10%\">\n          <div class=\"progress\" [class.hide]=\"!loading\" >\n            <div class=\"indeterminate\"></div>\n          </div>\n          <div [class.form-loading]=\"loading\">\n            <h3 class=\"center\">Wellcome</h3>\n            <h6 class=\"center\">Do you want to start treatement?</h6>\n            <br>\n            <div style=\"width: 80%; margin:auto\">\n              <app-room-number \n              (status)=\"onStatus($event)\" \n              [roomNumber]=\"($auth)?.room_number\"\n              ></app-room-number>           \n            </div>\n            \n            <div style=\"width: 100%; text-align: center;\">\n              <button mat-flat-button color=\"primary\" (click)=\"next()\">Start</button>\n            </div>\n          </div> \n        </mat-card>\n       </section>\n<!-- STATE 1 -->\n       <section *ngIf=\"state == 1\">\n         <div class=\"row\">\n           <div class=\"col m7 s12\">\n            <mat-card>\n              <app-patinet-view [patient]=\"patient\"></app-patinet-view>\n            </mat-card>\n          </div>\n          <div class=\"col m5 s12\">\n            <mat-card>\n              <app-recent-visits [patient]=\"patient\" icon=\"launch\"></app-recent-visits>\n            </mat-card>\n          </div>\n         </div>    \n          <mat-card class=\"row\">\n            <app-history-form [hisstory]=\"hisstory\" ></app-history-form>\n            <div class=\"row\" id=\"buttons\">    \n              <!-- <button mat-stroked-button (click)=\"next()\" color=\"priamry\" class=\"right\"><span>Next </span> <mat-icon>navigate_next</mat-icon></button> -->\n              <button mat-flat-button (click)=\"finish()\" color=\"primary\" class=\"right\">Finish</button>  \n            </div>\n          </mat-card> \n       </section>\n<!-- STATE 2    --> \n       <section *ngIf=\"state == 2\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-laboratory [queue]=\"$queue\" ></app-laboratory> \n       </section>\n<!-- STATE 3 -->\n       <section *ngIf=\"state == 3\">\n          <button mat-icon-button>\n            <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n          </button>\n          <app-pharmacy [queue]=\"$queue\" (status)=\"$state($event) \"></app-pharmacy>\n       </section>\n<!-- STATE 5  -->\n       <section *ngIf=\"state == 5\">\n          <mat-card style=\"margin: 10%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                  <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                    <div class=\"img\" style=\"border-radius: 50%; background: #fbfbfb; padding: 24px;margin:auto; width: 170px; height: 170px; border-radius: 50%\">\n                      <img src=\"/img/bench.svg\" style=\"width: 100px; height: 100px;margin-top: 13px\">\n                    </div>\n                    <br>\n                    <h6><strong class=\"secondery center\">\n                      <B>There is no patient in the queue. <br>You will be notified when new patient arrived</B>\n                    </strong></h6>\n                    \n                  </div>\n              </div>\n            </div>\n          </mat-card>\n       </section>\n<!-- STATE 6  -->\n      <section *ngIf=\"state == 6\">\n          <mat-card style=\"margin: 15%;\">\n            <div class=\"container\">\n              <div class=\"row\">\n                <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                  <h6><strong class=\"secondery center\">\n                    <B>New patient arrived</B>\n                  </strong></h6>\n                </div>\n              </div>\n              <div class=\" center\">\n                <button mat-flat-button (click)=\"next()\">Accept</button> \n              </div>\n            </div>\n          </mat-card>\n      </section>\n<!-- STATE 7  -->\n    <section *ngIf=\"state == 7\">\n      <mat-card style=\"margin: 15%;\">\n        <div class=\"container\">\n          <div class=\"row\">\n              <div class=\"center\" style=\"width: 100%; opacity: 0.8\">\n                <h6><strong class=\"secondery center\">\n                  <B>You have finished all of your cases <br><span class=\"small\">Plase click next if you want to accept another patient</span></B>\n                </strong></h6>\n                \n              </div>\n          </div>\n          <div class=\" center\">\n            <button mat-flat-button color=\"primary\" (click)=\"next()\">next <mat-icon>navigate_next</mat-icon></button> \n          </div>\n        </div>\n      </mat-card>\n    </section>\n     </div> \n   </div>\n </div>\n</section>\n<div [hidden]=\"state == 0 || state == 5\">\n  <app-floating-action-btn (action)=\"$state($event)\" ></app-floating-action-btn>\n</div>\n<app-saved-states \n[activeQueueId]=\"($queue)?.id\"\n[update] = 'update.states'\n[next] = 'update.stateNext'\n(open) = \"open($event)\"\n></app-saved-states>"
 
 /***/ }),
 
@@ -1519,7 +1529,7 @@ var LaboratoryRequestComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n       <mat-card id=\"queue\">\n         <app-queue-min loadTriggr=\"1\"></app-queue-min>\n       </mat-card>\n    </div>\n    <div class=\"col m8 l9 s12\">  \n      <button mat-icon-button>\n        <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n      </button>\n      <app-pharmacy [queue]=\"$queue\" (status)=\"$state($event) \"></app-pharmacy>\n    </div>\n  </div>\n</section>"
+module.exports = "<section>\n  <div class=\"row\">\n    <div class=\"col m4 l3 s12\">\n       <mat-card id=\"queue\">\n         <app-queue-min loadTriggr=\"1\"></app-queue-min>\n       </mat-card>\n    </div>\n    <div class=\"col m8 l9 s12\">  \n      <button mat-icon-button>\n        <mat-icon (click)=\"$back()\">arrow_back</mat-icon>\n      </button>\n      <app-pharmacy [queue]=\"$queue\"></app-pharmacy>\n    </div>\n  </div>\n</section>"
 
 /***/ }),
 
@@ -1905,6 +1915,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _service_laboratory_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../service/laboratory.service */ "./src/app/service/laboratory.service.ts");
 /* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm5/table.es5.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _alert_alert_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../alert/alert.component */ "./src/app/alert/alert.component.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1919,10 +1932,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var LaboratoryComponent = /** @class */ (function () {
-    function LaboratoryComponent(_lab, _route) {
+    function LaboratoryComponent(_lab, _route, _dialog, _cookies) {
         this._lab = _lab;
         this._route = _route;
+        this._dialog = _dialog;
+        this._cookies = _cookies;
         this.testDatasource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"]();
         this.tests = [];
         this.testAuto = [];
@@ -1957,7 +1975,7 @@ var LaboratoryComponent = /** @class */ (function () {
         this.tests.splice(this.tests.indexOf(test), 1);
         this.testDatasource.data = this.tests;
     };
-    LaboratoryComponent.prototype.send = function () {
+    LaboratoryComponent.prototype.send_request = function () {
         var _this = this;
         this.loading = true;
         this._lab.request(this.tests, this.queue.id).subscribe(function (value) {
@@ -1966,6 +1984,34 @@ var LaboratoryComponent = /** @class */ (function () {
             _this.testDatasource.data = _this.tests;
             _this._route.navigate(['/lab/result/' + _this.queue.id]);
         });
+    };
+    LaboratoryComponent.prototype.send = function () {
+        var _this = this;
+        var that = this;
+        if (that._cookies.get('lab confrimation') != 'true') {
+            this._dialog.open(_alert_alert_component__WEBPACK_IMPORTED_MODULE_6__["AlertComponent"], {
+                width: "400px",
+                disableClose: true,
+                data: {
+                    dialog: 'confirm',
+                    color: "yellow",
+                    title: 'Confirm',
+                    message: 'Do you really want to send this Laboratory request for <b>' + this.queue.patient.father_name + " " + this.queue.patient.father_name + ".</b><br>",
+                    checkbox: 'Don\'t show this dialog again',
+                    checkboxStatus: (that._cookies.get('lab confrimation') == 'true'),
+                    onCheck: function (e) {
+                        that._cookies.set('lab confrimation', e.checked);
+                    }
+                }
+            }).afterClosed().subscribe(function (ok) {
+                if (ok.responce == true)
+                    _this.send_request();
+            }, function (no) {
+            });
+        }
+        else {
+            this.send_request();
+        }
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -1977,7 +2023,10 @@ var LaboratoryComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./laboratory.component.html */ "./src/app/laboratory/laboratory.component.html"),
             styles: [__webpack_require__(/*! ./laboratory.component.scss */ "./src/app/laboratory/laboratory.component.scss")]
         }),
-        __metadata("design:paramtypes", [_service_laboratory_service__WEBPACK_IMPORTED_MODULE_2__["LaboratoryService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        __metadata("design:paramtypes", [_service_laboratory_service__WEBPACK_IMPORTED_MODULE_2__["LaboratoryService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"],
+            ngx_cookie_service__WEBPACK_IMPORTED_MODULE_7__["CookieService"]])
     ], LaboratoryComponent);
     return LaboratoryComponent;
 }());
@@ -2059,7 +2108,7 @@ var LeftSideComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RootURL", function() { return RootURL; });
-var RootURL = '';
+var RootURL = 'http://clinic';
 
 
 /***/ }),
@@ -2273,6 +2322,136 @@ var PatientSearchComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/patient/side-view/side-view.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/patient/side-view/side-view.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n    <h6 style=\"margin-left: 24px\"><b>Patient</b></h6>\n</div>\n<h6 style=\"display: inline\">{{(patient)?.first_name}} {{(patient)?.father_name}} {{(patient)?.grand_father_name}}</h6>\n<!-- <strong class=\"right\"><span style=\"margin-right: 24px\">{{(patient)?.reg_id}}</span> \n</strong><br> -->\n<br>\n<strong class=\"secondery\">{{((patient)?.department)?.name}} Department</strong><br>\n<strong class=\"secondery\">Id number {{(patient)?.reg_id}}</strong><br>"
+
+/***/ }),
+
+/***/ "./src/app/patient/side-view/side-view.component.scss":
+/*!************************************************************!*\
+  !*** ./src/app/patient/side-view/side-view.component.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/patient/side-view/side-view.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/patient/side-view/side-view.component.ts ***!
+  \**********************************************************/
+/*! exports provided: SideViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SideViewComponent", function() { return SideViewComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SideViewComponent = /** @class */ (function () {
+    function SideViewComponent() {
+    }
+    SideViewComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], SideViewComponent.prototype, "patient", void 0);
+    SideViewComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-patient-side-view',
+            template: __webpack_require__(/*! ./side-view.component.html */ "./src/app/patient/side-view/side-view.component.html"),
+            styles: [__webpack_require__(/*! ./side-view.component.scss */ "./src/app/patient/side-view/side-view.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], SideViewComponent);
+    return SideViewComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/patient/taskbar-view/taskbar-view.component.html":
+/*!******************************************************************!*\
+  !*** ./src/app/patient/taskbar-view/taskbar-view.component.html ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  taskbar-view works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/patient/taskbar-view/taskbar-view.component.scss":
+/*!******************************************************************!*\
+  !*** ./src/app/patient/taskbar-view/taskbar-view.component.scss ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/patient/taskbar-view/taskbar-view.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/patient/taskbar-view/taskbar-view.component.ts ***!
+  \****************************************************************/
+/*! exports provided: TaskbarViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaskbarViewComponent", function() { return TaskbarViewComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TaskbarViewComponent = /** @class */ (function () {
+    function TaskbarViewComponent() {
+    }
+    TaskbarViewComponent.prototype.ngOnInit = function () {
+    };
+    TaskbarViewComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-taskbar-view',
+            template: __webpack_require__(/*! ./taskbar-view.component.html */ "./src/app/patient/taskbar-view/taskbar-view.component.html"),
+            styles: [__webpack_require__(/*! ./taskbar-view.component.scss */ "./src/app/patient/taskbar-view/taskbar-view.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], TaskbarViewComponent);
+    return TaskbarViewComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/patinet-view/patinet-view.component.html":
 /*!**********************************************************!*\
   !*** ./src/app/patinet-view/patinet-view.component.html ***!
@@ -2280,7 +2459,7 @@ var PatientSearchComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\" style=\"width: 100%\">\n  <div class=\"container\">\n    <h5 style=\"display: inline\">{{(patient)?.first_name}} {{(patient)?.father_name}} {{(patient)?.grand_father_name}}</h5>\n    <!-- <strong class=\"right\"><span>{{(patient)?.reg_id}}</span> </strong> -->\n    <br>\n    <strong class=\"secondery\">{{((patient)?.department)?.name}} Department</strong><br>\n    <strong class=\"secondery\">Id number {{(patient)?.reg_id}}</strong><br>\n\n    <div class=\"col m12 l12 s12\">\n      <div style=\"margin-top: .8em\">\n        <span class=\"secondery\">Age </span><span><strong>{{(patient)?.age}} years old</strong></span><br>\n        <span class=\"secondery\">Dorm </span> <span>B <strong>{{(patient)?.dorm_block}}</strong> D <strong>{{(patient)?.dorm_room_number}}</strong></span><br>\n        <mat-icon class=\"secondery\" style=\"font-size: 1rem\">phone</mat-icon> \n          <strong>{{(patient)?.phone}}</strong>\n        <!-- <strong>Registerd </strong><span>{{(patient)?.registerd_at}}</span><br> -->\n      </div>\n    </div>\n  </div>\n     <!-- <div class=\"col m6 l6 s12\" style=\"border: 1px solid #ededed; padding: 16px\">\n      \n    </div>  -->\n</div>"
+module.exports = "<div class=\"row\" style=\"width: 100%\">\n  <div class=\"container\" style=\"width: 90%\">\n    <h5 style=\"display: inline\">{{(patient)?.first_name}} {{(patient)?.father_name}} {{(patient)?.grand_father_name}}</h5>\n    <!-- <strong class=\"right\"><span>{{(patient)?.reg_id}}</span> </strong> -->\n    <br>\n    \n    <strong class=\"secondery\">{{((patient)?.department)?.name}} Department</strong><br>\n    <strong class=\"secondery\">Id number {{(patient)?.reg_id}}</strong><br>\n\n    <div class=\"col m12 l12 s12\">\n      <div style=\"margin-top: .8em\">\n        <span class=\"secondery\">Age </span><span><strong>{{(patient)?.age}} years old</strong></span><br>\n        <span class=\"secondery\">Dorm </span> <span>B <strong>{{(patient)?.dorm_block}}</strong> D <strong>{{(patient)?.dorm_room_number}}</strong></span><br>\n        <mat-icon class=\"secondery\" style=\"font-size: 1rem\">phone</mat-icon> \n          <strong>{{(patient)?.phone}}</strong>\n        <!-- <strong>Registerd </strong><span>{{(patient)?.registerd_at}}</span><br> -->\n      </div>\n    </div>\n  </div>\n     <!-- <div class=\"col m6 l6 s12\" style=\"border: 1px solid #ededed; padding: 16px\">\n      \n    </div>  -->\n</div>"
 
 /***/ }),
 
@@ -2347,7 +2526,7 @@ var PatinetViewComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card style=\"margin-top: 16px;\" class=\"row\">\n  <div class=\"progress\" [class.hide]=\"!loading\" >\n    <div class=\"indeterminate\"></div>\n  </div>\n  <div [class.form-loading]=\"loading\" style=\"padding: 0 1em\">\n    <h5 style=\"margin-left: 16px\">Drug prescription</h5>\n    <form action=\"\" [formGroup]=\"add\">\n      <div class=\"row\" style=\"margin: 0px 1.5em; \">\n        <div class=\"col s12 m5\" style=\"padding-right: 0px\">\n          <mat-form-field>   \n            <input matInput \n            [formControl]=\"name\" \n            placeholder=\"Drug\" \n            [matAutocomplete]=\"auto\"\n            #drugInput (focus)=\"onFocus(drugInput.value)\">    \n            <mat-autocomplete #auto=\"matAutocomplete\">\n              <mat-option *ngFor=\"let drug of drugAuto\" [value]=\"drug.name\">\n                {{ drug.name }}\n              </mat-option>\n            </mat-autocomplete>\n          </mat-form-field>\n        </div>\n        \n        <div class=\"col s5 m2\" style=\"padding-right: 0px\">\n          <mat-form-field>   \n            <input matInput [formControl]=\"dosage\" placeholder=\"Dosage\">    \n          </mat-form-field>\n        </div>\n        <div class=\"col s5 m2\" style=\"padding-right: 0px\">\n          <mat-form-field>   \n            <mat-select [formControl]=\"frequency_id\" placeholder=\"Frequency\">    \n              <mat-option *ngFor=\"let frequency of frequencies\" [value]=\"frequency.id\">\n                {{frequency.abr}}\n              </mat-option>\n            </mat-select>\n          </mat-form-field>\n        </div>\n        <div class=\"col s5 m2\">\n          <mat-form-field>\n            <mat-select [formControl]=\"root_id\" placeholder=\"Root\">\n              <mat-option *ngFor=\"let root of roots\" [value]=\"root.id\">\n                {{root.name}}\n              </mat-option>\n            </mat-select>\n          </mat-form-field>\n        </div>\n        <div class=\"col s2 m1\" style=\"padding-right: 0px\"> \n          <button mat-icon-button class=\"primary white-text\" (click)=\"$add()\" [disabled]='add.invalid' >\n            <mat-icon style=\"line-height: 20px\">arrow_downward</mat-icon>\n          </button> \n        </div>\n      </div>\n    </form>\n    \n\n    <div *ngIf=\"prescriptions.length == 0\">\n      <div style=\"text-align: center\"><strong><b>No drugs are prescribed yet</b></strong></div>\n    </div>\n\n    <div *ngIf=\"prescriptions.length > 0\">\n      <div style=\"width: 90%; margin:auto\" *ngIf=\"prescriptions.length > 2\"> \n        <mat-form-field>   \n          <input matInput [formControl]=\"filter\" placeholder=\"Search requested laboratory drug\">    \n        </mat-form-field>\n      </div>\n      \n      <table mat-table [dataSource]=\"drugDataSource\" \n      class=\"mat-elevation-z0\">\n      \n        <!-- number Column -->\n        <ng-container matColumnDef=\"no\">\n            <th mat-header-cell *matHeaderCellDef> No </th>\n            <td mat-cell *matCellDef=\"let drug\"> {{prescriptions.indexOf(drug)+1}} </td>\n          </ng-container>\n\n        <!-- Name Column -->\n        <ng-container matColumnDef=\"name\">\n          <th mat-header-cell *matHeaderCellDef> Name </th>\n          <td mat-cell *matCellDef=\"let drug\"> {{drug.name}} </td>\n        </ng-container>\n\n         <!-- Dose Column -->\n         <ng-container matColumnDef=\"Dose\">\n          <th mat-header-cell *matHeaderCellDef> Dose </th>\n          <td mat-cell *matCellDef=\"let drug\"> {{drug.dosage}} </td>\n        </ng-container>\n\n         <!-- Frequency Column -->\n         <ng-container matColumnDef=\"frequency\">\n          <th mat-header-cell *matHeaderCellDef> Frequency </th>\n          <td mat-cell *matCellDef=\"let drug\"> {{drug.frequency.abr}} </td>\n        </ng-container>\n\n        <!-- Root Column -->\n        <ng-container matColumnDef=\"root\">\n            <th mat-header-cell *matHeaderCellDef> Root </th>\n            <td mat-cell *matCellDef=\"let drug\"> {{drug.root.name}} </td>\n          </ng-container>\n\n        <!-- icon Column -->\n        <ng-container matColumnDef=\"icon\">\n          <th mat-header-cell *matHeaderCellDef></th>\n          <td mat-cell *matCellDef=\"let drug\" style=\"text-align: right\">\n            <button mat-icon-button class=\"danger-text\" (click)=\"remove(drug)\">\n              <mat-icon>remove_circle_outline</mat-icon>\n            </button>  \n          </td>\n        </ng-container>\n\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <div id='#buttons' style=\"margin-top: 8px;margin-right: 36px\" class=\"right\">\n        <button mat-flat-button (click)=\"send()\">\n          <span>SEND </span>\n          <mat-icon>send</mat-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n</mat-card>"
+module.exports = "<mat-card style=\"margin-top: 16px;\" class=\"row\">\n  <div class=\"progress\" [class.hide]=\"!loading\" >\n    <div class=\"indeterminate\"></div>\n  </div>\n  <div [class.form-loading]=\"loading\" style=\"padding: 0 1em\">\n    <h5 style=\"margin-left: 16px\">Drug prescription</h5>\n    <form action=\"\" [formGroup]=\"add\">\n      <div class=\"row\" style=\"margin: 0px 1.5em; \">\n        <div class=\"col s12 m5\" style=\"padding-right: 0px\">\n          <mat-form-field>   \n            <input matInput \n            [formControl]=\"name\" \n            placeholder=\"Drug\" \n            [matAutocomplete]=\"auto\"\n            #drugInput (focus)=\"onFocus(drugInput.value)\" \n            (focusout)=\"onDrugFocusOut(drugInput.value)\">\n            <mat-autocomplete #auto=\"matAutocomplete\">\n              <mat-option *ngFor=\"let drug of drugAuto\" [value]=\"drug.name\">\n                {{ drug.name }}\n              </mat-option>\n            </mat-autocomplete>\n            <mat-error *ngIf=\"name.errors?.avalible && name.touched\">\n              This drug is not available in stock.\n            </mat-error>\n          </mat-form-field>\n        </div>\n        \n        <div class=\"col s5 m2\" style=\"padding-right: 0px\">\n          <mat-form-field>   \n            <input matInput [formControl]=\"dosage\" placeholder=\"Dosage\">    \n          </mat-form-field>\n        </div>\n        <div class=\"col s5 m2\" style=\"padding-right: 0px\">\n          <mat-form-field>   \n            <mat-select [formControl]=\"frequency_id\" placeholder=\"Frequency\">    \n              <mat-option *ngFor=\"let frequency of frequencies\" [value]=\"frequency.id\">\n                {{frequency.abr}}\n              </mat-option>\n            </mat-select>\n          </mat-form-field>\n        </div>\n        <div class=\"col s5 m2\">\n          <mat-form-field>\n            <mat-select [formControl]=\"root_id\" placeholder=\"Root\">\n              <mat-option *ngFor=\"let root of roots\" [value]=\"root.id\">\n                {{root.name}}\n              </mat-option>\n            </mat-select>\n          </mat-form-field>\n        </div>\n        <div class=\"col s2 m1\" style=\"padding-right: 0px\"> \n          <button mat-icon-button class=\"primary white-text\" (click)=\"$add()\" [disabled]='add.invalid' >\n            <mat-icon style=\"line-height: 20px\">arrow_downward</mat-icon>\n          </button> \n        </div>\n      </div>\n    </form>\n    \n\n    <div *ngIf=\"prescriptions.length == 0\">\n      <div style=\"text-align: center\"><strong><b>No drugs are prescribed yet</b></strong></div>\n    </div>\n\n    <div *ngIf=\"prescriptions.length > 0\">\n      <div style=\"width: 90%; margin:auto\" *ngIf=\"prescriptions.length > 2\"> \n        <mat-form-field>   \n          <input matInput [formControl]=\"filter\" placeholder=\"Search requested laboratory drug\">    \n        </mat-form-field>\n      </div>\n      \n      <table mat-table [dataSource]=\"drugDataSource\" \n      class=\"mat-elevation-z0\">\n      \n        <!-- number Column -->\n        <ng-container matColumnDef=\"no\">\n            <th mat-header-cell *matHeaderCellDef> No </th>\n            <td mat-cell *matCellDef=\"let drug\"> {{prescriptions.indexOf(drug)+1}} </td>\n          </ng-container>\n\n        <!-- Name Column -->\n        <ng-container matColumnDef=\"name\">\n          <th mat-header-cell *matHeaderCellDef> Name </th>\n          <td mat-cell *matCellDef=\"let drug\"> {{drug.name}} </td>\n        </ng-container>\n\n         <!-- Dose Column -->\n         <ng-container matColumnDef=\"Dose\">\n          <th mat-header-cell *matHeaderCellDef> Dose </th>\n          <td mat-cell *matCellDef=\"let drug\"> {{drug.dosage}} </td>\n        </ng-container>\n\n         <!-- Frequency Column -->\n         <ng-container matColumnDef=\"frequency\">\n          <th mat-header-cell *matHeaderCellDef> Frequency </th>\n          <td mat-cell *matCellDef=\"let drug\"> {{drug.frequency.abr}} </td>\n        </ng-container>\n\n        <!-- Root Column -->\n        <ng-container matColumnDef=\"root\">\n            <th mat-header-cell *matHeaderCellDef> Root </th>\n            <td mat-cell *matCellDef=\"let drug\"> {{drug.root.name}} </td>\n          </ng-container>\n\n        <!-- icon Column -->\n        <ng-container matColumnDef=\"icon\">\n          <th mat-header-cell *matHeaderCellDef></th>\n          <td mat-cell *matCellDef=\"let drug\" style=\"text-align: right\">\n            <button mat-icon-button class=\"danger-text\" (click)=\"remove(drug)\">\n              <mat-icon>remove_circle_outline</mat-icon>\n            </button>  \n          </td>\n        </ng-container>\n\n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <div id='#buttons' style=\"margin-top: 8px;margin-right: 36px\" class=\"right\">\n        <button mat-flat-button (click)=\"send()\">\n          <span>SEND </span>\n          <mat-icon>send</mat-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n</mat-card>\n"
 
 /***/ }),
 
@@ -2377,6 +2556,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _service_pharmacy_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../service/pharmacy.service */ "./src/app/service/pharmacy.service.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/index.js");
+/* harmony import */ var _alert_alert_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../alert/alert.component */ "./src/app/alert/alert.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2391,11 +2572,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var PharmacyComponent = /** @class */ (function () {
-    function PharmacyComponent(_pharmacy, _route, _form) {
+    function PharmacyComponent(_pharmacy, _route, _form, _cookies, _dialog) {
         this._pharmacy = _pharmacy;
         this._route = _route;
         this._form = _form;
+        this._cookies = _cookies;
+        this._dialog = _dialog;
         this.status = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.drugDataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"]();
         this.prescriptions = [];
@@ -2408,13 +2593,13 @@ var PharmacyComponent = /** @class */ (function () {
     PharmacyComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.add = this._form.group({
-            id: [""],
-            name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            dosage: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            root_id: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            frequency_id: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            id: [''],
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            dosage: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            root_id: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            frequency_id: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
         });
-        this._pharmacy.drugAutoComplet("").subscribe(function (tests) { _this.drugAuto = tests; });
+        this._pharmacy.drugAutoComplet('').subscribe(function (tests) { _this.drugAuto = tests; });
         this.add.controls.name.valueChanges.subscribe(function (value) {
             _this._pharmacy.drugAutoComplet(value).subscribe(function (tests) { _this.drugAuto = tests; _this.fullDrug = tests; });
         });
@@ -2424,13 +2609,13 @@ var PharmacyComponent = /** @class */ (function () {
     PharmacyComponent.prototype.$add = function () {
         var $drug = this.add.controls.name.value;
         var _drug = this.prescriptions.filter(function (e) {
-            return (e.drug.name == $drug);
+            return (e.drug.name === $drug);
         });
-        if (_drug.length == 0) {
+        if (_drug.length === 0) {
             var $data_1 = this.add.value;
-            $data_1.frequency = (this.frequencies.find(function (x) { return x.id == $data_1.frequency_id; }));
-            $data_1.root = (this.roots.find(function (x) { return x.id == $data_1.root_id; }));
-            $data_1.drug = (this.fullDrug.find(function (x) { return x.name == $data_1.name; }));
+            $data_1.frequency = (this.frequencies.find(function (x) { return x.id === $data_1.frequency_id; }));
+            $data_1.root = (this.roots.find(function (x) { return x.id === $data_1.root_id; }));
+            $data_1.drug = (this.fullDrug.find(function (x) { return x.name === $data_1.name; }));
             this.prescriptions.push($data_1);
             this.drugDataSource.data = this.prescriptions;
         }
@@ -2438,17 +2623,29 @@ var PharmacyComponent = /** @class */ (function () {
         this.add.reset();
     };
     PharmacyComponent.prototype.onFocus = function (val) {
-        if (val == "") {
+        if (val === '') {
             this.drugAuto = this.fullDrug;
+        }
+    };
+    PharmacyComponent.prototype.onDrugFocusOut = function (val) {
+        var _this = this;
+        var drug = (this.fullDrug.find(function (x) { return x.name === _this.add.value.name; }));
+        if (drug != null) {
+            this._pharmacy.isDrugAvalilable(drug.id).subscribe(function (response) {
+                console.log(response);
+                if (!response) {
+                    console.log(_this.add.controls.name.getError);
+                    _this.add.controls.name.setErrors({ 'avalible': true });
+                }
+            });
         }
     };
     PharmacyComponent.prototype.remove = function (drug) {
         this.prescriptions.splice(this.prescriptions.indexOf(drug), 1);
         this.drugDataSource.data = this.prescriptions;
     };
-    PharmacyComponent.prototype.send = function () {
+    PharmacyComponent.prototype.send_request = function () {
         var _this = this;
-        console.log(this.queue);
         this.loading = true;
         this._pharmacy.prescribe(this.queue.hisstory.id, this.prescriptions).subscribe(function (value) {
             _this.loading = false;
@@ -2457,6 +2654,35 @@ var PharmacyComponent = /** @class */ (function () {
             _this.status.emit(1);
             _this._route.navigate(['prescription/prescribed/' + _this.queue.id]);
         });
+    };
+    PharmacyComponent.prototype.send = function () {
+        var _this = this;
+        var that = this;
+        if (that._cookies.get('prescription confrimation') != 'true') {
+            this._dialog.open(_alert_alert_component__WEBPACK_IMPORTED_MODULE_6__["AlertComponent"], {
+                width: '400px',
+                disableClose: true,
+                data: {
+                    dialog: 'confirm',
+                    color: 'yellow',
+                    title: 'Confirm',
+                    message: 'Do you really want to send this prescription for <b>' + this.queue.patient.father_name + ' ' + this.queue.patient.father_name + '.</b><br>',
+                    checkbox: 'Don\'t show this dialog again',
+                    checkboxStatus: (that._cookies.get('prescription confrimation') == 'true'),
+                    onCheck: function (e) {
+                        that._cookies.set('prescription confrimation', e.checked);
+                    }
+                }
+            }).afterClosed().subscribe(function (ok) {
+                if (ok.responce === true) {
+                    _this.send_request();
+                }
+            }, function (no) {
+            });
+        }
+        else {
+            this.send_request();
+        }
     };
     Object.defineProperty(PharmacyComponent.prototype, "name", {
         get: function () { return this.add.get('name'); },
@@ -2494,7 +2720,9 @@ var PharmacyComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_service_pharmacy_service__WEBPACK_IMPORTED_MODULE_4__["PharmacyService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]])
+            _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
+            ngx_cookie_service__WEBPACK_IMPORTED_MODULE_5__["CookieService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"]])
     ], PharmacyComponent);
     return PharmacyComponent;
 }());
@@ -2552,7 +2780,7 @@ var PrescriptionTableComponent = /** @class */ (function () {
     function PrescriptionTableComponent() {
         this.prescriptions = [];
         this.prescriptionDatasource = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatTableDataSource"]();
-        this.displayedColumns = ["no", "name", "frequency", "root", "dose"];
+        this.displayedColumns = ['no', 'name', 'frequency', 'root', 'dose'];
     }
     PrescriptionTableComponent.prototype.ngOnChanges = function () {
         console.log(this.prescriptions);
@@ -2635,8 +2863,6 @@ var PrescriptionComponent = /** @class */ (function () {
         this._hisstory = _hisstory;
         this.$prescriptions = [];
     }
-    PrescriptionComponent.prototype.ngOnChanges = function () {
-    };
     PrescriptionComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._activeRoute.params.subscribe(function (param) {
@@ -3438,7 +3664,7 @@ var appRoutes = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id='saved-stats-bar'>\n  <div \n  *ngFor=\"let queue of savedQueues\"\n  [style.width]=\"width\" \n  id=\"tab\" \n  [class.active]=\"queue.id == active\"\n  (click)=\"$open(queue)\">\n    <ul>\n      <li>.</li>\n      <li>{{queue.patient.reg_id}}<span style=\"color:red\" *ngIf=\"queue.status==4\">*</span></li>\n      <li>.</li>\n    </ul>\n  </div> \n</div>\n"
+module.exports = "<div id='saved-stats-bar'>\n  <div \n  *ngFor=\"let queue of savedQueues\"\n  [style.width]=\"width\" \n  id=\"tab\" \n  [class.active]=\"queue.id == active\"\n  (click)=\"$open(queue)\"\n  [matTooltip]=\"queue.patient.first_name+' '+queue.patient.father_name\"\n  >\n    <ul>\n      <li>.</li>\n      <li>{{queue.patient.reg_id}}<span style=\"color:red\" *ngIf=\"queue.status==4\">*</span></li>\n      <li>.</li>\n    </ul>\n  </div> \n</div>\n"
 
 /***/ }),
 
@@ -3976,23 +4202,27 @@ var PharmacyService = /** @class */ (function () {
         this.root = _model_RootURL__WEBPACK_IMPORTED_MODULE_2__["RootURL"];
     }
     PharmacyService.prototype.drugAutoComplet = function (key) {
-        var URL = this.root + "/ajax/get/pharmacy/drug/search/auto/" + key;
+        var URL = this.root + '/ajax/get/pharmacy/drug/search/auto/' + key;
         return this._http.get(URL);
     };
     PharmacyService.prototype.prescribe = function (hisstroy_id, prescriptions) {
-        var URL = this.root + "/ajax/post/pharmacy/prescription/prescribe/" + hisstroy_id;
+        var URL = this.root + '/ajax/post/pharmacy/prescription/prescribe/' + hisstroy_id;
         return this._http.post(URL, { prescriptions: prescriptions });
     };
     PharmacyService.prototype.getFrequencies = function () {
-        var URL = this.root + "/ajax/get/pharmacy/drug/frequencies";
+        var URL = this.root + '/ajax/get/pharmacy/drug/frequencies';
         return this._http.get(URL);
     };
     PharmacyService.prototype.getRoots = function () {
-        var URL = this.root + "/ajax/get/pharmacy/drug/roots";
+        var URL = this.root + '/ajax/get/pharmacy/drug/roots';
         return this._http.get(URL);
     };
     PharmacyService.prototype.prescription = function (hisstroy_id) {
-        var URL = this.root + "/ajax/get/pharmacy/prescription/prescribed/" + hisstroy_id;
+        var URL = this.root + '/ajax/get/pharmacy/prescription/prescribed/' + hisstroy_id;
+        return this._http.get(URL);
+    };
+    PharmacyService.prototype.isDrugAvalilable = function (drug_id) {
+        var URL = this.root + "/ajax/get/pharmacy/drug/is available/" + drug_id;
         return this._http.get(URL);
     };
     PharmacyService = __decorate([
