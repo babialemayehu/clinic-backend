@@ -19,15 +19,7 @@ class UserController extends \App\Http\Controllers\Controller
     function __construct(){
         $auth = Auth::user(); 
     } 
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
+ 
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -56,11 +48,6 @@ class UserController extends \App\Http\Controllers\Controller
         ]);
 
         return $user; 
-    }
-
-    public function edit($id)
-    {
-        
     }
 
     public function update(Request $request, $id = -1)

@@ -3,9 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\Auth;
 
 class FrontendController extends Controller
 {
+    public function index(){
+        
+        // switch($role){
+        //     case 1:
+        //         return $this->admin();
+        //     break;
+        //     case 2:
+        //         return $this->clurk();
+        //     break;
+        //     case 3:
+        //         return $this->drug_store();
+        //     break;
+        //     case 4:
+        //         return $this->laboratory();
+        //     break;
+        //     case 5:
+        //         return $this->physician();
+        //     break;
+        //     case 6:
+        //         return $this->drug_store();
+        //     break;
+        //     default:
+        //         abort(404); 
+            
+        // }
+    }
     public function admin(){
         return view('fontend.admin'); 
     }

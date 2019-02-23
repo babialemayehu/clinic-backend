@@ -13,7 +13,7 @@ use App\Http\Controllers\PatientManagment\QueueController as Queue;
 class QueueController extends Controller
 {
     private function _queue(){
-        return Patient_queue::where('status', 2)->orderBy('updated_at');
+        return Patient_queue::where('status', 2)->orderBy('created_at');
     }
 
     public function requests($limit = -1){ 
@@ -23,6 +23,7 @@ class QueueController extends Controller
         $queues = $queues->get();
         foreach($queues as $queue){
             \App\Http\Controllers\PatientManagment\QueueController::_setUp($queue); 
+            $queue->lab_technician = $queue->hisstory()->first()->laboratory_technician()->first(); 
         }    
 
         return $queues; 
@@ -32,8 +33,10 @@ class QueueController extends Controller
         $queue = $this->_queue()->first(); 
         if($queue != null){
             $queue->status = 3;
-            $queue->_call = 2; 
-            $queue->save();  
+            $queue->_call = 2;   
+            $queue->save();   
+            $queue->hisstory()->update(['lab_technician_id'=> Auth::user()->id]);    
+           
             \App\Http\Controllers\PatientManagment\QueueController::_setUp($queue); 
             return $queue; 
         }else{

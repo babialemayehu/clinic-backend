@@ -21,6 +21,7 @@ class CreateLaboratoriesTable extends Migration
             $table->text('note')->nullable();
             $table->decimal('value')->nullable();  
             $table->integer('status')->default(0); 
+            // $table->integer('lab_technician_id')->nullable(); 
             $table->timestamps();
         });
     }

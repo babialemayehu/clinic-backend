@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\Auth;
 use App\Drug; 
 use App\Drug_frequency; 
-use App\Drug_root; 
+use App\Drug_root;
+
 
 class DrugsController extends Controller
 {
@@ -31,5 +32,9 @@ class DrugsController extends Controller
 
     public function getRoots(){
         return Drug_root::get(); 
+    }
+
+    public function isAvailable($id){
+        return json_encode(\App\Http\Controllers\DrugOrderManagement\Stock::isAvailable(Drug::find($id)));
     }
 }

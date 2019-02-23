@@ -21,6 +21,7 @@ class QueueController extends Controller
 
     public static function _setUp(&$queue){
         $queue->patient = $queue->patient()->first(); 
+        $queue->patient->department = $queue->patient->department()->first(); 
         $queue->physician = $queue->physician()->first();
         $queue->humanWaitingTime = Carbon::parse($queue->updated_at)->diffForHumans(); 
     }
@@ -48,6 +49,7 @@ class QueueController extends Controller
         $patient->update(['queue_number'=>$patient->queue_nubmer+$previos_queue_number]); 
         $patient->physician = $patient->physician()->first(); 
         $patient->patient = $patient->patient()->first(); 
+        $patient->patient->department = $patient->patinet->department()->first(); 
         $patient->humanWaitingTime = Carbon::parse($patient->created_at)->diffForHumans();
         return $patient; 
     }
@@ -171,6 +173,8 @@ class QueueController extends Controller
         $queue->physician = $queue->physician()->first(); 
         $queue->hisstory = $queue->hisstory()->first(); 
         $queue->patient = $queue->patient()->first();
+        $queue->patient->department = $queue->patient->department()->first(); 
+        $queue->patient->age = Carbon::parse($queue->patient->birth_date)->age; 
         return $queue;
     }
 

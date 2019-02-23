@@ -60,6 +60,6 @@ class Handler extends ExceptionHandler
             ],401);
         }
 
-        return redirect()->to('/');
+        return redirect()->to('/login');
     }
 }

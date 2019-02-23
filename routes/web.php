@@ -22,8 +22,12 @@ Route::prefix('ajax')
             Route::get('total users', 'UserController@totalUsers'); 
             Route::get('auth user', 'UserController@authUser'); 
             Route::get('user profile/{user}', 'UserController@userProfile');
+           
             Route::prefix('user')->group(function(){
                 Route::get('total', 'UserController@total'); 
+                Route::prefix('validate')->group(function(){
+                    Route::get('id exits/{id}','UserController@isIdExists'); 
+                }); 
             }); 
         }); 
 
@@ -70,7 +74,8 @@ Route::prefix('ajax')
                 Route::get('search/auto/{key?}', 'DrugsController@search_auto'); 
                 Route::get('search/{key}', 'DrugsController@search'); 
                 Route::get('frequencies', 'DrugsController@getFrequencies'); 
-                Route::get('roots', 'DrugsController@getRoots'); 
+                Route::get('roots', 'DrugsController@getRoots');
+                Route::get('is available/{id}', 'DrugsController@isAvailable');
                 
             }); 
 
@@ -201,7 +206,7 @@ Route::prefix('ajax')
             Route::put('close/{queue}', 'HisstoryController@close'); 
         }); 
 
-        Route::namespace('LaboratoryManagment')->prefix('lab')
+        Route::namespace('LaboratoryManagement')->prefix('lab')
         ->group(function(){
             Route::put('responce', 'LaboratoryContorller@responce'); 
             
@@ -248,7 +253,7 @@ Route::prefix('ajax')
 
 Route::namespace('Auth')->group(function(){
     // AUTHENTICATION
-    Route::get('/', 'LoginController@showLoginForm')->name('login');
+    Route::get('/login', 'LoginController@showLoginForm')->name('login');
     Route::post('/', 'LoginController@ajaxLogin');
     Route::post('logout', 'LoginController@logout')->name('logout');
 
@@ -266,18 +271,14 @@ Route::namespace('Auth')->group(function(){
 Route::namespace('PatientManagment')
 ->group(function(){
     Route::get('/ajax/public/patients/queue/{type?}', 'QueueController@publicQueuedPatients'); 
-}); 
+});  
+
 // FRONT END VIEWS 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get("/admin", "FrontendController@admin"); 
-    Route::get("/clurk", "FrontendController@clurk"); 
-    Route::get("/drug_store", "FrontendController@drug_store");   
-    Route::get("/laboratory", "FrontendController@laboratory"); 
-    Route::get("/pharmacy", "FrontendController@pharmacy"); 
-    Route::get("/physician", "FrontendController@physician"); 
+    Route::get("/", function(){
+        return view('fontend.index',["role"=> strtolower(Auth::user()->role()->first()->name)]);
+    }); 
 });  
 Route::get("/lab_queue", "FrontendController@lab_queue");  
 Route::get("/queue", "FrontendController@queue"); 
-// Route::get("/admin", "FrontendController@admin"); 
-//     Route::get("/clurk", "FrontendController@clurk"); 

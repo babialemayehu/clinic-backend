@@ -900,7 +900,7 @@ var ContextComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m6 l5 s12\" style=\"padding: 0px;\">\n      <app-navbar></app-navbar>\n     <mat-card id=\"queue\">\n        <iframe width=\"100%\" height=\"315\" style=\"margin: 0px\" src=\"https://www.youtube.com/embed/4IjfAC14YfM?controls=0&autoplay=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>      \n\n      </mat-card>\n   </div>\n   <div class=\"col m6 l7 s12\" style=\"background: #eee; height: 750px;\">\n     <div class=\"row\" style=\"margin-left: 2px;\">\n        <app-queue></app-queue>\n     </div>\n    \n   </div>\n </div>\n</section>"
+module.exports = "<section>\n <div class=\"row\">\n   <div class=\"col m6 l5 s12\" style=\"padding: 0px;\">\n      <app-navbar></app-navbar>\n     <mat-card id=\"queue\">\n        <iframe width=\"100%\" height=\"315\" style=\"margin: 0px\" src=\"https://www.youtube.com/embed/4IjfAC14YfM?controls=0&autoplay=1&mute=1\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>      \n\n      </mat-card>\n   </div>\n   <div class=\"col m6 l7 s12\" style=\"background: #eee; height: 750px;\">\n     <div class=\"row\" style=\"margin-left: 2px;\">\n        <app-queue></app-queue>\n     </div>\n    \n   </div>\n </div>\n</section>"
 
 /***/ }),
 

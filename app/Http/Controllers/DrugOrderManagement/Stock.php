@@ -8,15 +8,18 @@ use Carbon\Carbon;
 
 class Stock{
     public static function think(){ echo "hello world"; }
-    public static function sold(\App\Drug $drug, int $ordered_by){
-         $drugs = $drug->prescriptions()->where('isDeliverd', 1)->get()->count(); 
+
+    public static function sold(\App\Drug $drug){
+         $drugs = $drug->prescriptions()->get()->count();
          return $drugs; 
     }
 
-    public static function available(\App\Drug $drug, int $ordered_by){
-        $sold = Stock::sold($drug, $ordered_by); 
+    public static function available(\App\Drug $drug){
+        $sold = Stock::sold($drug);
 
-        $totalOrders = $drug->drug_order()->where('expier_at', '>', Carbon::now())->where('recived_at', '<>', null)->get(); 
+        $totalOrders = $drug->drug_order()
+            ->where('expier_at', '>', Carbon::now())
+            ->where('recived_at', '<>', null)->get();
         $total = 0; 
 
         foreach($totalOrders as $order){
@@ -25,7 +28,7 @@ class Stock{
         return $total-$sold; 
     }
 
-    public static function isAvailable(\App\Drug $drug, int $ordered_by){
-        return (Stock::available($durg, $ordered_by) > 0); 
+    public static function isAvailable(\App\Drug $drug){
+        return (Stock::available($drug) > 0);
     }
 }

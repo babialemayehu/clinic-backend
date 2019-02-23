@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <sction class="valign-wrapper" >
     <div class="container">

@@ -51,29 +51,6 @@ class LoginController extends Controller
     }
     protected function redirectTo()
     {
-        $role = Auth::user()->role_id;
-
-        switch($role){
-            case 1:
-                return '/admin';
-            break;
-            case 2:
-                return '/clurk';
-            break;
-            case 3:
-                return '/physician';
-            break;
-            case 4:
-                return '/laboratory';
-            break;
-            case 5:
-                return '/pharmacy';
-            break;
-            case 6:
-                return '/drug_store';
-            break;
-            
-        }
-        return '/notFound';
+        return '/';
     }
 }

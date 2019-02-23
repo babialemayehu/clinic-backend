@@ -36,4 +36,8 @@ class Hisstory extends Model
     public function laboratories(){
         return $this->hasMany('App\Laboratory'); 
     }
+
+    public function laboratory_technician(){
+        return $this->belongsTo('App\User', 'lab_technician_id'); 
+    }
 }

@@ -22,6 +22,7 @@ class CreateHisstoriesTable extends Migration
             $table->decimal('BP')->nullable(); 
             $table->decimal('puls_rate')->nullable(); 
             $table->decimal('respiratory_rate')->nullable(); 
+            $table->integer('lab_technician_id')->nullable(); 
             $table->timestamps();
         });
     }

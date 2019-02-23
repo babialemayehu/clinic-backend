@@ -101,12 +101,17 @@ class PatientController extends Controller
     public function search($key){
         if(!empty($key)){
             $patient = Patient::where('reg_id', '=', $key)->first(); 
-            $patient->department = $patient->department()->first(); 
-            $queues = $patient->queues()->get(); 
-            $patient->is_queued = false; 
-            $patient->birth_date= Carbon::parse($patient->birth_date)->toFormattedDateString(); 
-            $patient->age = Carbon::parse($patient->birth_date)->diffForHumans();
-            $patient->registerd_at = Carbon::parse($patient->created_at)->diffForHumans();
+            if($patient == null){
+               return response(json_encode((object)['message'=>"This patient is new. He/She is not registered"]), 407 ); 
+            }else{
+                $patient->department = $patient->department()->first(); 
+                $queues = $patient->queues()->get(); 
+                $patient->is_queued = false; 
+                $patient->birth_date= Carbon::parse($patient->birth_date)->toFormattedDateString(); 
+                $patient->age = Carbon::parse($patient->birth_date)->diffForHumans();
+                $patient->registerd_at = Carbon::parse($patient->created_at)->diffForHumans();
+            }
+            
             // foreach($queues as $queue){
             //     if(!$queue->is_served){
             //         $patient->is_queued = true; 
