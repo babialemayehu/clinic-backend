@@ -11,6 +11,7 @@ Route::get('/icon', function(){
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
+
 Route::prefix('ajax')
 ->middleware(['cors'])
 ->group(function(){
