@@ -15,6 +15,7 @@
                     </div>
                     <form name="loginForm" ng-submit="submit()" novalidate >
                         <div class="input-field">
+                            
                             <input id="user-name" ng-blur="validate()" ng-model="credintial.worker_id" type="text" class="validate" name="worker_id" ng-required="true" autofocus style="margin-bottom: .5em;">
                             <label for="user-name">worker_id</label>
                             <span ng-show="loginForm.worker_id.$invalid && loginForm.worker_id.$touched"class="helper-text red-text" style="font-size: 0.9em; ">Username field can't be empty</span>
@@ -29,6 +30,7 @@
                             <label class="form-check-label" for="remember">
                                 {{ __('Remember Me') }}
                             </label>
+
                         </p>
                         <div class="right-align">
                             <button type="submit" class="btn waves-effect waves-light blue" ng-disabled="!(loginForm.$valid && loginForm.$dirty)">Login</button>
